@@ -13,6 +13,7 @@ subprojects {
     dependencies {
         testCompile group: 'junit', name: 'junit', version: '4.11'
         compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.36'
+        compile group:'javax.servlet',name:'jstl',version:'1.2'
     }
 }
 
