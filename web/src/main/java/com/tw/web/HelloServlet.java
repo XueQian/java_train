@@ -17,7 +17,7 @@ public class HelloServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        String forward = null;
+        String forward;
         String action = req.getParameter("action");
 
         List<User> userList = service.getUsers();
@@ -56,14 +56,9 @@ public class HelloServlet extends HttpServlet {
         user.setAddress(request.getParameter("address"));
         user.setAge(Integer.parseInt(request.getParameter("age")));
 
-
-        System.out.println("444444444444444444444444");
-
         if (userId != null) {
+
             user.setId(Integer.parseInt(userId));
-
-            System.out.println("88888888888888888888888");
-
             service.updateUser(user);
         } else {
 

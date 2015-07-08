@@ -17,7 +17,6 @@ public class Service {
             Statement stmt = connection.createStatement();
             String sql = "SELECT * FROM User";
             ResultSet rs = stmt.executeQuery(sql);
-            System.out.println("#################################");
             while (rs.next()){
 
                 int id = rs.getInt("id");
@@ -78,7 +77,6 @@ public class Service {
             preparedStatement.setString(3,user.getAddress());
             preparedStatement.setInt(4, user.getAge());
             preparedStatement.setInt(5,user.getId());
-            System.out.println(preparedStatement+"@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

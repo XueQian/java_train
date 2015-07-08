@@ -11,11 +11,11 @@ public class DbConnection {
     public Connection getConnection(){
 
         Connection connection = null;
-        String driver = "com.mysql.jdbc.Driver";
+//        String driver = "com.mysql.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8";
 
         try{
-            Class.forName(driver);
+//            Class.forName(driver);
             connection = DriverManager.getConnection(url,"root","12345");
 
         }catch (Exception e){

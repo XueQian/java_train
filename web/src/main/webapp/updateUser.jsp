@@ -28,7 +28,6 @@
     Age : <input type="text" name="age"
                    value="<c:out value="${user.age}" />"/> <br/>
     <input type="submit" value="update"/>
-    <%--<a href="Service?action=updateSuccess&id=<c:out value="${user.id}"/>">submit</a>--%>
 </form>
 
 </body>
