@@ -37,37 +37,22 @@ public class UserDao {
         session.close();
         sessionFactory.close();
     }
-//    public void addUser(User user){
-//
-//        String sql = "insert into User(name,sex,address,age)"+"values(?,?,?,?)";
-//
-//        try {
-//            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//            preparedStatement.setString(1,user.getName());
-//            preparedStatement.setString(2,user.getSex());
-//            preparedStatement.setString(3,user.getAddress());
-//            preparedStatement.setInt(4,user.getAge());
-//
-//            preparedStatement.executeUpdate();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void deleteUser(int id) {
-//
-//        String sql = "delete from User where id=?";
-//        try {
-//            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//            preparedStatement.setInt(1, id);
-//            preparedStatement.executeUpdate();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
+
+    public void deleteUser(int id){
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
+        Session session = sessionFactory.openSession();
+
+        session.beginTransaction();
+
+        User user = (User)session.load(User.class,id);
+
+        session.delete(user);
+
+        session.getTransaction().commit();
+
+        sessionFactory.close();
+    }
 //    public void updateUser(User user){
 //
 //        String sql = "update User set name=?,sex=?,address=?,age=?"+" where id=?";

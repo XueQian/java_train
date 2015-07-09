@@ -22,13 +22,13 @@ public class HelloServlet extends HttpServlet {
 
         List<User> userList = service.getUsers();
 
-//        if ("delete".equalsIgnoreCase(action)) {
-//
-//            int id = Integer.parseInt(req.getParameter("id"));
-//            service.deleteUser(id);
-//            forward = USERLIST;
-//            req.setAttribute("users", service.getUsers());
-//
+        if ("delete".equalsIgnoreCase(action)) {
+
+            int id = Integer.parseInt(req.getParameter("id"));
+            service.deleteUser(id);
+            forward = USERLIST;
+            req.setAttribute("users", service.getUsers());
+
 //        } else if ("update".equalsIgnoreCase(action)) {
 //
 //            forward = UPDATEUSER;
@@ -36,11 +36,11 @@ public class HelloServlet extends HttpServlet {
 //            User user = service.getUserById(userId);
 //            req.setAttribute("user", user);
 //
-//        } else {
+        } else {
 
             forward = USERLIST;
             req.setAttribute("users", userList);
-//        }
+        }
         RequestDispatcher view = req.getRequestDispatcher(forward);
         view.forward(req, res);
     }
