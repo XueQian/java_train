@@ -48,13 +48,13 @@ public class HelloServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-//        User user = new User();
-//
-//        String userId = request.getParameter("id");
-//        user.setName(request.getParameter("name"));
-//        user.setSex(request.getParameter("sex"));
-//        user.setAddress(request.getParameter("address"));
-//        user.setAge(Integer.parseInt(request.getParameter("age")));
+        User user = new User();
+
+        String userId = request.getParameter("id");
+        user.setName(request.getParameter("name"));
+        user.setSex(request.getParameter("sex"));
+        user.setAddress(request.getParameter("address"));
+        user.setAge(Integer.parseInt(request.getParameter("age")));
 //
 //        if (userId != null) {
 //
@@ -62,12 +62,12 @@ public class HelloServlet extends HttpServlet {
 //            service.updateUser(user);
 //        } else {
 //
-//            service.addUser(user);
+            service.addUser(user);
 //        }
 //
-//        RequestDispatcher view = request.getRequestDispatcher(USERLIST);
-//        request.setAttribute("users", service.getUsers());
-//        view.forward(request, response);
+        RequestDispatcher view = request.getRequestDispatcher(USERLIST);
+        request.setAttribute("users", service.getUsers());
+        view.forward(request, response);
     }
 }
 

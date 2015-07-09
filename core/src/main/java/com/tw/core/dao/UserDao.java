@@ -9,34 +9,6 @@ import java.util.List;
 
 public class UserDao {
 
-//    DbConnection dbConnection = new DbConnection();
-//    Connection connection = dbConnection.getConnection();
-
-//    public List<User> getUsers() {
-//
-//        List<User> userList = new ArrayList<User>();
-//
-//        try {
-//            Statement stmt = connection.createStatement();
-//            String sql = "SELECT * FROM User";
-//            ResultSet rs = stmt.executeQuery(sql);
-//            while (rs.next()){
-//
-//                int id = rs.getInt("id");
-//                String name = rs.getString("name");
-//                String sex = rs.getString("sex");
-//                String address = rs.getString("address");
-//                int age = rs.getInt("age");
-//
-//                User user = new User(id,name,sex,address,age);
-//
-//                userList.add(user);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return userList;
-//    }
     public List<User> getUsers(){
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
@@ -52,23 +24,19 @@ public class UserDao {
         return userList;
     }
 
+    public void addUser(User user){
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
+        Session session = sessionFactory.openSession();
 
-//    SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-//    //getting session object from session factory
-//    Session session = sessionFactory.openSession();
-//    //getting transaction object from session object
-//    session.beginTransaction();
-//    Query query = session.createQuery("from Student");
-//    List<student> students = query.list();
-//    for(Student student : students)
-//    {
-//        System.out.println("Roll Number: "+student.getRollNumber()+", Student Name: "+student.getStudentName()+", Course: "+student.getCourse());
-//    }
-//    session.getTransaction().commit();
-//    sessionFactory.close();
+        session.beginTransaction();
 
+        session.save(user);
 
+        session.getTransaction().commit();
+        session.close();
+        sessionFactory.close();
+    }
 //    public void addUser(User user){
 //
 //        String sql = "insert into User(name,sex,address,age)"+"values(?,?,?,?)";
