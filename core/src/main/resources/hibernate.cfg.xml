@@ -11,6 +11,7 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.show_sql">true</property>
 
-        <mapping class="com.tw.core.entity.User"/>
+        <!--<mapping class="com.tw.core.entity.User"/>-->
+        <mapping resource="User.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

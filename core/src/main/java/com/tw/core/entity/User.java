@@ -5,21 +5,21 @@ import javax.persistence.*;
 /**
  * Created by qxue on 7/7/15.
  */
-@Entity
-@Table(name = "User")
+//@Entity
+//@Table(name = "User")
 public class User {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Id
+//    @Column(name = "id")
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(name="name")
+//    @Column(name="name")
     private String name;
-    @Column(name="sex")
+//    @Column(name="sex")
     private String sex;
-    @Column(name="address")
+//    @Column(name="address")
     private String address;
-    @Column(name="age")
+//    @Column(name="age")
     private int age;
 
     public User(){
