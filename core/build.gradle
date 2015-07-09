@@ -8,17 +8,18 @@ buildscript {
     }
 }
 
-dependencies{
-        testCompile 'junit:junit:4.10'
+dependencies {
+    testCompile 'junit:junit:4.10'
+    compile 'org.hibernate:hibernate-core:4.3.10.Final'
 }
 
 apply plugin: 'org.flywaydb.flyway'
 apply plugin: 'java'
 
 flyway {
-    url = 'jdbc:mysql://localhost:3306/User'
+    url = 'jdbc:mysql://localhost:3306/test'
     user = 'root'
-    password='12345'
+    password = '12345'
     baselineOnMigrate = true
 }
 
