@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<form method="POST" action="Service" name="addUser">
+<form method="POST" action="Service">
     Name : <input type="text" name="name"/> <br/>
     Sex : <input type="text" name="sex"/> <br/>
     Address : <input type="text" name="address"/> <br/>
