@@ -14,7 +14,6 @@
 <body>
 
 <form method="POST" action="Service" name="addUser">
-    <%--ID : <input type="text" name="id"/> <br/>--%>
     Name : <input type="text" name="name"/> <br/>
     Sex : <input type="text" name="sex"/> <br/>
     Address : <input type="text" name="address"/> <br/>
