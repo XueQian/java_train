@@ -53,46 +53,35 @@ public class UserDao {
 
         sessionFactory.close();
     }
-//    public void updateUser(User user){
-//
-//        String sql = "update User set name=?,sex=?,address=?,age=?"+" where id=?";
-//
-//        try {
-//            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//            preparedStatement.setString(1,user.getName());
-//            preparedStatement.setString(2,user.getSex());
-//            preparedStatement.setString(3,user.getAddress());
-//            preparedStatement.setInt(4, user.getAge());
-//            preparedStatement.setInt(5,user.getId());
-//            preparedStatement.executeUpdate();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public User getUserById(int id) {
-//
-//        String sql = "select * from User where id=?";
-//        User user = new User();
-//
-//        try {
-//            PreparedStatement preparedStatement = connection.
-//                    prepareStatement(sql);
-//            preparedStatement.setInt(1, id);
-//            ResultSet rs = preparedStatement.executeQuery();
-//
-//            if (rs.next()) {
-//                user.setId(rs.getInt("id"));
-//                user.setName(rs.getString("name"));
-//                user.setSex(rs.getString("sex"));
-//                user.setAddress(rs.getString("address"));
-//                user.setAge(rs.getInt("age"));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return user;
-//    }
+
+    public User getUserById(int id){
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
+        Session session = sessionFactory.openSession();
+
+        session.beginTransaction();
+
+        User user = (User)session.get(User.class,id);
+
+        session.getTransaction().commit();
+
+        sessionFactory.close();
+
+        return user;
+    }
+
+    public void updateUser(User user){
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
+        Session session = sessionFactory.openSession();
+
+        session.beginTransaction();
+
+        session.update(user);
+
+        session.getTransaction().commit();
+
+        sessionFactory.close();
+    }
 }
 
