@@ -5,35 +5,34 @@ import java.util.List;
 import javax.servlet.http.*;
 import javax.servlet.*;
 
-import com.tw.core.dao.UserDao;
 import com.tw.core.entity.User;
+import com.tw.core.service.UserService;
 
 public class HelloServlet extends HttpServlet {
 
     private static String USERLIST = "/userList.jsp";
     private static String UPDATEUSER = "/updateUser.jsp";
 
-    private UserDao service = new UserDao();
-
+    private UserService userService = new UserService();
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
         String forward;
         String action = req.getParameter("action");
 
-        List<User> userList = service.getUsers();
+        List<User> userList = userService.getUsers();
 
         if ("delete".equalsIgnoreCase(action)) {
 
             int id = Integer.parseInt(req.getParameter("id"));
-            service.deleteUser(id);
+            userService.deleteUser(id);
             forward = USERLIST;
-            req.setAttribute("users", service.getUsers());
+            req.setAttribute("users", userService.getUsers());
 
         } else if ("update".equalsIgnoreCase(action)) {
 
             forward = UPDATEUSER;
             int userId = Integer.parseInt(req.getParameter("id"));
-            User user = service.getUserById(userId);
+            User user = userService.getUserById(userId);
             req.setAttribute("user", user);
 
         } else {
@@ -59,14 +58,14 @@ public class HelloServlet extends HttpServlet {
         if (userId != null) {
 
             user.setId(Integer.parseInt(userId));
-            service.updateUser(user);
+            userService.updateUser(user);
         } else {
 
-            service.addUser(user);
+            userService.addUser(user);
         }
 
         RequestDispatcher view = request.getRequestDispatcher(USERLIST);
-        request.setAttribute("users", service.getUsers());
+        request.setAttribute("users", userService.getUsers());
         view.forward(request, response);
     }
 }
