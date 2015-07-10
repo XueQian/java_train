@@ -15,7 +15,7 @@
 
 <form method="POST">
     Id : <input type="text" readonly="readonly" name="id"
-                     value="<c:out value="${user.id}" />"/> <br/>
+                value="<c:out value="${user.id}" />"/> <br/>
     Name : <input
         type="text" name="name"
         value="<c:out value="${user.name}" />"/> <br/>
@@ -26,7 +26,7 @@
         type="text" name="address"
         value="<c:out value="${user.address}" />"/> <br/>
     Age : <input type="text" name="age"
-                   value="<c:out value="${user.age}" />"/> <br/>
+                 value="<c:out value="${user.age}" />"/> <br/>
     <input type="submit" value="update"/>
 </form>
 
