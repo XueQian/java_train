@@ -21,6 +21,8 @@
         <th>Sex</th>
         <th>Address</th>
         <th>age</th>
+        <th>Operation</th>
+        <th>Operation</th>
     </tr>
     </thead>
     <tbody>
