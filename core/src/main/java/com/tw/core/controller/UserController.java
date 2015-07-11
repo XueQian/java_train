@@ -43,6 +43,12 @@ public class UserController {
         userService.addUser(user);
         return new ModelAndView("redirect:/");
     }
+
+    @RequestMapping(value = "deleteUser",method = RequestMethod.GET)
+    public ModelAndView deleteUser(@RequestParam int id){
+        userService.deleteUser(id);
+        return new ModelAndView("redirect:/");
+    }
 }
 
 
