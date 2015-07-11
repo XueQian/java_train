@@ -10,7 +10,7 @@ import com.tw.core.service.UserService;
 
 public class HelloServlet extends HttpServlet {
 
-    private static String USERLIST = "/userList.jsp";
+    private static String USERLIST = "/index.jsp";
     private static String UPDATEUSER = "/updateUser.jsp";
 
     private UserService userService = new UserService();

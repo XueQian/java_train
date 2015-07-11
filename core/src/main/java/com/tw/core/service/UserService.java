@@ -2,12 +2,14 @@ package com.tw.core.service;
 
 import com.tw.core.dao.UserDao;
 import com.tw.core.entity.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by qxue on 7/9/15.
  */
+@Service
 public class UserService {
 
     UserDao userDao = new UserDao();
