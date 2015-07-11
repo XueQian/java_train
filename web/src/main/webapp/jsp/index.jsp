@@ -39,7 +39,7 @@
     </c:forEach>
     </tbody>
 </table>
-<p><a href="addUser.jsp">Add User</a></p>
+<p><a href="./addUser">Add User</a></p>
 
 </body>
 </html>
