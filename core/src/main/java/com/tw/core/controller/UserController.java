@@ -19,34 +19,49 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/",method = RequestMethod.GET)
-    public ModelAndView getUsers(){
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView getUsers() {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
-        modelAndView.addObject("users",userService.getUsers());
+        modelAndView.addObject("users", userService.getUsers());
         return modelAndView;
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.GET)
-    public ModelAndView getCreateUserPage(){
+    public ModelAndView getCreateUserPage() {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addUser");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/addUser",method = RequestMethod.POST)
-    public ModelAndView addUser(@RequestParam String name,@RequestParam String sex,@RequestParam String address,@RequestParam String age){
+    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    public ModelAndView addUser(@RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam String age) {
 
-        User user = new User(name,sex,address,Integer.parseInt(age));
+        User user = new User(name, sex, address, Integer.parseInt(age));
         userService.addUser(user);
         return new ModelAndView("redirect:/");
     }
 
-    @RequestMapping(value = "deleteUser",method = RequestMethod.GET)
-    public ModelAndView deleteUser(@RequestParam int id){
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
+    public ModelAndView deleteUser(@RequestParam int id) {
         userService.deleteUser(id);
+        return new ModelAndView("redirect:/");
+    }
+
+    @RequestMapping(value = "/updateUser", method = RequestMethod.GET)
+    public ModelAndView getUserById(@RequestParam int id) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("updateUser");
+        modelAndView.addObject("user", userService.getUserById(id));
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    public ModelAndView updateUser(@RequestParam int id, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age) {
+        User user = new User(id, name, sex, address, age);
+        userService.updateUser(user);
         return new ModelAndView("redirect:/");
     }
 }

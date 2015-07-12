@@ -33,6 +33,14 @@ public class User {
         this.age = age;
     }
 
+    public User (int id,String name,String sex,String address,int age){
+        this.id = id;
+        this.name = name;
+        this.sex = sex;
+        this.address = address;
+        this.age = age;
+    }
+
     public int getId() {
         return id;
     }

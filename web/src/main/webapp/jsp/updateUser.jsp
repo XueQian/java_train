@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<form method="POST">
+<form method="POST" action="/web">
     Id : <input type="text" readonly="readonly" name="id"
                 value="<c:out value="${user.id}" />"/> <br/>
     Name : <input
