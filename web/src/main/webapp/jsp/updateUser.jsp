@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<form method="POST" action="">
+<form method="POST" action="" style="position:absolute; left: 350px;">
     <%--Id : <input type="text" readonly="readonly" name="id"--%>
                 <%--value="<c:out value="${user.id}" />"/> <br/>--%>
     Name : <input
@@ -27,7 +27,7 @@
         value="<c:out value="${user.address}" />"/> <br/>
     Age : <input type="text" name="age"
                  value="<c:out value="${user.age}" />"/> <br/>
-    <input type="submit" value="update"/>
+    <input type="submit" value="Submit"/>
 </form>
 
 </body>

@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<form method="POST" action="">
+<form method="POST" action="" style="position:absolute; left: 350px;">
     Name : <input type="text" name="name"/> <br/>
     Sex : <input type="text" name="sex"/> <br/>
     Address : <input type="text" name="address"/> <br/>

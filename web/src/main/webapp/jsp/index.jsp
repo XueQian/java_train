@@ -13,7 +13,7 @@
     <title>用户信息页面</title>
 </head>
 <body>
-<table border=1>
+<table border=1  style="position:absolute; left: 350px;">
     <thead>
     <tr>
         <th>Id</th>
@@ -39,7 +39,7 @@
     </c:forEach>
     </tbody>
 </table>
-<p><a href="./addUser">Add User</a></p>
+<p style="position:absolute; left: 350px;top:230px;"><a href="./addUser">Add User</a></p>
 
 </body>
 </html>
