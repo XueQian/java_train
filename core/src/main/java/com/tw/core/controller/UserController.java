@@ -3,10 +3,7 @@ package com.tw.core.controller;
 import com.tw.core.entity.User;
 import com.tw.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -59,8 +56,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
-    public ModelAndView updateUser(@RequestParam int id, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age) {
-        User user = new User(id, name, sex, address, age);
+    public ModelAndView updateUser(@RequestParam String id,@RequestParam String name,@RequestParam String sex,@RequestParam String address,@RequestParam String age) {
+        User user = new User(Integer.parseInt(id), name, sex, address, Integer.parseInt(age));
         userService.updateUser(user);
         return new ModelAndView("redirect:/");
     }
