@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -32,7 +33,13 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView login(@RequestParam int id, @RequestParam String password, HttpServletResponse response) {
+    public ModelAndView login(@RequestParam int id, @RequestParam String password, HttpServletResponse response, HttpServletRequest request) {
+
+        String uri = String.valueOf(request.getRequestURI());
+
+        String usefulUri = uri.substring(4);
+
+        System.out.println(uri + "@@@@@@@@@@@" + usefulUri + "!!!!!!!!!!!!!!!!!!!!!");
 
         User userDatabase = userService.getUserById(id);
 
@@ -44,10 +51,14 @@ public class UserController {
             e.printStackTrace();
         }
 
-        if (userDatabase.getPassword().equals(passwordMD5)) {
+        if (userDatabase.getPassword().equals(passwordMD5) && usefulUri.equals("/")) {
 
             response.addCookie(new Cookie("isLogin", "valid"));
-            return new ModelAndView("redirect:/users");
+            return new ModelAndView("redirect:" + "/users");
+        } else if (userDatabase.getPassword().equals(passwordMD5)) {
+
+            response.addCookie(new Cookie("isLogin", "valid"));
+            return new ModelAndView("redirect:" + usefulUri);
         } else {
 
             response.addCookie(new Cookie("isLogin", "invalid"));
