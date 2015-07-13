@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * Created by qxue on 7/11/15.
  */
@@ -18,7 +21,9 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView getLoginPage() {
+    public ModelAndView getLoginPage(HttpServletResponse response) {
+
+        response.addCookie(new Cookie("qxue", "invalid"));
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
@@ -27,95 +32,129 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView login(@RequestParam int id,@RequestParam String password){
+    public ModelAndView login(@RequestParam int id, @RequestParam String password, HttpServletResponse response) {
 
         User userDatabase = userService.getUserById(id);
+
         String passwordMD5 = null;
+
         try {
             passwordMD5 = MD5Util.getMD5(password);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(userDatabase.getPassword().equals(passwordMD5)){
-            return new ModelAndView("redirect:/users");
-        }
 
-        return new ModelAndView("redirect:/");
+        if (userDatabase.getPassword().equals(passwordMD5)) {
+
+            response.addCookie(new Cookie("qxue", "valid"));
+            return new ModelAndView("redirect:/users");
+        } else {
+
+            response.addCookie(new Cookie("qxue", "invalid"));
+            return new ModelAndView("redirect:/");
+        }
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public ModelAndView getUsers() {
+    public ModelAndView getUsers(@CookieValue("qxue") String cookie) {
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("index");
-        modelAndView.addObject("users", userService.getUsers());
 
-        return modelAndView;
+        if ("valid".equals(cookie)) {
+            modelAndView.setViewName("index");
+            modelAndView.addObject("users", userService.getUsers());
+            return modelAndView;
+
+        } else {
+            return new ModelAndView("redirect:/");
+        }
     }
 
     @RequestMapping(value = "/users/creation", method = RequestMethod.GET)
-    public ModelAndView getAddUserPage() {
-
+    public ModelAndView getAddUserPage(@CookieValue("qxue") String cookie) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("addUser");
 
-        return modelAndView;
+        if ("valid".equals(cookie)) {
+
+            modelAndView.setViewName("addUser");
+            return modelAndView;
+        } else {
+            return new ModelAndView("redirect:/");
+        }
     }
 
     @RequestMapping(value = "/users/creation", method = RequestMethod.POST)
-    public ModelAndView addUser(@RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age, @RequestParam String password) {
+    public ModelAndView addUser(@CookieValue("qxue") String cookie, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age, @RequestParam String password) {
 
-        User user = null;
+        if ("valid".equals(cookie)) {
+            User user = null;
 
-        try {
-            user = new User(name, sex, address, age, MD5Util.getMD5(password));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        userService.addUser(user);
-
-        return new ModelAndView("redirect:/users");
-    }
-
-    @RequestMapping(value = "/users/deletion/{id}", method = RequestMethod.GET)
-    public ModelAndView deleteUser(@PathVariable int id) {
-
-        userService.deleteUser(id);
-        return new ModelAndView("redirect:/users");
-    }
-
-    @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.GET)
-    public ModelAndView getUpdateUserPage(@PathVariable int id) {
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("updateUser");
-
-        modelAndView.addObject("user", userService.getUserById(id));
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.POST)
-    public ModelAndView updateUser(@PathVariable int id, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age, @RequestParam String password) {
-
-        User user;
-        String passwordMD5 = password;
-
-        User userDatabase = userService.getUserById(id);
-
-        if (!(userDatabase.getPassword().equals(password))) {
             try {
-                passwordMD5 = MD5Util.getMD5(password);
+                user = new User(name, sex, address, age, MD5Util.getMD5(password));
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            userService.addUser(user);
+
+            return new ModelAndView("redirect:/users");
+        } else {
+            return new ModelAndView("redirect:/");
         }
+    }
 
-        user = new User(id, name, sex, address, age, passwordMD5);
-        userService.updateUser(user);
+    @RequestMapping(value = "/users/deletion/{id}", method = RequestMethod.GET)
+    public ModelAndView deleteUser(@PathVariable int id, @CookieValue("qxue") String cookie) {
 
-        return new ModelAndView("redirect:/users");
+        if ("valid".equals(cookie)) {
+
+            userService.deleteUser(id);
+            return new ModelAndView("redirect:/users");
+        } else {
+            return new ModelAndView("redirect:/");
+        }
+    }
+
+    @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.GET)
+    public ModelAndView getUpdateUserPage(@PathVariable int id, @CookieValue("qxue") String cookie) {
+
+        if ("valid".equals(cookie)) {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("updateUser");
+
+            modelAndView.addObject("user", userService.getUserById(id));
+
+            return modelAndView;
+        } else {
+            return new ModelAndView("redirect:/");
+        }
+    }
+
+    @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.POST)
+    public ModelAndView updateUser(@CookieValue("qxue") String cookie, @PathVariable int id, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age, @RequestParam String password) {
+
+        if ("valid".equals(cookie)) {
+            User user;
+            String passwordMD5 = password;
+
+            User userDatabase = userService.getUserById(id);
+
+            if (!(userDatabase.getPassword().equals(password))) {
+                try {
+                    passwordMD5 = MD5Util.getMD5(password);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            user = new User(id, name, sex, address, age, passwordMD5);
+            userService.updateUser(user);
+
+            return new ModelAndView("redirect:/users");
+
+        } else {
+            return new ModelAndView("redirect:/");
+        }
     }
 }
 
