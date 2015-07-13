@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/users",method = RequestMethod.GET)
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ModelAndView getUsers() {
 
         ModelAndView modelAndView = new ModelAndView();
@@ -34,9 +34,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/creation", method = RequestMethod.POST)
-    public ModelAndView addUser(@RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam String age) {
+    public ModelAndView addUser(@RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age) {
 
-        User user = new User(name, sex, address, Integer.parseInt(age));
+        User user = new User(name, sex, address, age);
         userService.addUser(user);
         return new ModelAndView("redirect:/users");
     }
@@ -56,8 +56,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/modify/{id}", method = RequestMethod.POST)
-    public ModelAndView updateUser(@PathVariable String id,@RequestParam String name,@RequestParam String sex,@RequestParam String address,@RequestParam String age) {
-        User user = new User(Integer.parseInt(id), name, sex, address, Integer.parseInt(age));
+    public ModelAndView updateUser(@PathVariable int id, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age) {
+        User user = new User(id, name, sex, address, age);
         userService.updateUser(user);
         return new ModelAndView("redirect:/users");
     }
