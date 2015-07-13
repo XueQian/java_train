@@ -18,12 +18,29 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView login() {
+    public ModelAndView getLoginPage() {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
 
         return modelAndView;
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ModelAndView login(@RequestParam int id,@RequestParam String password){
+
+        User userDatabase = userService.getUserById(id);
+        String passwordMD5 = null;
+        try {
+            passwordMD5 = MD5Util.getMD5(password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(userDatabase.getPassword().equals(passwordMD5)){
+            return new ModelAndView("redirect:/users");
+        }
+
+        return null;
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
