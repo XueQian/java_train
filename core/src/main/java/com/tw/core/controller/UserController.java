@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.lang.ref.SoftReference;
-
 /**
  * Created by qxue on 7/11/15.
  */
@@ -73,8 +71,17 @@ public class UserController {
     @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.POST)
     public ModelAndView updateUser(@PathVariable int id, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age, @RequestParam String password) {
         User user = null;
+        String passwordMD5 = password;
+        User userDatabase = userService.getUserById(id);
+        if (!(userDatabase.getPassword().equals(password))) {
+            try {
+                passwordMD5 = MD5Util.getMD5(password);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         try {
-            user = new User(id, name, sex, address, age, MD5Util.getMD5(password));
+            user = new User(id, name, sex, address, age, passwordMD5);
         } catch (Exception e) {
             e.printStackTrace();
         }
