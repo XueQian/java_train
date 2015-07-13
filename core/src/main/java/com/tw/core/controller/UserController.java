@@ -80,11 +80,7 @@ public class UserController {
                 e.printStackTrace();
             }
         }
-        try {
-            user = new User(id, name, sex, address, age, passwordMD5);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        user = new User(id, name, sex, address, age, passwordMD5);
         userService.updateUser(user);
         return new ModelAndView("redirect:/users");
     }
