@@ -10,7 +10,7 @@
 
 <html>
 <head>
-    <title>用户信息页面</title>
+    <title>VIEW USERS</title>
 </head>
 <body>
 <table border=1  style="position:absolute; left: 350px;">
