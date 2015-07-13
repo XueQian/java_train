@@ -2,6 +2,7 @@ package com.tw.core.controller;
 
 import com.tw.core.entity.User;
 import com.tw.core.service.UserService;
+import com.tw.core.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -45,7 +46,12 @@ public class UserController {
     @RequestMapping(value = "/users/creation", method = RequestMethod.POST)
     public ModelAndView addUser(@RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age, @RequestParam String password) {
 
-        User user = new User(name, sex, address, age, password);
+        User user = null;
+        try {
+            user = new User(name, sex, address, age, MD5Util.getMD5(password));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         userService.addUser(user);
         return new ModelAndView("redirect:/users");
     }
@@ -66,7 +72,12 @@ public class UserController {
 
     @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.POST)
     public ModelAndView updateUser(@PathVariable int id, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age, @RequestParam String password) {
-        User user = new User(id, name, sex, address, age, password);
+        User user = null;
+        try {
+            user = new User(id, name, sex, address, age, MD5Util.getMD5(password));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         userService.updateUser(user);
         return new ModelAndView("redirect:/users");
     }
