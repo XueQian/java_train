@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/creation", method = RequestMethod.GET)
-    public ModelAndView getCreateUserPage() {
+    public ModelAndView getAddUserPage() {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addUser");
@@ -57,7 +57,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.GET)
-    public ModelAndView getUserById(@PathVariable int id) {
+    public ModelAndView getUpdateUserPage(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("updateUser");
         modelAndView.addObject("user", userService.getUserById(id));
