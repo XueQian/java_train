@@ -16,6 +16,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView login(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ModelAndView getUsers() {
 
