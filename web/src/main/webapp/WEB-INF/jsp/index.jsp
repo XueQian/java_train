@@ -41,7 +41,7 @@
     </c:forEach>
     </tbody>
 </table>
-<p style="position:absolute; left: 350px;top:230px;"><a href="./users/creation">Add User</a></p>
+<p style="position:absolute; left: 280px;"><a href="./users/creation">Add User</a></p>
 
 </body>
 </html>
