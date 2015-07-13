@@ -57,7 +57,7 @@ public class UserController {
         }
 
         userService.addUser(user);
-        
+
         return new ModelAndView("redirect:/users");
     }
 
