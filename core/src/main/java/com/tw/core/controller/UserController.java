@@ -40,7 +40,7 @@ public class UserController {
             return new ModelAndView("redirect:/users");
         }
 
-        return null;
+        return new ModelAndView("redirect:/");
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
