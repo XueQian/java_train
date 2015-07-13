@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.lang.ref.SoftReference;
+
 /**
  * Created by qxue on 7/11/15.
  */
@@ -17,7 +19,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView login(){
+    public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
         return modelAndView;
@@ -41,9 +43,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/creation", method = RequestMethod.POST)
-    public ModelAndView addUser(@RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age) {
+    public ModelAndView addUser(@RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age, @RequestParam String password) {
 
-        User user = new User(name, sex, address, age);
+        User user = new User(name, sex, address, age, password);
         userService.addUser(user);
         return new ModelAndView("redirect:/users");
     }
@@ -63,8 +65,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.POST)
-    public ModelAndView updateUser(@PathVariable int id, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age) {
-        User user = new User(id, name, sex, address, age);
+    public ModelAndView updateUser(@PathVariable int id, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age, @RequestParam String password) {
+        User user = new User(id, name, sex, address, age, password);
         userService.updateUser(user);
         return new ModelAndView("redirect:/users");
     }

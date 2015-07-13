@@ -21,24 +21,28 @@ public class User {
     private String address;
 //    @Column(name="age")
     private int age;
+//    @Column(name="password")
+    private String password;
 
     public User(){
 
     }
 
-    public User (String name,String sex,String address,int age){
+    public User (String name,String sex,String address,int age,String password){
         this.name = name;
         this.sex = sex;
         this.address = address;
         this.age = age;
+        this.password = password;
     }
 
-    public User (int id,String name,String sex,String address,int age){
+    public User (int id,String name,String sex,String address,int age,String password){
         this.id = id;
         this.name = name;
         this.sex = sex;
         this.address = address;
         this.age = age;
+        this.password = password;
     }
 
     public int getId() {
@@ -79,5 +83,13 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -18,6 +18,7 @@
     Sex : <input type="text" name="sex"/> <br/>
     Address : <input type="text" name="address"/> <br/>
     Age : <input type="text" name="age"/><br/>
+    Password:<input type="text" name="password"/><br/>
     <input type="submit" value="Submit"/>
 </form>
 

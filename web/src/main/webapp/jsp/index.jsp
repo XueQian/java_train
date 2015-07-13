@@ -21,6 +21,7 @@
         <th>Sex</th>
         <th>Address</th>
         <th>age</th>
+        <th>password</th>
         <th>Operation</th>
         <th>Operation</th>
     </tr>
@@ -33,6 +34,7 @@
             <td><c:out value="${user.sex}" /></td>
             <td><c:out value="${user.address}" /></td>
             <td><c:out value="${user.age}" /></td>
+            <td><c:out value="${user.password}"/> </td>
             <td><a href="./users/modification/<c:out value="${user.id}"/>">Update</a></td>
             <td><a href="./users/deletion/<c:out value="${user.id}"/>">Delete</a></td>
         </tr>
