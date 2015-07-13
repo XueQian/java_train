@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/users",method = RequestMethod.GET)
     public ModelAndView getUsers() {
 
         ModelAndView modelAndView = new ModelAndView();
@@ -25,7 +25,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/addUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/creation", method = RequestMethod.GET)
     public ModelAndView getCreateUserPage() {
 
         ModelAndView modelAndView = new ModelAndView();
@@ -33,21 +33,21 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/creation", method = RequestMethod.POST)
     public ModelAndView addUser(@RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam String age) {
 
         User user = new User(name, sex, address, Integer.parseInt(age));
         userService.addUser(user);
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/users");
     }
 
-    @RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/deletion", method = RequestMethod.GET)
     public ModelAndView deleteUser(@RequestParam int id) {
         userService.deleteUser(id);
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/users");
     }
 
-    @RequestMapping(value = "/updateUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/modify", method = RequestMethod.GET)
     public ModelAndView getUserById(@RequestParam int id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("updateUser");
@@ -55,11 +55,11 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/modify", method = RequestMethod.POST)
     public ModelAndView updateUser(@RequestParam String id,@RequestParam String name,@RequestParam String sex,@RequestParam String address,@RequestParam String age) {
         User user = new User(Integer.parseInt(id), name, sex, address, Integer.parseInt(age));
         userService.updateUser(user);
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/users");
     }
 }
 

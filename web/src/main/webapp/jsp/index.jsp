@@ -33,13 +33,13 @@
             <td><c:out value="${user.sex}" /></td>
             <td><c:out value="${user.address}" /></td>
             <td><c:out value="${user.age}" /></td>
-            <td><a href="./updateUser?id=<c:out value="${user.id}"/>">Update</a></td>
-            <td><a href="./deleteUser?id=<c:out value="${user.id}"/>">Delete</a></td>
+            <td><a href="./users/modify?id=<c:out value="${user.id}"/>">Update</a></td>
+            <td><a href="./users/deletion?id=<c:out value="${user.id}"/>">Delete</a></td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-<p style="position:absolute; left: 350px;top:230px;"><a href="./addUser">Add User</a></p>
+<p style="position:absolute; left: 350px;top:230px;"><a href="./users/creation">Add User</a></p>
 
 </body>
 </html>
