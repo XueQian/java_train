@@ -47,7 +47,7 @@ public class UserController {
         return new ModelAndView("redirect:/users");
     }
 
-    @RequestMapping(value = "/users/modify/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.GET)
     public ModelAndView getUserById(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("updateUser");
@@ -55,7 +55,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/users/modify/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.POST)
     public ModelAndView updateUser(@PathVariable int id, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age) {
         User user = new User(id, name, sex, address, age);
         userService.updateUser(user);

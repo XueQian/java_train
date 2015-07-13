@@ -13,7 +13,7 @@
 <body>
 <form method="POST" action="" style="position:absolute; left: 350px;">
     Name : <input type="text" name="name"/> <br/>
-    Password : <input type="text" name="sex"/> <br/>
+    Password : <input type="text" name="password"/> <br/>
     <input type="submit" value="Submit"/>
 </form>
 </body>
