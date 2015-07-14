@@ -24,17 +24,11 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getLoginPage(HttpServletRequest request, HttpServletResponse response) {
 
-        if (request.getCookies() == null) {
-
-            Cookie cookie = new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4));
-            cookie.setPath("/");
-            response.addCookie(cookie);
-        }
+        addCurrentIsLoginCookie(request, response);
         response.addCookie(new Cookie("isLogin", "invalid"));
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
-
         return modelAndView;
     }
 
@@ -231,6 +225,15 @@ public class UserController {
             response.addCookie(cookie);
 
             return new ModelAndView("redirect:/");
+        }
+    }
+
+    private void addCurrentIsLoginCookie(HttpServletRequest request, HttpServletResponse response) {
+        if (request.getCookies() == null) {
+
+            Cookie cookie = new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4));
+            cookie.setPath("/");
+            response.addCookie(cookie);
         }
     }
 }
