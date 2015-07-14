@@ -16,24 +16,28 @@ public class UserService {
     @Autowired
     UserDao userDao;
 
-    public List<User> getUsers(){
+    public List<User> getUsers() {
         return userDao.getUsers();
     }
 
-    public void addUser(User user){
+    public void addUser(User user) {
         userDao.addUser(user);
     }
 
-    public void deleteUser(int id){
+    public void deleteUser(int id) {
         userDao.deleteUser(id);
     }
 
-    public User getUserById(int id){
+    public User getUserById(int id) {
         return userDao.getUserById(id);
     }
 
-    public void updateUser(User user){
+    public void updateUser(User user) {
         userDao.updateUser(user);
+    }
+
+    public List<User> getUserByName(String name) {
+        return userDao.getUserByName(name);
     }
 }
 

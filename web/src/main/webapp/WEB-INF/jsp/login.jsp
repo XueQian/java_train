@@ -12,7 +12,7 @@
 </head>
 <body>
 <form method="POST" action="" style="position:absolute; left: 350px;">
-    Id : <input type="text" name="id"/> <br/>
+    Name : <input type="text" name="name"/> <br/>
     Password : <input type="text" name="password"/> <br/>
     <input type="submit" value="Submit"/>
 </form>

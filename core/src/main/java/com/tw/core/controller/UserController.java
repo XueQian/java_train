@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by qxue on 7/11/15.
@@ -33,9 +34,10 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView login(@CookieValue("URI") String uriCookie, @RequestParam int id, @RequestParam String password, HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView login(@CookieValue("URI") String uriCookie, @RequestParam String name, @RequestParam String password, HttpServletRequest request, HttpServletResponse response) {
 
-        User userDatabase = userService.getUserById(id);
+        List<User> userList = userService.getUserByName(name);
+        User userDatabase = userList.get(0);
 
         String passwordMD5 = null;
 
