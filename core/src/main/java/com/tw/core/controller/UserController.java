@@ -147,20 +147,8 @@ public class UserController {
     public ModelAndView updateUser(@CookieValue("isLogin") String isLoginCookie, @PathVariable int id, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age, @RequestParam String password, HttpServletRequest request, HttpServletResponse response) {
 
         if ("valid".equals(isLoginCookie)) {
-            User user;
-            String passwordMD5 = password;
 
-            User userDatabase = userService.getUserById(id);
-
-            if (!(userDatabase.getPassword().equals(password))) {
-                try {
-                    passwordMD5 = MD5Util.getMD5(password);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            user = new User(id, name, sex, address, age, passwordMD5);
+            User user = new User(id, name, sex, address, age, changePassword(id, password));
             userService.updateUser(user);
 
             addURICooike(request, response);
@@ -203,7 +191,7 @@ public class UserController {
         response.addCookie(cookie);
     }
 
-    private ModelAndView logIn(String uriCookie,HttpServletRequest request,HttpServletResponse response){
+    private ModelAndView logIn(String uriCookie, HttpServletRequest request, HttpServletResponse response) {
 
         if ("/".equals(uriCookie)) {
 
@@ -221,6 +209,22 @@ public class UserController {
             addURICooike(request, response);
             return modelAndView;
         }
+    }
+
+    private String changePassword(int id, String password) {
+
+        String passwordMD5 = password;
+
+        User userDatabase = userService.getUserById(id);
+
+        if (!(userDatabase.getPassword().equals(password))) {
+            try {
+                passwordMD5 = MD5Util.getMD5(password);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return passwordMD5;
     }
 }
 
