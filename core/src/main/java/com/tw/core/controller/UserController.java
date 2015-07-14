@@ -154,26 +154,6 @@ public class UserController {
         }
     }
 
-    //    @RequestMapping(value = "/users/deletion/{id}", method = RequestMethod.GET)
-//    public ModelAndView deleteUser(@PathVariable int id, @CookieValue("isLogin") String isLoginCookie, HttpServletRequest request, HttpServletResponse response) {
-//
-//        if ("valid".equals(isLoginCookie)) {
-//
-//            userService.deleteUser(id);
-//            Cookie cookie = new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4));
-//            cookie.setPath("/");
-//            response.addCookie(cookie);
-//
-//            return new ModelAndView("redirect:/users");
-//        } else {
-//
-//            Cookie cookie = new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4));
-//            cookie.setPath("/");
-//            response.addCookie(cookie);
-//
-//            return new ModelAndView("redirect:/");
-//        }
-//    }
     @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable int id, @CookieValue("isLogin") String isLoginCookie, HttpServletRequest request, HttpServletResponse response) {
 

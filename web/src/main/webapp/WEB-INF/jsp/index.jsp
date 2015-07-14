@@ -39,7 +39,6 @@
             <td><c:out value="${user.age}" /></td>
             <td><c:out value="${user.password}"/> </td>
             <td><a href="./users/modification/<c:out value="${user.id}"/>">Update</a></td>
-            <%--<td><a href="./users/deletion/<c:out value="${user.id}"/>">Delete</a></td>--%>
             <td><a href="javascript:;"onclick="deleteUserById(<c:out value="${user.id}" />);">删除</a></td>
         </tr>
     </c:forEach>
