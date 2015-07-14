@@ -38,22 +38,7 @@ public class UserController {
 
         if (IsPasswordCorrect(name, password)) {
 
-            if ("/".equals(uriCookie)) {
-
-                response.addCookie(new Cookie("isLogin", "valid"));
-
-                ModelAndView modelAndView = new ModelAndView("redirect:" + "/users");
-                addURICooike(request, response);
-                return modelAndView;
-
-            } else {
-
-                response.addCookie(new Cookie("isLogin", "valid"));
-
-                ModelAndView modelAndView = new ModelAndView("redirect:" + uriCookie);
-                addURICooike(request, response);
-                return modelAndView;
-            }
+            return logIn(uriCookie, request, response);
         } else {
 
             response.addCookie(new Cookie("isLogin", "invalid"));
@@ -63,7 +48,6 @@ public class UserController {
             return modelAndView;
         }
     }
-
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ModelAndView getUsers(@CookieValue("isLogin") String isLoginCookie, HttpServletRequest request, HttpServletResponse response) {
@@ -217,6 +201,26 @@ public class UserController {
         Cookie cookie = new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4));
         cookie.setPath("/");
         response.addCookie(cookie);
+    }
+
+    private ModelAndView logIn(String uriCookie,HttpServletRequest request,HttpServletResponse response){
+
+        if ("/".equals(uriCookie)) {
+
+            response.addCookie(new Cookie("isLogin", "valid"));
+
+            ModelAndView modelAndView = new ModelAndView("redirect:" + "/users");
+            addURICooike(request, response);
+            return modelAndView;
+
+        } else {
+
+            response.addCookie(new Cookie("isLogin", "valid"));
+
+            ModelAndView modelAndView = new ModelAndView("redirect:" + uriCookie);
+            addURICooike(request, response);
+            return modelAndView;
+        }
     }
 }
 
