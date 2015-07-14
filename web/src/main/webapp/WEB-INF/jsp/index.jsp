@@ -7,10 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags"  prefix="spring"%>
 
 <html>
 <head>
     <title>VIEW USERS</title>
+    <spring:url value="lib/js/jquery-1.11.1.min.js" var="jQuery"/><script src="${jQuery}"></script>
+    <spring:url value="js/user.js" var="user"/><script src="${user}"></script>
 </head>
 <body>
 <table border=1  style="position:absolute; left: 350px;">
@@ -36,7 +39,8 @@
             <td><c:out value="${user.age}" /></td>
             <td><c:out value="${user.password}"/> </td>
             <td><a href="./users/modification/<c:out value="${user.id}"/>">Update</a></td>
-            <td><a href="./users/deletion/<c:out value="${user.id}"/>">Delete</a></td>
+            <%--<td><a href="./users/deletion/<c:out value="${user.id}"/>">Delete</a></td>--%>
+            <td><a href="javascript:;"onclick="deleteUserById(<c:out value="${user.id}" />);">删除</a></td>
         </tr>
     </c:forEach>
     </tbody>
