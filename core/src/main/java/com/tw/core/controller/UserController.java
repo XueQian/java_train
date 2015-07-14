@@ -22,9 +22,10 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView getLoginPage(HttpServletResponse response) {
+    public ModelAndView getLoginPage(HttpServletResponse response,HttpServletRequest request) {
 
         response.addCookie(new Cookie("isLogin", "invalid"));
+        response.addCookie(new Cookie("URI",String.valueOf(request.getRequestURI()).substring(4)));
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
@@ -33,13 +34,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView login(@RequestParam int id, @RequestParam String password, HttpServletResponse response, HttpServletRequest request) {
-
-        String uri = String.valueOf(request.getRequestURI());
-
-        String usefulUri = uri.substring(4);
-
-        System.out.println(uri + "@@@@@@@@@@@" + usefulUri + "!!!!!!!!!!!!!!!!!!!!!");
+    public ModelAndView login(@CookieValue("URI") String uriCookie,@RequestParam int id, @RequestParam String password, HttpServletResponse response, HttpServletRequest request) {
 
         User userDatabase = userService.getUserById(id);
 
@@ -51,51 +46,75 @@ public class UserController {
             e.printStackTrace();
         }
 
-        if (userDatabase.getPassword().equals(passwordMD5) && usefulUri.equals("/")) {
+        if (userDatabase.getPassword().equals(passwordMD5)) {
 
-            response.addCookie(new Cookie("isLogin", "valid"));
-            return new ModelAndView("redirect:" + "/users");
-        } else if (userDatabase.getPassword().equals(passwordMD5)) {
+            if("/".equals(uriCookie)){
 
-            response.addCookie(new Cookie("isLogin", "valid"));
-            return new ModelAndView("redirect:" + usefulUri);
-        } else {
+                response.addCookie(new Cookie("isLogin", "valid"));
+
+                ModelAndView modelAndView = new ModelAndView("redirect:" + "/users");
+                response.addCookie(new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4)));
+                return modelAndView;
+
+            }else {
+
+                response.addCookie(new Cookie("isLogin", "valid"));
+
+                ModelAndView modelAndView = new ModelAndView("redirect:" + uriCookie);
+                response.addCookie(new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4)));
+                return modelAndView;
+            }
+        }else {
 
             response.addCookie(new Cookie("isLogin", "invalid"));
-            return new ModelAndView("redirect:/");
+
+            ModelAndView modelAndView =  new ModelAndView("redirect:/");
+            new Cookie("URI",String.valueOf(request.getRequestURI()).substring(4)).setPath("/");
+            return modelAndView;
         }
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public ModelAndView getUsers(@CookieValue("isLogin") String cookie) {
+    public ModelAndView getUsers(@CookieValue("isLogin") String cookie,HttpServletResponse response,HttpServletRequest request) {
 
         ModelAndView modelAndView = new ModelAndView();
 
         if ("valid".equals(cookie)) {
             modelAndView.setViewName("index");
             modelAndView.addObject("users", userService.getUsers());
+            response.addCookie(new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4)));
+
             return modelAndView;
 
         } else {
+            response.addCookie(new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4)));
+
             return new ModelAndView("redirect:/");
         }
     }
 
     @RequestMapping(value = "/users/creation", method = RequestMethod.GET)
-    public ModelAndView getAddUserPage(@CookieValue("isLogin") String cookie) {
+    public ModelAndView getAddUserPage(@CookieValue("isLogin") String cookie,HttpServletRequest request,HttpServletResponse response) {
         ModelAndView modelAndView = new ModelAndView();
 
         if ("valid".equals(cookie)) {
 
             modelAndView.setViewName("addUser");
+            Cookie cookie1 = new Cookie("URI",String.valueOf(request.getRequestURI()).substring(4));
+            cookie1.setPath("/");
+            response.addCookie(cookie1);
             return modelAndView;
         } else {
+
+            Cookie cookie1 = new Cookie("URI",String.valueOf(request.getRequestURI()).substring(4));
+            cookie1.setPath("/");
+            response.addCookie(cookie1);
             return new ModelAndView("redirect:/");
         }
     }
 
     @RequestMapping(value = "/users/creation", method = RequestMethod.POST)
-    public ModelAndView addUser(@CookieValue("isLogin") String cookie, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age, @RequestParam String password) {
+    public ModelAndView addUser(HttpServletRequest request,HttpServletResponse response,@CookieValue("isLogin") String cookie, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age, @RequestParam String password) {
 
         if ("valid".equals(cookie)) {
             User user = null;
@@ -107,27 +126,39 @@ public class UserController {
             }
 
             userService.addUser(user);
-
+            Cookie cookie1 = new Cookie("URI",String.valueOf(request.getRequestURI()).substring(4));
+            cookie1.setPath("/");
+            response.addCookie(cookie1);
             return new ModelAndView("redirect:/users");
         } else {
+
+            Cookie cookie1 = new Cookie("URI",String.valueOf(request.getRequestURI()).substring(4));
+            cookie1.setPath("/");
+            response.addCookie(cookie1);
             return new ModelAndView("redirect:/");
         }
     }
 
     @RequestMapping(value = "/users/deletion/{id}", method = RequestMethod.GET)
-    public ModelAndView deleteUser(@PathVariable int id, @CookieValue("isLogin") String cookie) {
+    public ModelAndView deleteUser(@PathVariable int id, @CookieValue("isLogin") String cookie,HttpServletRequest request,HttpServletResponse response) {
 
         if ("valid".equals(cookie)) {
 
             userService.deleteUser(id);
+            response.addCookie(new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4)));
+
+
             return new ModelAndView("redirect:/users");
         } else {
+            response.addCookie(new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4)));
+
+
             return new ModelAndView("redirect:/");
         }
     }
 
     @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.GET)
-    public ModelAndView getUpdateUserPage(@PathVariable int id, @CookieValue("isLogin") String cookie) {
+    public ModelAndView getUpdateUserPage(@PathVariable int id, @CookieValue("isLogin") String cookie,HttpServletRequest request,HttpServletResponse response) {
 
         if ("valid".equals(cookie)) {
             ModelAndView modelAndView = new ModelAndView();
@@ -135,14 +166,20 @@ public class UserController {
 
             modelAndView.addObject("user", userService.getUserById(id));
 
+            response.addCookie(new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4)));
+
+
             return modelAndView;
         } else {
+            response.addCookie(new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4)));
+
+
             return new ModelAndView("redirect:/");
         }
     }
 
     @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.POST)
-    public ModelAndView updateUser(@CookieValue("isLogin") String cookie, @PathVariable int id, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age, @RequestParam String password) {
+    public ModelAndView updateUser(HttpServletRequest request,HttpServletResponse response,@CookieValue("isLogin") String cookie, @PathVariable int id, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age, @RequestParam String password) {
 
         if ("valid".equals(cookie)) {
             User user;
@@ -160,10 +197,13 @@ public class UserController {
 
             user = new User(id, name, sex, address, age, passwordMD5);
             userService.updateUser(user);
+            response.addCookie(new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4)));
 
             return new ModelAndView("redirect:/users");
 
         } else {
+            response.addCookie(new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4)));
+
             return new ModelAndView("redirect:/");
         }
     }
