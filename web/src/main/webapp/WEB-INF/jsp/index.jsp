@@ -12,8 +12,8 @@
 <html>
 <head>
     <title>VIEW USERS</title>
-    <spring:url value="lib/js/jquery-1.11.1.min.js" var="jQuery"/><script src="${jQuery}"></script>
-    <spring:url value="js/user.js" var="user"/><script src="${user}"></script>
+    <spring:url value="/lib/js/jquery-1.11.1.min.js" var="jQuery"/><script src="${jQuery}"></script>
+    <spring:url value="/js/user.js" var="user"/><script src="${user}"></script>
 </head>
 <body>
 <table border=1  style="position:absolute; left: 350px;">
