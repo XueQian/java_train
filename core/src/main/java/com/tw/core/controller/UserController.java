@@ -36,18 +36,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView login(@CookieValue("URI") String uriCookie, @RequestParam String name, @RequestParam String password, HttpServletRequest request, HttpServletResponse response) {
 
-        List<User> userList = userService.getUserByName(name);
-        User userDatabase = userList.get(0);
-
-        String passwordMD5 = null;
-
-        try {
-            passwordMD5 = MD5Util.getMD5(password);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (userDatabase.getPassword().equals(passwordMD5)) {
+        if (IsPasswordCorrect(name,password)) {
 
             if ("/".equals(uriCookie)) {
 
@@ -237,6 +226,22 @@ public class UserController {
             cookie.setPath("/");
             response.addCookie(cookie);
         }
+    }
+
+    private boolean IsPasswordCorrect(String name,String password){
+
+        List<User> userList = userService.getUserByName(name);
+        User userDatabase = userList.get(0);
+
+        String passwordMD5 = null;
+
+        try {
+            passwordMD5 = MD5Util.getMD5(password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return userDatabase.getPassword().equals(passwordMD5);
     }
 }
 
