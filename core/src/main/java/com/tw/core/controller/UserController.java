@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * Created by qxue on 7/11/15.
- */
+* Created by qxue on 7/11/15.
+*/
 @RestController
 @RequestMapping("/")
 public class UserController {
@@ -58,7 +58,6 @@ public class UserController {
             modelAndView.setViewName("index");
             modelAndView.addObject("users", userService.getUsers());
 
-            addURICooike(request, response);
             return modelAndView;
 
         } else {
@@ -76,7 +75,6 @@ public class UserController {
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("addUser");
 
-            addURICooike(request, response);
             return modelAndView;
 
         } else {
@@ -99,7 +97,6 @@ public class UserController {
             }
 
             userService.addUser(user);
-            addURICooike(request, response);
             return new ModelAndView("redirect:/users");
 
         } else {
@@ -115,7 +112,6 @@ public class UserController {
         if ("valid".equals(isLoginCookie)) {
 
             userService.deleteUser(id);
-            addURICooike(request, response);
 
         } else {
 
@@ -131,8 +127,6 @@ public class UserController {
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("updateUser");
             modelAndView.addObject("user", userService.getUserById(id));
-
-            addURICooike(request, response);
 
             return modelAndView;
         } else {
@@ -151,7 +145,6 @@ public class UserController {
             User user = new User(id, name, sex, address, age, changePassword(id, password));
             userService.updateUser(user);
 
-            addURICooike(request, response);
             return new ModelAndView("redirect:/users");
 
         } else {
@@ -191,22 +184,27 @@ public class UserController {
         response.addCookie(cookie);
     }
 
+    private void deleteURICooike(HttpServletResponse response){
+        Cookie cookie = new Cookie("URI", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+    }
+
     private ModelAndView logIn(String uriCookie, HttpServletRequest request, HttpServletResponse response) {
+
+        response.addCookie(new Cookie("isLogin", "valid"));
 
         if ("/".equals(uriCookie)) {
 
-            response.addCookie(new Cookie("isLogin", "valid"));
-
             ModelAndView modelAndView = new ModelAndView("redirect:" + "/users");
-            addURICooike(request, response);
+            deleteURICooike(response);
             return modelAndView;
 
         } else {
 
-            response.addCookie(new Cookie("isLogin", "valid"));
-
             ModelAndView modelAndView = new ModelAndView("redirect:" + uriCookie);
-            addURICooike(request, response);
+            deleteURICooike(response);
             return modelAndView;
         }
     }
