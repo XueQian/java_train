@@ -20,7 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/")
-public class UserSessionController {
+public class UserController {
     @Autowired
     private UserService userService;
 

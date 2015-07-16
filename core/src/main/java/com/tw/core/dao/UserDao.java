@@ -15,7 +15,7 @@ public class UserDao {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
-        List<User> userList = session.createQuery("from user").list();
+        List<User> userList = session.createQuery("from User").list();
         session.getTransaction().commit();
 
         return userList;
