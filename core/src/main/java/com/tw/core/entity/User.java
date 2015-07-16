@@ -5,61 +5,20 @@ import javax.persistence.*;
 /**
  * Created by qxue on 7/7/15.
  */
-//@Entity
-//@Table(name = "User")
+@Entity
+@Table(name = "user")
 public class User {
 
-//    @Id
-//    @Column(name = "id")
-//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-//    @Column(name="name")
+
+    @Column(name = "name")
     private String name;
-//    @Column(name="sex")
-    private String sex;
-//    @Column(name="address")
-    private String address;
-//    @Column(name="age")
-    private int age;
-//    @Column(name="password")
+
+    @Column(name = "password")
     private String password;
-
-    public User(){
-
-    }
-
-    public User (String name,String sex,String address,int age,String password){
-        this.name = name;
-        this.sex = sex;
-        this.address = address;
-        this.age = age;
-        this.password = password;
-    }
-
-    public User (int id,String name,String sex,String address,int age,String password){
-        this.id = id;
-        this.name = name;
-        this.sex = sex;
-        this.address = address;
-        this.age = age;
-        this.password = password;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public String getName() {
         return name;
@@ -69,20 +28,12 @@ public class User {
         this.name = name;
     }
 
-    public String getSex() {
-        return sex;
+    public int getId() {
+        return id;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPassword() {
