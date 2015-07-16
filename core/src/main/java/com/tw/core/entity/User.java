@@ -20,6 +20,18 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "employee_id")
+    private int employeeId;
+
+    public User(String name, String password, int employeeId) {
+        this.name = name;
+        this.password = password;
+        this.employeeId = employeeId;
+    }
+
+    public User() {
+    }
+
     public String getName() {
         return name;
     }
@@ -42,5 +54,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 }
