@@ -1,4 +1,3 @@
-use gym;
 create table employee(id int not null primary key auto_increment,user_name varchar(30),role varchar(10));
 create table user (id int not null primary key auto_increment,name varchar(20) not null,password varchar(50) not null,employee_id int not null,constraint foreign key(employee_id) references user(id));
 create table course(id int not null primary key auto_increment,name varchar(30),employee_id int not null,constraint foreign key(employee_id) references employee(id) on delete cascade);
