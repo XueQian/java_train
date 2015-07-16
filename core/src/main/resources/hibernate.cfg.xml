@@ -13,6 +13,7 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.current_session_context_class">thread</property>
         <mapping class="com.tw.core.entity.User"/>
+        <mapping class="com.tw.core.entity.Employee"/>
         <!--<mapping resource="User.hbm.xml"/>-->
     </session-factory>
 </hibernate-configuration>
