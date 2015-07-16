@@ -14,6 +14,7 @@
         <property name="hibernate.current_session_context_class">thread</property>
         <mapping class="com.tw.core.entity.User"/>
         <mapping class="com.tw.core.entity.Employee"/>
+        <mapping class="com.tw.core.entity.Course"/>
         <!--<mapping resource="User.hbm.xml"/>-->
     </session-factory>
 </hibernate-configuration>
