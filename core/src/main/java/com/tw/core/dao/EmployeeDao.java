@@ -15,23 +15,21 @@ import java.util.List;
 public class EmployeeDao {
 
     public void addEmployee(Employee employee) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
         session.beginTransaction();
         session.save(employee);
         session.getTransaction().commit();
 
-        session.close();
     }
 
     public List<Employee> getEmployeeByName(String name) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-//        session.beginTransaction();
+        session.beginTransaction();
         Query query = session.createQuery("from Employee where user_name=:name");
         List employeeList = query.setString("name", name).list();
-//        session.getTransaction().commit();
-        session.close();
+        session.getTransaction().commit();
 
         return employeeList;
     }
