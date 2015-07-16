@@ -1,6 +1,8 @@
 package com.tw.core.controller;
 
+import com.tw.core.entity.Employee;
 import com.tw.core.entity.User;
+import com.tw.core.service.EmployeeService;
 import com.tw.core.service.UserService;
 import com.tw.core.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ import java.util.List;
 public class UserSessionController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private EmployeeService employeeService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getLoginPage() {
@@ -53,17 +58,34 @@ public class UserSessionController {
     @RequestMapping(value = "/users/creation", method = RequestMethod.GET)
     public ModelAndView getAddUserPage() {
 
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("register");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("register");
 
-            return modelAndView;
+        return modelAndView;
     }
 
-//    @RequestMapping(value = "/users/creation", method = RequestMethod.POST)
-//    public ModelAndView addUser(HttpSession session, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age, @RequestParam String password, HttpServletRequest request, HttpServletResponse response) {
-//
-//        String isLoginSession = (String) session.getAttribute("isLogin");
-//
+    @RequestMapping(value = "/users/creation", method = RequestMethod.POST)
+    public ModelAndView addUser(@RequestParam String name, @RequestParam String password, @RequestParam String role) {
+
+        Employee employee = new Employee(name, role);
+
+        employeeService.addEmployee(employee);
+
+        List<Employee> employeeList = employeeService.getEmployeeByName(name);
+
+        Employee employeeDatabase = employeeList.get(0);
+
+        User user = null;
+        try {
+            user = new User(name, MD5Util.getMD5(password), employeeDatabase.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        userService.addUser(user);
+        return new ModelAndView("redirect:/");
+
+
 //        if ("valid".equals(isLoginSession)) {
 //            User user = null;
 //
@@ -81,7 +103,7 @@ public class UserSessionController {
 //            addURICooike(request, response);
 //            return new ModelAndView("redirect:/");
 //        }
-//    }
+    }
 
 //    @RequestMapping(value = "/users", method = RequestMethod.GET)
 //    public ModelAndView getUsers(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
@@ -162,59 +184,59 @@ public class UserSessionController {
 //        }
 //    }
 
-    private void addCurrentIsLoginCookie(HttpServletRequest request, HttpServletResponse response) {
-        if (request.getCookies() == null) {
-
-            addURICooike(request, response);
-        }
-    }
-
-    private boolean IsPasswordCorrect(String name, String password) {
-
-        List<User> userList = userService.getUserByName(name);
-        User userDatabase = userList.get(0);
-
-        String passwordMD5 = null;
-
-        try {
-            passwordMD5 = MD5Util.getMD5(password);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return userDatabase.getPassword().equals(passwordMD5);
-    }
-
-    private void addURICooike(HttpServletRequest request, HttpServletResponse response) {
-        Cookie cookie = new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4));
-        cookie.setPath("/");
-        response.addCookie(cookie);
-    }
-
-    private void deleteURICooike(HttpServletResponse response) {
-        Cookie cookie = new Cookie("URI", null);
-        cookie.setMaxAge(0);
-        cookie.setPath("/");
-        response.addCookie(cookie);
-    }
-
-    private ModelAndView logIn(String uriCookie, HttpSession session, HttpServletResponse response) {
-
-        session.setAttribute("isLogin", "valid");
-
-        if ("/".equals(uriCookie)) {
-
-            ModelAndView modelAndView = new ModelAndView("redirect:" + "/users");
-            deleteURICooike(response);
-            return modelAndView;
-
-        } else {
-
-            ModelAndView modelAndView = new ModelAndView("redirect:" + uriCookie);
-            deleteURICooike(response);
-            return modelAndView;
-        }
-    }
+//    private void addCurrentIsLoginCookie(HttpServletRequest request, HttpServletResponse response) {
+//        if (request.getCookies() == null) {
+//
+//            addURICooike(request, response);
+//        }
+//    }
+//
+//    private boolean IsPasswordCorrect(String name, String password) {
+//
+//        List<User> userList = userService.getUserByName(name);
+//        User userDatabase = userList.get(0);
+//
+//        String passwordMD5 = null;
+//
+//        try {
+//            passwordMD5 = MD5Util.getMD5(password);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return userDatabase.getPassword().equals(passwordMD5);
+//    }
+//
+//    private void addURICooike(HttpServletRequest request, HttpServletResponse response) {
+//        Cookie cookie = new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4));
+//        cookie.setPath("/");
+//        response.addCookie(cookie);
+//    }
+//
+//    private void deleteURICooike(HttpServletResponse response) {
+//        Cookie cookie = new Cookie("URI", null);
+//        cookie.setMaxAge(0);
+//        cookie.setPath("/");
+//        response.addCookie(cookie);
+//    }
+//
+//    private ModelAndView logIn(String uriCookie, HttpSession session, HttpServletResponse response) {
+//
+//        session.setAttribute("isLogin", "valid");
+//
+//        if ("/".equals(uriCookie)) {
+//
+//            ModelAndView modelAndView = new ModelAndView("redirect:" + "/users");
+//            deleteURICooike(response);
+//            return modelAndView;
+//
+//        } else {
+//
+//            ModelAndView modelAndView = new ModelAndView("redirect:" + uriCookie);
+//            deleteURICooike(response);
+//            return modelAndView;
+//        }
+//    }
 
     private String changePassword(int id, String password) {
 
