@@ -20,6 +20,14 @@ public class Employee {
     @Column(name = "role")
     private String role;
 
+    public Employee(String userName, String role) {
+        this.userName = userName;
+        this.role = role;
+    }
+
+    public Employee() {
+    }
+
     public int getId() {
         return id;
     }
