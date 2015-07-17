@@ -3,16 +3,25 @@ package com.tw.core.model;
 /**
  * Created by qxue on 7/17/15.
  */
-public class courseModel {
+public class CourseModel {
 
+    private int id;
     private String name;
     private String coach;
     private String time;
 
-    public courseModel(String name, String coach, String time) {
+    public CourseModel(String name, String coach, String time) {
         this.name = name;
         this.coach = coach;
         this.time = time;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
