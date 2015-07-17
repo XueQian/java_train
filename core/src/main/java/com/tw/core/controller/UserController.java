@@ -38,21 +38,13 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView login(@RequestParam String name, @RequestParam String password, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 
-//        if (IsPasswordCorrect(name, password)) {
-//
-////            return logIn(uriCookie, session, response);
-//            ModelAndView modelAndView = new ModelAndView("redirect:" + "/users");
-//            deleteURICooike(response);
-//            return modelAndView;
-//        } else {
-//
-//            session.setAttribute("isLogin", "invalid");
-//
-//            ModelAndView modelAndView = new ModelAndView("redirect:/");
-//            addURICooike(request, response);
-//            return modelAndView;
-//        }
-        return new ModelAndView();
+        if (IsPasswordCorrect(name, password)) {
+
+            return new ModelAndView("redirect:" + "/courses");
+        } else {
+
+            return new ModelAndView("redirect:/");
+        }
     }
 
     @RequestMapping(value = "/users/creation", method = RequestMethod.GET)
@@ -191,21 +183,21 @@ public class UserController {
 //        }
 //    }
 //
-//    private boolean IsPasswordCorrect(String name, String password) {
-//
-//        List<User> userList = userService.getUserByName(name);
-//        User userDatabase = userList.get(0);
-//
-//        String passwordMD5 = null;
-//
-//        try {
-//            passwordMD5 = MD5Util.getMD5(password);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return userDatabase.getPassword().equals(passwordMD5);
-//    }
+    private boolean IsPasswordCorrect(String name, String password) {
+
+        List<User> userList = userService.getUserByName(name);
+        User userDatabase = userList.get(0);
+
+        String passwordMD5 = null;
+
+        try {
+            passwordMD5 = MD5Util.getMD5(password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return userDatabase.getPassword().equals(passwordMD5);
+    }
 //
 //    private void addURICooike(HttpServletRequest request, HttpServletResponse response) {
 //        Cookie cookie = new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4));
@@ -238,19 +230,19 @@ public class UserController {
 //        }
 //    }
 
-    private String changePassword(int id, String password) {
-
-        String passwordMD5 = password;
-
-        User userDatabase = userService.getUserById(id);
-
-        if (!(userDatabase.getPassword().equals(password))) {
-            try {
-                passwordMD5 = MD5Util.getMD5(password);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return passwordMD5;
-    }
+//    private String changePassword(int id, String password) {
+//
+//        String passwordMD5 = password;
+//
+//        User userDatabase = userService.getUserById(id);
+//
+//        if (!(userDatabase.getPassword().equals(password))) {
+//            try {
+//                passwordMD5 = MD5Util.getMD5(password);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return passwordMD5;
+//    }
 }
