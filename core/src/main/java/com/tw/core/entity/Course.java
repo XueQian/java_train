@@ -1,6 +1,7 @@
 package com.tw.core.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by qxue on 7/16/15.
@@ -12,6 +13,7 @@ public class Course {
     private int id;
     private String name;
     private Employee employee;
+    private String time;
 
     public Course() {
     }
@@ -45,4 +47,15 @@ public class Course {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
+    @Column(name ="time")
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 }
+
+
