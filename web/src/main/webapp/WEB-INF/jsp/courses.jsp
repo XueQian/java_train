@@ -32,8 +32,8 @@
             <td><c:out value="${course.name}" /></td>
             <td><c:out value="${course.coach}" /></td>
             <td><c:out value="${course.time}" /></td>
-            <td><a href="./users/modification/<c:out value="${course.id}"/>">Update</a></td>
-            <td><a href="./users/deletion/<c:out value="${course.id}"/>">Delete</a></td>
+            <td><a href="./courses/modification/<c:out value="${course.id}"/>">Update</a></td>
+            <td><a href="./courses/deletion/<c:out value="${course.id}"/>">Delete</a></td>
         </tr>
     </c:forEach>
     </tbody>
