@@ -2,6 +2,7 @@ package com.tw.core.dao;
 
 import com.tw.core.entity.Course;
 import com.tw.core.entity.Employee;
+import com.tw.core.entity.User;
 import com.tw.core.util.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -61,6 +62,24 @@ public class CourseDao {
         session.beginTransaction();
         Course course = (Course) session.load(Course.class, id);
         session.delete(course);
+        session.getTransaction().commit();
+    }
+
+    public Course getCourseById(int id){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        session.beginTransaction();
+        Course course = (Course)session.get(Course.class,id);
+        session.getTransaction().commit();
+
+        return course;
+    }
+
+    public void updateCourse(Course course) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        session.beginTransaction();
+        session.update(course);
         session.getTransaction().commit();
     }
 }
