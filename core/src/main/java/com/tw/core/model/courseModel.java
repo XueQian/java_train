@@ -16,6 +16,10 @@ public class CourseModel {
         this.time = time;
     }
 
+    public CourseModel(){
+
+    }
+
     public int getId() {
         return id;
     }
