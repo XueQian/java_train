@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>增加用户</title>
+    <title>ADD COURSE!!</title>
 </head>
 <body>
 

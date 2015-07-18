@@ -10,7 +10,7 @@
 
 <html>
 <head>
-    <title></title>
+    <title>SHOW COURSES!!</title>
 </head>
 <body>
 
