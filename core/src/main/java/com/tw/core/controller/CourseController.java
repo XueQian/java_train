@@ -60,14 +60,21 @@ public class CourseController {
     public ModelAndView addCourse(@RequestParam String name, @RequestParam String coach, @RequestParam String time) {
 
         Employee employee = new Employee(coach, "coach");
+
+        if (isCoachExist(coach)) {
+
+            employee.setId(employeeService.getEmployeeByName(coach).getId());
+        }else {
+
+            courseService.addEmployeeCourse(employee);
+        }
+
         Course course = new Course(name, employee, time);
 
         Set<Course> courseSet = new HashSet<Course>();
         courseSet.add(course);
-
         employee.setCourses(courseSet);
 
-        courseService.addEmployeeCourse(employee);
         courseService.addCourse(course);
 
         return new ModelAndView("redirect:/courses");
@@ -81,7 +88,7 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/courses/modification/{id}", method = RequestMethod.GET)
-    public ModelAndView getUpdateUserPage(@PathVariable int id) {
+    public ModelAndView getUpdateCoursePage(@PathVariable int id) {
 
         Course course = courseService.getCourseById(id);
         CourseModel courseModel = new CourseModel(course.getName(), course.getEmployee().getUserName(), course.getTime());
@@ -90,6 +97,27 @@ public class CourseController {
         modelAndView.setViewName("updateCourse");
         modelAndView.addObject("course", courseModel);
         return modelAndView;
+    }
+
+//    @RequestMapping(value = "/courses/modification/{id}", method = RequestMethod.POST)
+//    public ModelAndView updateCourse(@PathVariable int id, @RequestParam String name, @RequestParam String coach, @RequestParam String time) {
+//
+//        Employee employee = new Employee(coach, "coach");
+//        Course course = new Course(id, name, employee, time);
+////        CourseModel course = new CourseModel(name,coach,time);
+//        courseService.updateCourse(course);
+//
+//        return new ModelAndView("redirect:/courses");
+//    }
+
+    private boolean isCoachExist(String coachName) {
+
+        boolean flag = true;
+
+        if (employeeService.getEmployeeByName(coachName) == null) {
+            flag = false;
+        }
+        return flag;
     }
 }
 
