@@ -50,8 +50,6 @@ public class CourseDao {
     public void addCourse(Course course){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        System.out.println(course.getEmployee().getId()+"!!!!!!!!!!!!!!!!!!");
-
         session.beginTransaction();
         session.save(course);
         session.getTransaction().commit();
