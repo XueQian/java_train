@@ -10,7 +10,8 @@ public class CourseModel {
     private String coach;
     private String time;
 
-    public CourseModel(String name, String coach, String time) {
+    public CourseModel(int id,String name, String coach, String time) {
+        this.id = id;
         this.name = name;
         this.coach = coach;
         this.time = time;
