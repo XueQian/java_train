@@ -18,7 +18,7 @@ import java.util.Set;
 @Repository
 public class CourseDao {
 
-    public List<Course> getCourses(){
+    public List<Course> getCourses() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
@@ -39,7 +39,7 @@ public class CourseDao {
         return courseList;
     }
 
-    public void addEmployeeCourse(Employee employee){
+    public void addEmployeeCourse(Employee employee) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
         session.beginTransaction();
@@ -47,11 +47,20 @@ public class CourseDao {
         session.getTransaction().commit();
     }
 
-    public void addCourse(Course course){
+    public void addCourse(Course course) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
         session.beginTransaction();
         session.save(course);
+        session.getTransaction().commit();
+    }
+
+    public void deleteCourse(int id) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        session.beginTransaction();
+        Course course = (Course) session.load(Course.class, id);
+        session.delete(course);
         session.getTransaction().commit();
     }
 }
