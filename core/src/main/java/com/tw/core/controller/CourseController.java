@@ -38,7 +38,7 @@ public class CourseController {
 
             Course course1 = employeeService.getEmployeeByCourse(course.getId());
 
-            courseModels.add(new CourseModel(course.getId(),course.getName(), course1.getEmployee().getUserName(), course1.getTime()));
+            courseModels.add(new CourseModel(course.getId(), course.getName(), course1.getEmployee().getUserName(), course1.getTime()));
         }
 
         ModelAndView modelAndView = new ModelAndView();
@@ -78,6 +78,18 @@ public class CourseController {
 
         courseService.deleteCourse(id);
         return new ModelAndView("redirect:/courses");
+    }
+
+    @RequestMapping(value = "/courses/modification/{id}", method = RequestMethod.GET)
+    public ModelAndView getUpdateUserPage(@PathVariable int id) {
+
+        Course course = courseService.getCourseById(id);
+        CourseModel courseModel = new CourseModel(course.getName(), course.getEmployee().getUserName(), course.getTime());
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("updateCourse");
+        modelAndView.addObject("course", courseModel);
+        return modelAndView;
     }
 }
 
