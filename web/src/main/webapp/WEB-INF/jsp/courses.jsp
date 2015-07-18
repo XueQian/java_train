@@ -37,5 +37,7 @@
     </tbody>
 </table>
 
+<p style="position:absolute; left: 260px;"><a href="./courses/creation">Add Course</a></p>
+
 </body>
 </html>
