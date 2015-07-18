@@ -8,12 +8,14 @@ import com.tw.core.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by qxue on 7/17/15.
@@ -56,26 +58,21 @@ public class CourseController {
 
         return modelAndView;
     }
-//
-//    @RequestMapping(value = "/courses/creation", method = RequestMethod.POST)
-//    public ModelAndView addUser(@RequestParam String name, @RequestParam String password, @RequestParam String role) {
-//
-//        Employee employee = new Employee(name, role);
-//
-//        employeeService.addEmployee(employee);
-//
-//        List<Employee> employeeList = employeeService.getEmployeeByName(name);
-//
-//        Employee employeeDatabase = employeeList.get(0);
-//
-//        User user = null;
-//        try {
-//            user = new User(name, MD5Util.getMD5(password), employeeDatabase.getId());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        userService.addUser(user);
-//        return new ModelAndView("redirect:/");
-//    }
+
+    @RequestMapping(value = "/courses/creation", method = RequestMethod.POST)
+    public ModelAndView addCourse(@RequestParam String name, @RequestParam String coach, @RequestParam String time) {
+
+        Employee employee = new Employee(coach,"coach");
+        Course course = new Course(name,employee,time);
+
+        Set<Course> courseSet = new HashSet<Course>();
+        courseSet.add(course);
+
+        employee.setCourses(courseSet);
+
+        courseService.addEmployeeCourse(employee);
+        courseService.addCourse(course);
+
+        return new ModelAndView("redirect:/courses");
+    }
 }
