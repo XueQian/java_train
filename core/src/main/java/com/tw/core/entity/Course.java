@@ -18,6 +18,12 @@ public class Course {
     public Course() {
     }
 
+    public Course(String name,Employee employee,String time){
+        this.name = name;
+        this.employee = employee;
+        this.time = time;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
