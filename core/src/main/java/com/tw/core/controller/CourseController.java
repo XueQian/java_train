@@ -37,17 +37,10 @@ public class CourseController {
 
         for(Course course:courseList1){
 
-            Course employee = employeeService.getEmployeeByCourse(course.getId());
+            Course course1 = employeeService.getEmployeeByCourse(course.getId());
 
-            System.out.println(employee.getEmployee().getUserName()+"@@@@@@@@@@@@@@");
-
-            courseModels.add(new CourseModel(course.getName(),employee.getEmployee().getUserName(),"1111"));
+            courseModels.add(new CourseModel(course.getName(),course1.getEmployee().getUserName(),course1.getTime()));
         }
-
-//        List<CourseModel> courseList = new ArrayList<CourseModel>();
-//
-//        courseList.add(new CourseModel("瑜伽","薛倩","7.21"));
-//        courseList.add(new CourseModel("舞蹈","李燕子","7.12"));
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("courses");
