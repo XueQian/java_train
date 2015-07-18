@@ -1,6 +1,7 @@
 package com.tw.core.service;
 
 import com.tw.core.dao.EmployeeDao;
+import com.tw.core.entity.Course;
 import com.tw.core.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,4 +24,9 @@ public class EmployeeService {
     public List<Employee> getEmployeeByName(String name) {
         return employeeDao.getEmployeeByName(name);
     }
+
+    public Course getEmployeeByCourse(int courseId) {
+        return employeeDao.getEmployeeByCourse(courseId);
+    }
+
 }
