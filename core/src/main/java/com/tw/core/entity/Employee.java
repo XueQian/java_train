@@ -1,6 +1,7 @@
 package com.tw.core.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by qxue on 7/16/15.
@@ -9,16 +10,10 @@ import javax.persistence.*;
 @Table(name = "employee")
 public class Employee {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
-    @Column(name = "user_name")
     private String userName;
-
-    @Column(name = "role")
     private String role;
+    private Set<Course> courses;
 
     public Employee(String userName, String role) {
         this.userName = userName;
@@ -28,6 +23,9 @@ public class Employee {
     public Employee() {
     }
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }
@@ -36,6 +34,7 @@ public class Employee {
         this.id = id;
     }
 
+    @Column(name = "user_name")
     public String getUserName() {
         return userName;
     }
@@ -44,11 +43,21 @@ public class Employee {
         this.userName = userName;
     }
 
+    @Column(name = "role")
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "employee")
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
     }
 }
