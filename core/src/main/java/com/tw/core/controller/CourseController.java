@@ -47,4 +47,35 @@ public class CourseController {
         modelAndView.addObject("courses",courseModels);
         return modelAndView;
     }
+
+    @RequestMapping(value = "/courses/creation", method = RequestMethod.GET)
+    public ModelAndView getAddCoursePage() {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("addCourse");
+
+        return modelAndView;
+    }
+//
+//    @RequestMapping(value = "/courses/creation", method = RequestMethod.POST)
+//    public ModelAndView addUser(@RequestParam String name, @RequestParam String password, @RequestParam String role) {
+//
+//        Employee employee = new Employee(name, role);
+//
+//        employeeService.addEmployee(employee);
+//
+//        List<Employee> employeeList = employeeService.getEmployeeByName(name);
+//
+//        Employee employeeDatabase = employeeList.get(0);
+//
+//        User user = null;
+//        try {
+//            user = new User(name, MD5Util.getMD5(password), employeeDatabase.getId());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        userService.addUser(user);
+//        return new ModelAndView("redirect:/");
+//    }
 }
