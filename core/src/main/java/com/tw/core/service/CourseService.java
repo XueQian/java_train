@@ -32,4 +32,8 @@ public class CourseService {
     public void deleteCourse(int id){
         courseDao.deleteCourse(id);
     }
+
+    public Course getCourseById(int id){
+        return courseDao.getCourseById(id);
+    }
 }
