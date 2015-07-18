@@ -9,17 +9,16 @@ import javax.persistence.*;
 @Table(name = "course")
 public class Course {
 
+    private int id;
+    private String name;
+    private Employee employee;
+
+    public Course() {
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "employee_id")
-    private String employeeId;
-
     public int getId() {
         return id;
     }
@@ -28,6 +27,7 @@ public class Course {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -36,11 +36,13 @@ public class Course {
         this.name = name;
     }
 
-    public String getEmployeeId() {
-        return employeeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id")
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }
