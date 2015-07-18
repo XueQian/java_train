@@ -14,6 +14,8 @@
 </head>
 <body>
 
+<h1>show public courses</h1>
+
 <table border=1  style="position:absolute; left: 350px;">
     <thead>
     <tr>
