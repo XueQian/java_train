@@ -17,8 +17,10 @@ public class CourseModel {
         this.time = time;
     }
 
-    public CourseModel(){
-
+    public CourseModel(String name,String coach,String time){
+        this.name = name;
+        this.coach = coach;
+        this.time = time;
     }
 
     public int getId() {
