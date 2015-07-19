@@ -48,9 +48,9 @@ public class Customer {
         this.employee = employee;
     }
 
-    @ManyToMany
-    @JoinTable(name="customer_course", joinColumns={ @JoinColumn(name="customer_id")},
-            inverseJoinColumns={ @JoinColumn(name = "course_id") })
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "customer_course", joinColumns = {@JoinColumn(name = "customer_id")},
+            inverseJoinColumns = {@JoinColumn(name = "course_id")})
     public Set<Course> getCourses() {
         return courses;
     }

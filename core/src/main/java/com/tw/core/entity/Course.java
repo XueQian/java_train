@@ -19,20 +19,20 @@ public class Course {
     public Course() {
     }
 
-    public Course(String name,Employee employee,String time){
+    public Course(String name, Employee employee, String time) {
         this.name = name;
         this.employee = employee;
         this.time = time;
     }
 
-    public Course(int id,String name,Employee employee,String time){
+    public Course(int id, String name, Employee employee, String time) {
         this.id = id;
         this.name = name;
         this.employee = employee;
         this.time = time;
     }
 
-    public Course(int id){
+    public Course(int id) {
         this.id = id;
     }
 
@@ -66,7 +66,7 @@ public class Course {
         this.employee = employee;
     }
 
-    @Column(name ="time")
+    @Column(name = "time")
     public String getTime() {
         return time;
     }
@@ -75,7 +75,7 @@ public class Course {
         this.time = time;
     }
 
-    @ManyToMany(mappedBy="courses")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "courses")
     public Set<Customer> getCustomers() {
         return customers;
     }
