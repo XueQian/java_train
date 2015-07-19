@@ -16,7 +16,7 @@
 <form method="POST" action="" style="position:absolute; left: 350px;">
     Name : <input type="text" name="name"/> <br/>
     Coach : <input type="text" name="coach"/> <br/>
-    Time : <input type="text" name="time"/> <br/>
+    Time : <input type="date" name="time"/> <br/>
     <input type="submit" value="Submit"/>
 </form>
 
