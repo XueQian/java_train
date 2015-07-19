@@ -64,7 +64,14 @@ public class CourseController {
         if (isCoachExist(coach)) {
 
             employee.setId(employeeService.getEmployeeByName(coach).getId());
-        }else {
+
+            if (!isCoachFree(name, time)) {
+
+                ModelAndView modelAndView = new ModelAndView();
+                modelAndView.setViewName("coachIsBusy");
+                return modelAndView;
+            }
+        } else {
 
             courseService.addEmployeeCourse(employee);
         }
@@ -115,6 +122,23 @@ public class CourseController {
         boolean flag = true;
 
         if (employeeService.getEmployeeByName(coachName) == null) {
+            flag = false;
+        }
+        return flag;
+    }
+
+    private boolean isCoachFree(String name, String time) {
+        boolean flag = true;
+
+        List<Course> courseList = courseService.getCourseByName(name);
+
+        List<String> timeList = new ArrayList<String>();
+
+        for (Course course : courseList) {
+            timeList.add(courseList.indexOf(course), course.getTime());
+        }
+
+        if (timeList.contains(time)) {
             flag = false;
         }
         return flag;
