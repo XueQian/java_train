@@ -1,18 +1,17 @@
 package com.tw.core.controller;
 
 import com.tw.core.entity.Course;
+import com.tw.core.entity.Customer;
 import com.tw.core.entity.Employee;
 import com.tw.core.model.CourseModel;
 import com.tw.core.service.CourseService;
+import com.tw.core.service.CustomerService;
 import com.tw.core.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by qxue on 7/17/15.
@@ -26,6 +25,9 @@ public class CourseController {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private CustomerService customerService;
 
     @RequestMapping(value = "/courses", method = RequestMethod.GET)
     public ModelAndView getCoursePage() {
@@ -144,6 +146,39 @@ public class CourseController {
         modelAndView.setViewName("addPrivateCoach");
 
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/courses/private/creation",method = RequestMethod.POST)
+    public ModelAndView addPrivateCoach(@RequestParam String customer,@RequestParam String course,@RequestParam String coach,@RequestParam String time){
+        Customer customerObject = new Customer(customer);
+
+        Employee employee = new Employee(coach, "coach");
+
+        if(isCoachExist(coach)){
+            employee.setId(employeeService.getEmployeeByName(coach).getId());
+
+        }else {
+            courseService.addEmployeeCourse(employee);
+        }
+
+        Course courseObject = new Course(course,employee,time);
+
+        Set<Customer> customerSet = new HashSet<Customer>();
+        customerSet.add(customerObject);
+
+        courseObject.setCustomers(customerSet);
+
+        courseService.addCourse(courseObject);
+
+        Set<Course> courseSet = new HashSet<Course>();
+        courseSet.add(courseObject);
+
+        customerObject.setCourses(courseSet);
+        customerObject.setEmployee(employee);
+
+        customerService.addCustomer(customerObject);
+
+        return new ModelAndView("redirect:/courses");
     }
 
     private boolean isCoachExist(String coachName) {
