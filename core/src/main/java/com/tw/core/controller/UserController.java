@@ -63,9 +63,7 @@ public class UserController {
 
         employeeService.addEmployee(employee);
 
-        List<Employee> employeeList = employeeService.getEmployeeByName(name);
-
-        Employee employeeDatabase = employeeList.get(0);
+        Employee employeeDatabase = employeeService.getEmployeeByName(name);
 
         User user = null;
         try {
@@ -76,25 +74,6 @@ public class UserController {
 
         userService.addUser(user);
         return new ModelAndView("redirect:/");
-
-
-//        if ("valid".equals(isLoginSession)) {
-//            User user = null;
-//
-//            try {
-//                user = new User(name, sex, address, age, MD5Util.getMD5(password));
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//            userService.addUser(user);
-//            return new ModelAndView("redirect:/users");
-//
-//        } else {
-//
-//            addURICooike(request, response);
-//            return new ModelAndView("redirect:/");
-//        }
     }
 
 //    @RequestMapping(value = "/users", method = RequestMethod.GET)
