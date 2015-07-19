@@ -19,21 +19,30 @@ public class EmployeeDao {
     public void addEmployee(Employee employee) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        session.beginTransaction();
-        session.save(employee);
-        session.getTransaction().commit();
-
+        try {
+            session.beginTransaction();
+            session.save(employee);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
     }
 
     public Employee getEmployeeByName(String name) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Employee employee;
 
-        session.beginTransaction();
-        Query query = session.createQuery("from Employee where user_name=:name");
-        query.setString("name", name);
-        Employee employee = (Employee) query.uniqueResult();
-        session.getTransaction().commit();
-
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from Employee where user_name=:name");
+            query.setString("name", name);
+            employee = (Employee) query.uniqueResult();
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
         return employee;
     }
 
@@ -47,16 +56,22 @@ public class EmployeeDao {
         return employee;
     }
 
-    public Course getEmployeeByCourse(int courseId){
+    public Course getEmployeeByCourse(int courseId) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Course course;
 
-        session.beginTransaction();
-        Query query= session.createQuery("from Employee e join e.courses course where course.id=:id");
-        query.setResultTransformer(RootEntityResultTransformer.INSTANCE);
-        query.setInteger("id",courseId);
-        Course employee = (Course) query.uniqueResult();
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from Employee e join e.courses course where course.id=:id");
+            query.setResultTransformer(RootEntityResultTransformer.INSTANCE);
+            query.setInteger("id", courseId);
+            course = (Course) query.uniqueResult();
 
-        session.getTransaction().commit();
-        return employee;
+            session.getTransaction().commit();
+        }catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+        return course;
     }
 }

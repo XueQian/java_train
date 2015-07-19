@@ -21,21 +21,33 @@ public class CourseDao {
 
     public List<Course> getCourses() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
+        List<Course> courseList;
 
-        List<Course> courseList = session.createQuery("from Course").list();
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            courseList = session.createQuery("from Course").list();
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
 
         return courseList;
     }
 
     public List<Course> getCourseByName(String name) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        List courseList;
 
-        session.beginTransaction();
-        Query query = session.createQuery("from Course where name=:name");
-        List courseList = query.setString("name", name).list();
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from Course where name=:name");
+            courseList = query.setString("name", name).list();
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
 
         return courseList;
     }
@@ -43,43 +55,69 @@ public class CourseDao {
     public void addEmployeeCourse(Employee employee) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        session.beginTransaction();
-        session.save(employee);
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            session.save(employee);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
     }
 
     public void addCourse(Course course) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        session.beginTransaction();
-        session.save(course);
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            session.save(course);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+
     }
 
     public void deleteCourse(int id) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        session.beginTransaction();
-        Course course = (Course) session.load(Course.class, id);
-        session.delete(course);
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            Course course = (Course) session.load(Course.class, id);
+            session.delete(course);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
     }
 
-    public Course getCourseById(int id){
+    public Course getCourseById(int id) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Course course;
 
-        session.beginTransaction();
-        Course course = (Course)session.get(Course.class,id);
-        session.getTransaction().commit();
-
+        try {
+            session.beginTransaction();
+            course = (Course) session.get(Course.class, id);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
         return course;
     }
 
     public void updateCourse(Course course) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        session.beginTransaction();
-        session.update(course);
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            session.update(course);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
     }
 }

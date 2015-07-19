@@ -24,9 +24,14 @@ public class UserDao {
     public void addUser(User user){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        session.beginTransaction();
-        session.save(user);
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            session.save(user);
+            session.getTransaction().commit();
+        }catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
     }
 //
 //    public void deleteUser(int id){
@@ -40,10 +45,16 @@ public class UserDao {
 
     public User getUserById(int id){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        User user;
 
-        session.beginTransaction();
-        User user = (User)session.get(User.class,id);
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            user = (User) session.get(User.class, id);
+            session.getTransaction().commit();
+        }catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
 
         return user;
     }
@@ -58,14 +69,18 @@ public class UserDao {
 
     public User getUserByName(String name){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        User user;
 
-        session.beginTransaction();
-        Query query = session.createQuery("from User where name=:name");
-        query.setString("name", name);
-        User user = (User) query.uniqueResult();
-
-        session.getTransaction().commit();
-
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from User where name=:name");
+            query.setString("name", name);
+            user = (User) query.uniqueResult();
+            session.getTransaction().commit();
+        }catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
         return user;
     }
 }
