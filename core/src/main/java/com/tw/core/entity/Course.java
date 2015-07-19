@@ -31,6 +31,10 @@ public class Course {
         this.time = time;
     }
 
+    public Course(int id){
+        this.id = id;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
