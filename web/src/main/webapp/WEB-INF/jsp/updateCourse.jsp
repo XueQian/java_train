@@ -18,10 +18,10 @@
         type="text" name="name"
         value="<c:out value="${course.name}" />"/> <br/>
     Coach: <input
-        type="text" name="sex"
+        type="text" name="coach"
         value="<c:out value="${course.coach}" />"/> <br/>
     Time : <input
-        type="text" name="address"
+        type="text" name="time"
         value="<c:out value="${course.time}" />"/> <br/>
     <input type="submit" value="Submit"/>
 </form>
