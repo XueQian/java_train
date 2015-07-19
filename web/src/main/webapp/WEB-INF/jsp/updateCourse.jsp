@@ -21,7 +21,7 @@
         type="text" name="coach"
         value="<c:out value="${course.coach}" />"/> <br/>
     Time : <input
-        type="text" name="time"
+        type="date" name="time"
         value="<c:out value="${course.time}" />"/> <br/>
     <input type="submit" value="Submit"/>
 </form>

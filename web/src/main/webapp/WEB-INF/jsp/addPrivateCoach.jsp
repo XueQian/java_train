@@ -16,7 +16,7 @@
     Customer : <input type="text" name="customer"/> <br/>
     Course : <input type="text" name="course"/> <br/>
     Coach : <input type="text" name="coach"/> <br/>
-    Time : <input type="text" name="time"/> <br/>
+    Time : <input type="date" name="time"/> <br/>
     <input type="submit" value="Submit"/>
 </form>
 
