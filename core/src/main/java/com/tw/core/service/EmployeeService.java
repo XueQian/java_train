@@ -21,7 +21,7 @@ public class EmployeeService {
         employeeDao.addEmployee(employee);
     }
 
-    public List<Employee> getEmployeeByName(String name) {
+    public Employee getEmployeeByName(String name) {
         return employeeDao.getEmployeeByName(name);
     }
 
