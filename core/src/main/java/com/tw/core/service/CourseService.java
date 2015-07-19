@@ -17,23 +17,27 @@ public class CourseService {
     @Autowired
     private CourseDao courseDao;
 
-    public List<Course> getCourses(){
+    public List<Course> getCourses() {
         return courseDao.getCourses();
     }
 
-    public void addEmployeeCourse(Employee employee){
+    public void addEmployeeCourse(Employee employee) {
         courseDao.addEmployeeCourse(employee);
     }
 
-    public void addCourse(Course course){
+    public void addCourse(Course course) {
         courseDao.addCourse(course);
     }
 
-    public void deleteCourse(int id){
+    public void deleteCourse(int id) {
         courseDao.deleteCourse(id);
     }
 
-    public Course getCourseById(int id){
+    public Course getCourseById(int id) {
         return courseDao.getCourseById(id);
+    }
+
+    public List<Course> getCourseByName(String name) {
+        return courseDao.getCourseByName(name);
     }
 }
