@@ -12,7 +12,7 @@
 </head>
 <body>
 <h1>您所增加的课程教练时间冲突，请重新操作!</h1>
-<a href="./">回到公共课主页</a>
-<a href="./creation">重新添加课程</a>
+<a href="/web/courses">回到公共课主页</a>
+<a href="/web/courses/creation">重新添加课程</a>
 </body>
 </html>
