@@ -18,6 +18,14 @@ public class Customer {
     private Employee employee;
     private Set<Course> courses;
 
+    public Customer(String name){
+        this.name = name;
+    }
+
+    public Customer(){
+
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
