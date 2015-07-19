@@ -14,6 +14,7 @@ public class Course {
     private String name;
     private Employee employee;
     private String time;
+    private Set<Customer> customers;
 
     public Course() {
     }
@@ -72,6 +73,15 @@ public class Course {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    @ManyToMany(mappedBy="courses")
+    public Set<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
     }
 }
 

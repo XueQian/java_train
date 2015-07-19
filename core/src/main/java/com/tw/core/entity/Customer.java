@@ -16,6 +16,7 @@ public class Customer {
     private int id;
     private String name;
     private Employee employee;
+    private Set<Course> courses;
 
     @Id
     @Column(name = "id")
@@ -45,5 +46,16 @@ public class Customer {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    @ManyToMany
+    @JoinTable(name="customer_course", joinColumns={ @JoinColumn(name="customer_id")},
+            inverseJoinColumns={ @JoinColumn(name = "course_id") })
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
     }
 }
