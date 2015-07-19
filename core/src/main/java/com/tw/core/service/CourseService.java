@@ -40,4 +40,8 @@ public class CourseService {
     public List<Course> getCourseByName(String name) {
         return courseDao.getCourseByName(name);
     }
+
+    public void updateCourse(Course course){
+        courseDao.updateCourse(course);
+    }
 }
