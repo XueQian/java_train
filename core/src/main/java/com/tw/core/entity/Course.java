@@ -24,6 +24,13 @@ public class Course {
         this.time = time;
     }
 
+    public Course(int id,String name,Employee employee,String time){
+        this.id = id;
+        this.name = name;
+        this.employee = employee;
+        this.time = time;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
