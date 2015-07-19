@@ -68,7 +68,7 @@ public class CourseController {
             if (!isCoachFree(name, time)) {
 
                 ModelAndView modelAndView = new ModelAndView();
-                modelAndView.setViewName("coachIsBusy");
+                modelAndView.setViewName("addCourseCoachIsBusy");
                 return modelAndView;
             }
         } else {
@@ -106,32 +106,6 @@ public class CourseController {
         return modelAndView;
     }
 
-//    Employee employee = new Employee(coach, "coach");
-//
-//    if (isCoachExist(coach)) {
-//
-//        employee.setId(employeeService.getEmployeeByName(coach).getId());
-//
-//        if (!isCoachFree(name, time)) {
-//
-//            ModelAndView modelAndView = new ModelAndView();
-//            modelAndView.setViewName("coachIsBusy");
-//            return modelAndView;
-//        }
-//    } else {
-//
-//        courseService.addEmployeeCourse(employee);
-//    }
-//
-//    Course course = new Course(name, employee, time);
-//
-//    Set<Course> courseSet = new HashSet<Course>();
-//    courseSet.add(course);
-//    employee.setCourses(courseSet);
-//
-//    courseService.addCourse(course);
-//
-//    return new ModelAndView("redirect:/courses");
     @RequestMapping(value = "/courses/modification/{id}", method = RequestMethod.POST)
     public ModelAndView updateCourse(@PathVariable int id, @RequestParam String name, @RequestParam String coach, @RequestParam String time) {
 
@@ -145,7 +119,7 @@ public class CourseController {
                 Course course = new Course(id);
 
                 ModelAndView modelAndView = new ModelAndView();
-                modelAndView.setViewName("updateCoachIsBusy");
+                modelAndView.setViewName("updateCourseCoachIsBusy");
                 modelAndView.addObject("course",course);
                 return modelAndView;
             }
