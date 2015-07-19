@@ -7,19 +7,19 @@ public class CourseModel {
 
     private int id;
     private String name;
-    private String coach;
+    private String employee;
     private String time;
 
-    public CourseModel(int id,String name, String coach, String time) {
+    public CourseModel(int id,String name, String employee, String time) {
         this.id = id;
         this.name = name;
-        this.coach = coach;
+        this.employee = employee;
         this.time = time;
     }
 
-    public CourseModel(String name,String coach,String time){
+    public CourseModel(String name,String employee,String time){
         this.name = name;
-        this.coach = coach;
+        this.employee = employee;
         this.time = time;
     }
 
@@ -40,11 +40,11 @@ public class CourseModel {
     }
 
     public String getCoach() {
-        return coach;
+        return employee;
     }
 
-    public void setCoach(String coach) {
-        this.coach = coach;
+    public void setCoach(String employee) {
+        this.employee = employee;
     }
 
     public String getTime() {
