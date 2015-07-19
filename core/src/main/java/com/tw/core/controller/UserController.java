@@ -59,22 +59,56 @@ public class UserController {
     @RequestMapping(value = "/users/creation", method = RequestMethod.POST)
     public ModelAndView addUser(@RequestParam String name, @RequestParam String password, @RequestParam String role) {
 
-        Employee employee = new Employee(name, role);
+        if (isUserExist(name)) {
 
-        employeeService.addEmployee(employee);
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("addUserExist");
 
-        Employee employeeDatabase = employeeService.getEmployeeByName(name);
+            return modelAndView;
+        }else {
 
-        User user = null;
-        try {
-            user = new User(name, MD5Util.getMD5(password), employeeDatabase.getId());
-        } catch (Exception e) {
-            e.printStackTrace();
+            Employee employee = new Employee(name, role);
+
+            if (!isEmployeeExist(name)) {
+
+                employeeService.addEmployee(employee);
+            }
+
+            Employee employeeDatabase = employeeService.getEmployeeByName(name);
+
+            User user = null;
+            try {
+                user = new User(name, MD5Util.getMD5(password), employeeDatabase.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            userService.addUser(user);
+            return new ModelAndView("redirect:/");
+        }
+    }
+
+    private boolean isEmployeeExist(String name) {
+
+        boolean flag = true;
+
+        if (employeeService.getEmployeeByName(name) == null) {
+            flag = false;
+        }
+        return flag;
+    }
+
+    private boolean isUserExist(String name){
+
+        boolean flag = true;
+
+        if(userService.getUserByName(name) == null){
+            flag = false;
         }
 
-        userService.addUser(user);
-        return new ModelAndView("redirect:/");
+        return flag;
     }
+
 
 //    @RequestMapping(value = "/users", method = RequestMethod.GET)
 //    public ModelAndView getUsers(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
@@ -155,7 +189,7 @@ public class UserController {
 //        }
 //    }
 
-//    private void addCurrentIsLoginCookie(HttpServletRequest request, HttpServletResponse response) {
+    //    private void addCurrentIsLoginCookie(HttpServletRequest request, HttpServletResponse response) {
 //        if (request.getCookies() == null) {
 //
 //            addURICooike(request, response);
@@ -164,8 +198,7 @@ public class UserController {
 //
     private boolean IsPasswordCorrect(String name, String password) {
 
-        List<User> userList = userService.getUserByName(name);
-        User userDatabase = userList.get(0);
+        User userDatabase = userService.getUserByName(name);
 
         String passwordMD5 = null;
 
