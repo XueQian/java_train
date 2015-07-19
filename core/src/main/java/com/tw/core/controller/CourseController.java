@@ -137,6 +137,15 @@ public class CourseController {
         return new ModelAndView("redirect:/courses");
     }
 
+    @RequestMapping(value = "/courses/private/creation", method = RequestMethod.GET)
+    public ModelAndView getAddPrivateCoachPage() {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("addPrivateCoach");
+
+        return modelAndView;
+    }
+
     private boolean isCoachExist(String coachName) {
 
         boolean flag = true;
