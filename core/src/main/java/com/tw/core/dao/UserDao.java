@@ -56,15 +56,17 @@ public class UserDao {
 //        session.getTransaction().commit();
 //    }
 
-    public List<User> getUserByName(String name){
+    public User getUserByName(String name){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
         session.beginTransaction();
         Query query = session.createQuery("from User where name=:name");
-        List userList = query.setString("name", name).list();
+        query.setString("name", name);
+        User user = (User) query.uniqueResult();
+
         session.getTransaction().commit();
 
-        return userList;
+        return user;
     }
 }
 
