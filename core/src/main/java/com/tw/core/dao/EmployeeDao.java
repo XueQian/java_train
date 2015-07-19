@@ -25,15 +25,16 @@ public class EmployeeDao {
 
     }
 
-    public List<Employee> getEmployeeByName(String name) {
+    public Employee getEmployeeByName(String name) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
         session.beginTransaction();
         Query query = session.createQuery("from Employee where user_name=:name");
-        List employeeList = query.setString("name", name).list();
+        query.setString("name", name);
+        Employee employee = (Employee) query.uniqueResult();
         session.getTransaction().commit();
 
-        return employeeList;
+        return employee;
     }
 
     public Employee getEmployeeById(int id) {
