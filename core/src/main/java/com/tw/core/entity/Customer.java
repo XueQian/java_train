@@ -15,7 +15,7 @@ public class Customer {
 
     private int id;
     private String name;
-    private Set<Employee> employees;
+    private Employee employee;
 
     @Id
     @Column(name = "id")
@@ -37,13 +37,13 @@ public class Customer {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "id")
-    @LazyCollection(LazyCollectionOption.EXTRA)
-    public Set<Employee> getEmployees() {
-        return employees;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id")
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

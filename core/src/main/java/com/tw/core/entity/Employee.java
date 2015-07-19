@@ -14,6 +14,7 @@ public class Employee {
     private String userName;
     private String role;
     private Set<Course> courses;
+    private Set<Customer> customers;
 
     public Employee(String userName, String role) {
         this.userName = userName;
@@ -59,5 +60,14 @@ public class Employee {
 
     public void setCourses(Set<Course> courses) {
         this.courses = courses;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "employee")
+    public Set<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
     }
 }
