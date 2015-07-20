@@ -28,6 +28,13 @@ public class Employee {
         this.role = role;
     }
 
+    public Employee(int id, String role, String name, String email) {
+        this.id = id;
+        this.role = role;
+        this.name = name;
+        this.email = email;
+    }
+
     public Employee() {
     }
 
