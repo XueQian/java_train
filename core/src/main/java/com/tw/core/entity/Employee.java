@@ -17,17 +17,16 @@ public class Employee {
     private Set<Course> courses;
     private Set<Customer> customers;
 
-//    public Employee(String userName, String role, String employeeName, String email) {
-////        this.userName = userName;
-//        this.role = role;
-//        this.name = employeeName;
-//        this.email = email;
-//    }
+    public Employee(String role, String name, String email) {
+        this.role = role;
+        this.name = name;
+        this.email = email;
+    }
 
-//    public Employee(String userName, String role) {
-////        this.userName = userName;
-//        this.role = role;
-//    }
+    public Employee(String name, String role) {
+        this.name = name;
+        this.role = role;
+    }
 
     public Employee() {
     }
