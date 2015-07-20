@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<h1>show public courses</h1>
+<h1>show courses</h1>
 
 <table border=1 style="position:absolute; left: 400px;">
     <thead>
@@ -45,7 +45,7 @@
 
 <h3 style="position:absolute; left: 240px;top:130px;"><a href="./users">User Management</a></h3>
 
-<h3 style="position:absolute; left: 240px;top:160px;"><a href="./employees">Employee Management</a></h3>
+<h3 style="position:absolute; left: 210px;top:160px;"><a href="./employees">Employee Management</a></h3>
 
 </body>
 </html>
