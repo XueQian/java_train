@@ -6,6 +6,8 @@ import com.tw.core.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by qxue on 7/19/15.
  */
@@ -25,5 +27,9 @@ public class CustomerService {
 
     public void deleteCustomer(Employee employee){
         customerDao.deleteCustomer(employee);
+    }
+
+    public List<Customer> getCustomers(){
+        return customerDao.getCustomers();
     }
 }
