@@ -37,4 +37,7 @@ public class EmployeeService {
         return employeeDao.getEmployeeById(id);
     }
 
+    public void updateEmployee(Employee employee){
+        employeeDao.updateEmployee(employee);
+    }
 }
