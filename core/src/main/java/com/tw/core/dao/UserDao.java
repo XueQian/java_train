@@ -11,24 +11,31 @@ import java.util.List;
 @Repository
 public class UserDao {
 
-    public List<User> getUsers(){
+    public List<User> getUsers() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
 
-        List<User> userList = session.createQuery("from User").list();
-        session.getTransaction().commit();
+        List<User> userList;
+
+        try {
+            session.beginTransaction();
+            userList = session.createQuery("from User").list();
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
 
         return userList;
     }
 
-    public void addUser(User user){
+    public void addUser(User user) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
         try {
             session.beginTransaction();
             session.save(user);
             session.getTransaction().commit();
-        }catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
         }
@@ -43,7 +50,7 @@ public class UserDao {
 //        session.getTransaction().commit();
 //    }
 
-    public User getUserById(int id){
+    public User getUserById(int id) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         User user;
 
@@ -51,7 +58,7 @@ public class UserDao {
             session.beginTransaction();
             user = (User) session.get(User.class, id);
             session.getTransaction().commit();
-        }catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
         }
@@ -59,15 +66,20 @@ public class UserDao {
         return user;
     }
 
-//    public void updateUser(User user){
-//        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-//
-//        session.beginTransaction();
-//        session.update(user);
-//        session.getTransaction().commit();
-//    }
+    public void updateUser(User user) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-    public User getUserByName(String name){
+        try {
+            session.beginTransaction();
+            session.update(user);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+
+    public User getUserByName(String name) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         User user;
 
@@ -77,7 +89,7 @@ public class UserDao {
             query.setString("name", name);
             user = (User) query.uniqueResult();
             session.getTransaction().commit();
-        }catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
         }
