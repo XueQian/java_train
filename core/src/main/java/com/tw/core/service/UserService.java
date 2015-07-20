@@ -31,6 +31,10 @@ public class UserService {
     public List<User> getUsers(){
         return userDao.getUsers();
     }
+
+    public void updateUser(User user){
+        userDao.updateUser(user);
+    }
 }
 
 
