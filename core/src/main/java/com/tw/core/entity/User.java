@@ -10,18 +10,15 @@ import javax.persistence.*;
 public class User {
 
     private int id;
-
     private String name;
-
     private String password;
+    private Employee employee;
 
-    private int employeeId;
-
-    public User(String name, String password, int employeeId) {
-        this.name = name;
-        this.password = password;
-        this.employeeId = employeeId;
-    }
+//    public User(String name, String password, int employeeId) {
+//        this.name = name;
+//        this.password = password;
+//        this.employeeId = employeeId;
+//    }
 
     public User() {
     }
@@ -55,12 +52,13 @@ public class User {
         this.password = password;
     }
 
-    @Column(name = "employee_id")
-    public int getEmployeeId() {
-        return employeeId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id")
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

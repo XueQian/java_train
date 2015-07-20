@@ -11,24 +11,23 @@ import java.util.Set;
 public class Employee {
 
     private int id;
-    private String userName;
     private String role;
-    private String employeeName;
+    private String name;
     private String email;
     private Set<Course> courses;
     private Set<Customer> customers;
 
-    public Employee(String userName, String role, String employeeName, String email) {
-        this.userName = userName;
-        this.role = role;
-        this.employeeName = employeeName;
-        this.email = email;
-    }
+//    public Employee(String userName, String role, String employeeName, String email) {
+////        this.userName = userName;
+//        this.role = role;
+//        this.name = employeeName;
+//        this.email = email;
+//    }
 
-    public Employee(String userName, String role) {
-        this.userName = userName;
-        this.role = role;
-    }
+//    public Employee(String userName, String role) {
+////        this.userName = userName;
+//        this.role = role;
+//    }
 
     public Employee() {
     }
@@ -44,15 +43,6 @@ public class Employee {
         this.id = id;
     }
 
-    @Column(name = "user_name")
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     @Column(name = "role")
     public String getRole() {
         return role;
@@ -63,12 +53,12 @@ public class Employee {
     }
 
     @Column(name = "name")
-    public String getEmployeeName() {
-        return employeeName;
+    public String getName() {
+        return name;
     }
 
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Column(name = "email")
