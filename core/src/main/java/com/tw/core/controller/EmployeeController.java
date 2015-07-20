@@ -3,10 +3,7 @@ package com.tw.core.controller;
 import com.tw.core.entity.Employee;
 import com.tw.core.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -42,4 +39,15 @@ public class EmployeeController {
         modelAndView.addObject("employee", employee);
         return modelAndView;
     }
+
+    @RequestMapping(value = "/employees/modification/{id}", method = RequestMethod.POST)
+    public ModelAndView updateUser(@PathVariable int id, @RequestParam String name, @RequestParam String role,@RequestParam String email) {
+
+        Employee employee = new Employee(id,name,role,email);
+
+        employeeService.updateEmployee(employee);
+
+        return new ModelAndView("redirect:/employees");
+    }
+
 }
