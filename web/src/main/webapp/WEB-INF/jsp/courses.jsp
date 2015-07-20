@@ -47,5 +47,7 @@
 
 <h3 style="position:absolute; left: 200px;top:160px;"><a href="./employees">Employee Management</a></h3>
 
+<h3 style="position:absolute; left: 200px;top:190px;"><a href="./customers">Customer Management</a></h3>
+
 </body>
 </html>
