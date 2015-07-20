@@ -114,6 +114,17 @@ public class UserController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.POST)
+    public ModelAndView updateCourse(@PathVariable int id, @RequestParam String name, @RequestParam String password) {
+
+        Employee employee = userService.getUserById(id).getEmployee();
+        User user = new User(id, name, password,employee);
+
+        userService.updateUser(user);
+
+        return new ModelAndView("redirect:/users");
+    }
+
     private boolean isEmployeeExist(String name) {
 
         boolean flag = true;
@@ -135,89 +146,6 @@ public class UserController {
         return flag;
     }
 
-
-//    @RequestMapping(value = "/users", method = RequestMethod.GET)
-//    public ModelAndView getUsers(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-//
-//        String isLoginSession = (String) session.getAttribute("isLogin");
-//
-//        if ("valid".equals(isLoginSession)) {
-//
-//            ModelAndView modelAndView = new ModelAndView();
-//            modelAndView.setViewName("index");
-//            modelAndView.addObject("users", userService.getUsers());
-//
-//            return modelAndView;
-//
-//        } else {
-//
-//            addURICooike(request, response);
-//            return new ModelAndView("redirect:/");
-//        }
-//    }
-//
-//    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
-//    public void deleteUser(HttpSession session, @PathVariable int id, HttpServletRequest request, HttpServletResponse response) {
-//
-//        String isLoginSession = (String) session.getAttribute("isLogin");
-//
-//        if ("valid".equals(isLoginSession)) {
-//
-//            userService.deleteUser(id);
-//
-//        } else {
-//
-//            addURICooike(request, response);
-//        }
-//    }
-//
-//    @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.GET)
-//    public ModelAndView getUpdateUserPage(HttpSession session, @PathVariable int id, HttpServletRequest request, HttpServletResponse response) {
-//
-//        String isLoginSession = (String) session.getAttribute("isLogin");
-//
-//        if ("valid".equals(isLoginSession)) {
-//
-//            ModelAndView modelAndView = new ModelAndView();
-//            modelAndView.setViewName("updateUser");
-//            modelAndView.addObject("user", userService.getUserById(id));
-//
-//            return modelAndView;
-//        } else {
-//
-//            addURICooike(request, response);
-//
-//            return new ModelAndView("redirect:/");
-//        }
-//    }
-//
-//    @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.POST)
-//    public ModelAndView updateUser(HttpSession session, @PathVariable int id, @RequestParam String name, @RequestParam String sex, @RequestParam String address, @RequestParam int age, @RequestParam String password, HttpServletRequest request, HttpServletResponse response) {
-//
-//        String isLoginSession = (String) session.getAttribute("isLogin");
-//
-//        if ("valid".equals(isLoginSession)) {
-//
-//            User user = new User(id, name, sex, address, age, changePassword(id, password));
-//            userService.updateUser(user);
-//
-//            return new ModelAndView("redirect:/users");
-//
-//        } else {
-//
-//            addURICooike(request, response);
-//
-//            return new ModelAndView("redirect:/");
-//        }
-//    }
-
-    //    private void addCurrentIsLoginCookie(HttpServletRequest request, HttpServletResponse response) {
-//        if (request.getCookies() == null) {
-//
-//            addURICooike(request, response);
-//        }
-//    }
-//
     private boolean IsPasswordCorrect(String name, String password) {
 
         User userDatabase = userService.getUserByName(name);
@@ -232,37 +160,7 @@ public class UserController {
 
         return userDatabase.getPassword().equals(passwordMD5);
     }
-//
-//    private void addURICooike(HttpServletRequest request, HttpServletResponse response) {
-//        Cookie cookie = new Cookie("URI", String.valueOf(request.getRequestURI()).substring(4));
-//        cookie.setPath("/");
-//        response.addCookie(cookie);
-//    }
-//
-//    private void deleteURICooike(HttpServletResponse response) {
-//        Cookie cookie = new Cookie("URI", null);
-//        cookie.setMaxAge(0);
-//        cookie.setPath("/");
-//        response.addCookie(cookie);
-//    }
-//
-//    private ModelAndView logIn(String uriCookie, HttpSession session, HttpServletResponse response) {
-//
-//        session.setAttribute("isLogin", "valid");
-//
-//        if ("/".equals(uriCookie)) {
-//
-//            ModelAndView modelAndView = new ModelAndView("redirect:" + "/users");
-//            deleteURICooike(response);
-//            return modelAndView;
-//
-//        } else {
-//
-//            ModelAndView modelAndView = new ModelAndView("redirect:" + uriCookie);
-//            deleteURICooike(response);
-//            return modelAndView;
-//        }
-//    }
+
 
 //    private String changePassword(int id, String password) {
 //
