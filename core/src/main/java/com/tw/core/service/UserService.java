@@ -27,6 +27,10 @@ public class UserService {
     public User getUserByName(String name) {
         return userDao.getUserByName(name);
     }
+
+    public List<User> getUsers(){
+        return userDao.getUsers();
+    }
 }
 
 
