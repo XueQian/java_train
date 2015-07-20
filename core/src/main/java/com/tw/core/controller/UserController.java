@@ -103,6 +103,17 @@ public class UserController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.GET)
+    public ModelAndView getUpdateUserPage(@PathVariable int id) {
+
+        User user = userService.getUserById(id);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("updateUser");
+        modelAndView.addObject("user", user);
+        return modelAndView;
+    }
+
     private boolean isEmployeeExist(String name) {
 
         boolean flag = true;
