@@ -40,15 +40,20 @@ public class UserDao {
             throw e;
         }
     }
-//
-//    public void deleteUser(int id){
-//        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-//
-//        session.beginTransaction();
-//        User user = (User)session.load(User.class,id);
-//        session.delete(user);
-//        session.getTransaction().commit();
-//    }
+
+    public void deleteUser(int id) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            User user = (User) session.load(User.class, id);
+            session.delete(user);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
 
     public User getUserById(int id) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
