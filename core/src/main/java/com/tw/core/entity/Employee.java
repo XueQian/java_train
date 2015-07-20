@@ -13,8 +13,17 @@ public class Employee {
     private int id;
     private String userName;
     private String role;
+    private String employeeName;
+    private String email;
     private Set<Course> courses;
     private Set<Customer> customers;
+
+    public Employee(String userName, String role, String employeeName, String email) {
+        this.userName = userName;
+        this.role = role;
+        this.employeeName = employeeName;
+        this.email = email;
+    }
 
     public Employee(String userName, String role) {
         this.userName = userName;
@@ -53,7 +62,25 @@ public class Employee {
         this.role = role;
     }
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "employee")
+    @Column(name = "name")
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    @Column(name = "email")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     public Set<Course> getCourses() {
         return courses;
     }
@@ -62,7 +89,7 @@ public class Employee {
         this.courses = courses;
     }
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "employee")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     public Set<Customer> getCustomers() {
         return customers;
     }
