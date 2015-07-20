@@ -92,6 +92,17 @@ public class UserController {
         }
     }
 
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public ModelAndView getUsers() {
+
+        List<User> userList = userService.getUsers();
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("users");
+        modelAndView.addObject("users", userList);
+        return modelAndView;
+    }
+
     private boolean isEmployeeExist(String name) {
 
         boolean flag = true;
