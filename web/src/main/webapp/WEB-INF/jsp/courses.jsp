@@ -39,13 +39,13 @@
     </tbody>
 </table>
 
-<h3 style="position:absolute; left: 260px;"><a href="./courses/creation">Add Course</a></h3>
+<h3 style="position:absolute; left: 200px;"><a href="./courses/creation">Add Public Course</a></h3>
 
-<h3 style="position:absolute; left: 240px;top:100px;"><a href="./courses/private/creation">Add Private Coach</a></h3>
+<h3 style="position:absolute; left: 200px;top:100px;"><a href="./courses/private/creation">Add Private Coach</a></h3>
 
-<h3 style="position:absolute; left: 240px;top:130px;"><a href="./users">User Management</a></h3>
+<h3 style="position:absolute; left: 200px;top:130px;"><a href="./users">User Management</a></h3>
 
-<h3 style="position:absolute; left: 210px;top:160px;"><a href="./employees">Employee Management</a></h3>
+<h3 style="position:absolute; left: 200px;top:160px;"><a href="./employees">Employee Management</a></h3>
 
 </body>
 </html>
