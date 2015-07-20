@@ -40,7 +40,7 @@ public class CourseController {
 
             Course course1 = employeeService.getEmployeeByCourse(course.getId());
 
-            courseModels.add(new CourseModel(course.getId(), course.getName(), course1.getEmployee().getUserName(), course1.getTime()));
+            courseModels.add(new CourseModel(course.getId(), course.getName(), course1.getEmployee().getName(), course1.getTime()));
         }
 
         ModelAndView modelAndView = new ModelAndView();
@@ -106,7 +106,7 @@ public class CourseController {
     public ModelAndView getUpdateCoursePage(@PathVariable int id) {
 
         Course course = courseService.getCourseById(id);
-        CourseModel courseModel = new CourseModel(course.getName(), course.getEmployee().getUserName(), course.getTime());
+        CourseModel courseModel = new CourseModel(course.getName(), course.getEmployee().getName(), course.getTime());
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("updateCourse");
@@ -231,7 +231,7 @@ public class CourseController {
         List<String> employeeNameList = new ArrayList<String>();
 
         for (Course course : courseList) {
-            employeeNameList.add(courseList.indexOf(course), course.getEmployee().getUserName());
+            employeeNameList.add(courseList.indexOf(course), course.getEmployee().getName());
         }
 
         if (employeeNameList.contains(coachName)) {

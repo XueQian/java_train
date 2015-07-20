@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView login(@RequestParam String name, @RequestParam String password, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+    public ModelAndView login(@RequestParam String name, @RequestParam String password) {
 
         if (userService.getUserByName(name) == null) {
 
@@ -73,18 +73,16 @@ public class UserController {
             return modelAndView;
         } else {
 
-            Employee employee = new Employee(userName, role, employeeName, email);
+            Employee employee = new Employee(role, employeeName, email);
 
             if (!isEmployeeExist(userName)) {
 
                 employeeService.addEmployee(employee);
             }
 
-            Employee employeeDatabase = employeeService.getEmployeeByName(userName);
-
             User user = null;
             try {
-                user = new User(userName, MD5Util.getMD5(password), employeeDatabase.getId());
+                user = new User(userName, MD5Util.getMD5(password), employee);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -135,10 +133,6 @@ public class UserController {
 //            return new ModelAndView("redirect:/");
 //        }
 //    }
-//
-
-//
-
 //
 //    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
 //    public void deleteUser(HttpSession session, @PathVariable int id, HttpServletRequest request, HttpServletResponse response) {
