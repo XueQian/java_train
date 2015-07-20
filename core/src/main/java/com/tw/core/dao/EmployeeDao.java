@@ -74,4 +74,21 @@ public class EmployeeDao {
         }
         return course;
     }
+
+    public List<Employee> getEmployees() {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        List<Employee> employeeList;
+
+        try {
+            session.beginTransaction();
+            employeeList = session.createQuery("from Employee").list();
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+
+        return employeeList;
+    }
 }
