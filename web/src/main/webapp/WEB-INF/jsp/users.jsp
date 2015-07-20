@@ -36,5 +36,7 @@
     </c:forEach>
     </tbody>
 </table>
+
+<h3 style="position:absolute; left: 260px;"><a href="./users/creation">Add user</a></h3>
 </body>
 </html>
