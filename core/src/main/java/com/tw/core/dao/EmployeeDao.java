@@ -110,4 +110,18 @@ public class EmployeeDao {
             throw e;
         }
     }
+
+    public void deleteEmployee(int id) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            Employee employee = (Employee) session.load(Employee.class, id);
+            session.delete(employee);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
 }
