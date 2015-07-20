@@ -90,7 +90,13 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/courses/deletion/{id}", method = RequestMethod.GET)
-    public ModelAndView deleteUser(@PathVariable int id) {
+    public ModelAndView deleteCourse(@PathVariable int id) {
+
+        Employee employee = courseService.getCourseById(id).getEmployee();
+
+        if (employee != null) {
+            customerService.deleteCustomer(employee);
+        }
 
         courseService.deleteCourse(id);
         return new ModelAndView("redirect:/courses");
