@@ -150,6 +150,14 @@ public class CourseController {
 
     @RequestMapping(value = "/courses/private/creation", method = RequestMethod.POST)
     public ModelAndView addPrivateCoach(@RequestParam String customer, @RequestParam String course, @RequestParam String coach, @RequestParam String time) {
+
+        if (isCustomerExist(customer)) {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("customerExist");
+
+            return modelAndView;
+        }
+
         Customer customerObject = new Customer(customer);
 
         Employee employee = new Employee(coach, "coach");
@@ -183,10 +191,7 @@ public class CourseController {
         customerObject.setCourses(courseSet);
         customerObject.setEmployee(employee);
 
-        if (!isCustomerExist(customer)) {
-
         customerService.addCustomer(customerObject);
-        }
         return new ModelAndView("redirect:/courses");
     }
 
@@ -211,7 +216,7 @@ public class CourseController {
         return flag;
     }
 
-    private boolean isCoachFree(String coachName,String time){
+    private boolean isCoachFree(String coachName, String time) {
 
         boolean flag = true;
 
@@ -219,11 +224,11 @@ public class CourseController {
 
         List<String> employeeNameList = new ArrayList<String>();
 
-        for(Course course:courseList){
-            employeeNameList.add(courseList.indexOf(course),course.getEmployee().getUserName());
+        for (Course course : courseList) {
+            employeeNameList.add(courseList.indexOf(course), course.getEmployee().getUserName());
         }
 
-        if(employeeNameList.contains(coachName)){
+        if (employeeNameList.contains(coachName)) {
             flag = false;
         }
 
