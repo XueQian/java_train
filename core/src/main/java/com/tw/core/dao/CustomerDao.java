@@ -41,6 +41,23 @@ public class CustomerDao {
             throw e;
         }
         return customer;
-
     }
+
+    public void deleteCustomer(Employee employee) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from Customer where employee=:employee");
+            query.setEntity("employee",employee);
+            Customer customer = (Customer) query.uniqueResult();
+            session.delete(customer);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+
+
 }
