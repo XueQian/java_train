@@ -38,7 +38,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView login(@RequestParam String name, @RequestParam String password, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 
-        if(userService.getUserByName(name)==null){
+        if (userService.getUserByName(name) == null) {
 
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("userIsNotExist");
@@ -63,28 +63,28 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/creation", method = RequestMethod.POST)
-    public ModelAndView addUser(@RequestParam String name, @RequestParam String password, @RequestParam String role) {
+    public ModelAndView addUser(@RequestParam String userName, @RequestParam String password, @RequestParam String employeeName, @RequestParam String email, @RequestParam String role) {
 
-        if (isUserExist(name)) {
+        if (isUserExist(userName)) {
 
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("addUserExist");
 
             return modelAndView;
-        }else {
+        } else {
 
-            Employee employee = new Employee(name, role);
+            Employee employee = new Employee(userName, role, employeeName, email);
 
-            if (!isEmployeeExist(name)) {
+            if (!isEmployeeExist(userName)) {
 
                 employeeService.addEmployee(employee);
             }
 
-            Employee employeeDatabase = employeeService.getEmployeeByName(name);
+            Employee employeeDatabase = employeeService.getEmployeeByName(userName);
 
             User user = null;
             try {
-                user = new User(name, MD5Util.getMD5(password), employeeDatabase.getId());
+                user = new User(userName, MD5Util.getMD5(password), employeeDatabase.getId());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -104,11 +104,11 @@ public class UserController {
         return flag;
     }
 
-    private boolean isUserExist(String name){
+    private boolean isUserExist(String name) {
 
         boolean flag = true;
 
-        if(userService.getUserByName(name) == null){
+        if (userService.getUserByName(name) == null) {
             flag = false;
         }
 
