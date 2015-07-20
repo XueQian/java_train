@@ -46,16 +46,6 @@ public class EmployeeDao {
         return employee;
     }
 
-    public Employee getEmployeeById(int id) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-
-        session.beginTransaction();
-        Employee employee = (Employee) session.get(Employee.class, id);
-        session.getTransaction().commit();
-
-        return employee;
-    }
-
     public Course getEmployeeByCourse(int courseId) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Course course;
@@ -90,5 +80,21 @@ public class EmployeeDao {
         }
 
         return employeeList;
+    }
+
+    public Employee getEmployeeById(int id) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Employee employee;
+
+        try {
+            session.beginTransaction();
+            employee = (Employee) session.get(Employee.class, id);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+
+        return employee;
     }
 }
