@@ -17,4 +17,8 @@ public class CustomerService {
     public void addCustomer(Customer customer){
         customerDao.addCustomer(customer);
     }
+
+    public Customer getCustomerByName(String name){
+        return customerDao.getCustomerByName(name);
+    }
 }
