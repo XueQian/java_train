@@ -12,8 +12,10 @@
 </head>
 <body>
 <form method="POST" action="" style="position:absolute; left: 350px;">
-    Name : <input type="text" name="name"/> <br/>
+    UserName : <input type="text" name="userName"/> <br/>
     Password : <input type="text" name="password"/> <br/>
+    Employee Name:<input type="text" name="employeeName"><br/>
+    Email:<input type="text" name="email"><br/>
     Employee Role:<input type="text" name="role"><br/>
     <input type="submit" value="Submit"/>
 </form>
