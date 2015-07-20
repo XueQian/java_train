@@ -38,6 +38,12 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView login(@RequestParam String name, @RequestParam String password, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 
+        if(userService.getUserByName(name)==null){
+
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("userIsNotExist");
+            return modelAndView;
+        }
         if (IsPasswordCorrect(name, password)) {
 
             return new ModelAndView("redirect:" + "/courses");
