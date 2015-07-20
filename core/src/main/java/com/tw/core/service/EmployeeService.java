@@ -33,4 +33,8 @@ public class EmployeeService {
         return employeeDao.getEmployees();
     }
 
+    public Employee getEmployeeById(int id){
+        return employeeDao.getEmployeeById(id);
+    }
+
 }
