@@ -7,6 +7,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by qxue on 7/19/15.
  */
@@ -57,5 +59,22 @@ public class CustomerDao {
             session.getTransaction().rollback();
             throw e;
         }
+    }
+
+    public List<Customer> getCustomers() {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        List<Customer> customerList;
+
+        try {
+            session.beginTransaction();
+            customerList = session.createQuery("from Customer").list();
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+
+        return customerList;
     }
 }
