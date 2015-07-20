@@ -115,13 +115,20 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.POST)
-    public ModelAndView updateCourse(@PathVariable int id, @RequestParam String name, @RequestParam String password) {
+    public ModelAndView updateUser(@PathVariable int id, @RequestParam String name, @RequestParam String password) {
 
         Employee employee = userService.getUserById(id).getEmployee();
         User user = new User(id, name, password,employee);
 
         userService.updateUser(user);
 
+        return new ModelAndView("redirect:/users");
+    }
+
+    @RequestMapping(value = "/users/deletion/{id}", method = RequestMethod.GET)
+    public ModelAndView deleteUser(@PathVariable int id) {
+
+        userService.deleteUser(id);
         return new ModelAndView("redirect:/users");
     }
 
