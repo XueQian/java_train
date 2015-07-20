@@ -97,4 +97,17 @@ public class EmployeeDao {
 
         return employee;
     }
+
+    public void updateEmployee(Employee employee) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            session.update(employee);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
 }
