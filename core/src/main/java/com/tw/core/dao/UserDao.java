@@ -11,15 +11,15 @@ import java.util.List;
 @Repository
 public class UserDao {
 
-//    public List<User> getUsers(){
-//        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-//        session.beginTransaction();
-//
-//        List<User> userList = session.createQuery("from User").list();
-//        session.getTransaction().commit();
-//
-//        return userList;
-//    }
+    public List<User> getUsers(){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        List<User> userList = session.createQuery("from User").list();
+        session.getTransaction().commit();
+
+        return userList;
+    }
 
     public void addUser(User user){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
