@@ -154,8 +154,17 @@ public class CourseController {
 
         Employee employee = new Employee(coach, "coach");
 
+        System.out.println(isCoachFree(course,time)+"@@@@@@@@@@@@@@@@@@@@@");
+
         if(isCoachExist(coach)){
             employee.setId(employeeService.getEmployeeByName(coach).getId());
+
+            if(!isCoachFree(course,time)){
+
+                ModelAndView modelAndView = new ModelAndView();
+                modelAndView.setViewName("privateCoachIsBusy");
+                return modelAndView;
+            }
 
         }else {
             courseService.addEmployeeCourse(employee);
