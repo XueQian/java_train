@@ -39,5 +39,5 @@
     </tbody>
 </table>
 
-<h3 style="position:absolute; left: 260px;"><a href="./employees/creation">Add Employee</a></h3>
+<h3 style="position:absolute; left: 260px;"><a href="./users/creation">Add Employee</a></h3>
 </body>
