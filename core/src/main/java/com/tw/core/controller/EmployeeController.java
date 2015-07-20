@@ -50,4 +50,11 @@ public class EmployeeController {
         return new ModelAndView("redirect:/employees");
     }
 
+    @RequestMapping(value = "/employees/deletion/{id}", method = RequestMethod.GET)
+    public ModelAndView deleteUser(@PathVariable int id) {
+
+        employeeService.deleteEmployee(id);
+
+        return new ModelAndView("redirect:/employees");
+    }
 }
