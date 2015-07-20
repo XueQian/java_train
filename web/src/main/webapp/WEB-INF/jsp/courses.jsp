@@ -45,5 +45,7 @@
 
 <h3 style="position:absolute; left: 240px;top:130px;"><a href="./users">User Management</a></h3>
 
+<h3 style="position:absolute; left: 240px;top:160px;"><a href="./employees">Employee Management</a></h3>
+
 </body>
 </html>
