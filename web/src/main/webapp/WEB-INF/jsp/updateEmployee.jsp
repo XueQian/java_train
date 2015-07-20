@@ -21,7 +21,7 @@
         type="text" name="role"
         value="<c:out value="${employee.role}" />"/> <br/>
     Email: <input
-        type="text" name="role"
+        type="text" name="email"
         value="<c:out value="${employee.email}" />"/> <br/>
     <input type="submit" value="Submit"/>
 </form>
