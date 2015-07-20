@@ -35,7 +35,7 @@ public class EmployeeDao {
 
         try {
             session.beginTransaction();
-            Query query = session.createQuery("from Employee where user_name=:name");
+            Query query = session.createQuery("from Employee where name=:name");
             query.setString("name", name);
             employee = (Employee) query.uniqueResult();
             session.getTransaction().commit();
