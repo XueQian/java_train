@@ -113,19 +113,19 @@ public class CourseController {
 
         Employee employee = new Employee(coach, "coach");
 
-        if(isCoachExist(coach)){
+        if (isCoachExist(coach)) {
             employee.setId(employeeService.getEmployeeByName(coach).getId());
 
-            if(!isCoachFree(name,time)){
+            if (!isCoachFree(name, time)) {
 
                 Course course = new Course(id);
 
                 ModelAndView modelAndView = new ModelAndView();
                 modelAndView.setViewName("updateCourseCoachIsBusy");
-                modelAndView.addObject("course",course);
+                modelAndView.addObject("course", course);
                 return modelAndView;
             }
-        }else {
+        } else {
             courseService.addEmployeeCourse(employee);
         }
 
@@ -148,29 +148,27 @@ public class CourseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/courses/private/creation",method = RequestMethod.POST)
-    public ModelAndView addPrivateCoach(@RequestParam String customer,@RequestParam String course,@RequestParam String coach,@RequestParam String time){
+    @RequestMapping(value = "/courses/private/creation", method = RequestMethod.POST)
+    public ModelAndView addPrivateCoach(@RequestParam String customer, @RequestParam String course, @RequestParam String coach, @RequestParam String time) {
         Customer customerObject = new Customer(customer);
 
         Employee employee = new Employee(coach, "coach");
 
-        System.out.println(isCoachFree(course,time)+"@@@@@@@@@@@@@@@@@@@@@");
-
-        if(isCoachExist(coach)){
+        if (isCoachExist(coach)) {
             employee.setId(employeeService.getEmployeeByName(coach).getId());
 
-            if(!isCoachFree(course,time)){
+            if (!isCoachFree(course, time)) {
 
                 ModelAndView modelAndView = new ModelAndView();
                 modelAndView.setViewName("privateCoachIsBusy");
                 return modelAndView;
             }
 
-        }else {
+        } else {
             courseService.addEmployeeCourse(employee);
         }
 
-        Course courseObject = new Course(course,employee,time);
+        Course courseObject = new Course(course, employee, time);
 
         Set<Customer> customerSet = new HashSet<Customer>();
         customerSet.add(customerObject);
@@ -185,8 +183,10 @@ public class CourseController {
         customerObject.setCourses(courseSet);
         customerObject.setEmployee(employee);
 
-        customerService.addCustomer(customerObject);
+        if (!isCustomerExist(customer)) {
 
+        customerService.addCustomer(customerObject);
+        }
         return new ModelAndView("redirect:/courses");
     }
 
@@ -214,6 +214,17 @@ public class CourseController {
         if (timeList.contains(time)) {
             flag = false;
         }
+        return flag;
+    }
+
+    private boolean isCustomerExist(String name) {
+
+        boolean flag = true;
+
+        if (customerService.getCustomerByName(name) == null) {
+            flag = false;
+        }
+
         return flag;
     }
 }
