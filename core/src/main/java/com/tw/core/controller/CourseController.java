@@ -67,7 +67,7 @@ public class CourseController {
 
             employee.setId(employeeService.getEmployeeByName(coach).getId());
 
-            if (!isCoachFree(name, time)) {
+            if (!isCoachFree(coach, time)) {
 
                 ModelAndView modelAndView = new ModelAndView();
                 modelAndView.setViewName("addCourseCoachIsBusy");
@@ -116,7 +116,7 @@ public class CourseController {
         if (isCoachExist(coach)) {
             employee.setId(employeeService.getEmployeeByName(coach).getId());
 
-            if (!isCoachFree(name, time)) {
+            if (!isCoachFree(coach, time)) {
 
                 Course course = new Course(id);
 
@@ -157,7 +157,7 @@ public class CourseController {
         if (isCoachExist(coach)) {
             employee.setId(employeeService.getEmployeeByName(coach).getId());
 
-            if (!isCoachFree(course, time)) {
+            if (!isCoachFree(coach, time)) {
 
                 ModelAndView modelAndView = new ModelAndView();
                 modelAndView.setViewName("privateCoachIsBusy");
@@ -200,28 +200,30 @@ public class CourseController {
         return flag;
     }
 
-    private boolean isCoachFree(String name, String time) {
-        boolean flag = true;
-
-        List<Course> courseList = courseService.getCourseByName(name);
-
-        List<String> timeList = new ArrayList<String>();
-
-        for (Course course : courseList) {
-            timeList.add(courseList.indexOf(course), course.getTime());
-        }
-
-        if (timeList.contains(time)) {
-            flag = false;
-        }
-        return flag;
-    }
-
     private boolean isCustomerExist(String name) {
 
         boolean flag = true;
 
         if (customerService.getCustomerByName(name) == null) {
+            flag = false;
+        }
+
+        return flag;
+    }
+
+    private boolean isCoachFree(String coachName,String time){
+
+        boolean flag = true;
+
+        List<Course> courseList = courseService.getCourseByTime(time);
+
+        List<String> employeeNameList = new ArrayList<String>();
+
+        for(Course course:courseList){
+            employeeNameList.add(courseList.indexOf(course),course.getEmployee().getUserName());
+        }
+
+        if(employeeNameList.contains(coachName)){
             flag = false;
         }
 
