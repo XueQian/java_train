@@ -118,7 +118,8 @@ public class UserController {
     public ModelAndView updateUser(@PathVariable int id, @RequestParam String name, @RequestParam String password) {
 
         Employee employee = userService.getUserById(id).getEmployee();
-        User user = new User(id, name, password,employee);
+
+        User user = new User(id, name, changePassword(id, password), employee);
 
         userService.updateUser(user);
 
@@ -169,19 +170,19 @@ public class UserController {
     }
 
 
-//    private String changePassword(int id, String password) {
-//
-//        String passwordMD5 = password;
-//
-//        User userDatabase = userService.getUserById(id);
-//
-//        if (!(userDatabase.getPassword().equals(password))) {
-//            try {
-//                passwordMD5 = MD5Util.getMD5(password);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return passwordMD5;
-//    }
+    private String changePassword(int id, String password) {
+
+        String passwordMD5 = password;
+
+        User userDatabase = userService.getUserById(id);
+
+        if (!(userDatabase.getPassword().equals(password))) {
+            try {
+                passwordMD5 = MD5Util.getMD5(password);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return passwordMD5;
+    }
 }
