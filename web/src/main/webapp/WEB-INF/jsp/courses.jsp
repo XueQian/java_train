@@ -64,7 +64,7 @@
                     <td><h4><c:out value="${course.coach}"/></h4></td>
                     <td><h4><c:out value="${course.time}"/></h4></td>
                     <td><a role="button" class="btn btn-primary btn-lg"
-                           href=href="./courses/modification/<c:out value="${course.id}"/>">更新</a></td>
+                           href="./courses/modification/<c:out value="${course.id}"/>">更新</a></td>
                     <td><a role="button" class="btn btn-danger btn-lg"
                            href="./courses/deletion/<c:out value="${course.id}"/>">删除</a></td>
                 </tr>
