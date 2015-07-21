@@ -41,9 +41,9 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/employees/modification/{id}", method = RequestMethod.POST)
-    public ModelAndView updateUser(@PathVariable int id, @RequestParam String name, @RequestParam String role,@RequestParam String email) {
+    public ModelAndView updateEmployee(@PathVariable int id, @RequestParam String name, @RequestParam String role,@RequestParam String email) {
 
-        Employee employee = new Employee(id,name,role,email);
+        Employee employee = new Employee(id,role,name,email);
 
         employeeService.updateEmployee(employee);
 
