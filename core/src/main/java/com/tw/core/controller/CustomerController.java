@@ -42,7 +42,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/customers/modification/{id}", method = RequestMethod.POST)
-    public ModelAndView updateUser(@PathVariable int id, @RequestParam String name) {
+    public ModelAndView updateCustomer(@PathVariable int id, @RequestParam String name) {
 
         Employee employee = customerService.getCustomerById(id).getEmployee();
 

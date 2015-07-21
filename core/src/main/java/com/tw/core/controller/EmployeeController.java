@@ -1,5 +1,6 @@
 package com.tw.core.controller;
 
+import com.tw.core.entity.Customer;
 import com.tw.core.entity.Employee;
 import com.tw.core.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,17 @@ public class EmployeeController {
     @RequestMapping(value = "/employees/modification/{id}", method = RequestMethod.POST)
     public ModelAndView updateEmployee(@PathVariable int id, @RequestParam String name, @RequestParam String role,@RequestParam String email) {
 
-        Employee employee = new Employee(id,role,name,email);
+        if (isEmployeeExist(name)) {
+
+            Employee employee = employeeService.getEmployeeById(id);
+
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("updateEmployeeExist");
+            modelAndView.addObject("employee", employee);
+            return modelAndView;
+        }
+
+        Employee employee = new Employee(id, role, name, email);
 
         employeeService.updateEmployee(employee);
 
@@ -57,4 +68,16 @@ public class EmployeeController {
 
         return new ModelAndView("redirect:/employees");
     }
+
+    private boolean isEmployeeExist(String name) {
+
+        boolean flag = true;
+
+        if (employeeService.getEmployeeByName(name) == null) {
+            flag = false;
+        }
+        return flag;
+    }
+
+
 }
