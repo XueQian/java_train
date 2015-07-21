@@ -77,4 +77,33 @@ public class CustomerDao {
 
         return customerList;
     }
+
+    public Customer getCustomerById(int id) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Customer customer;
+
+        try {
+            session.beginTransaction();
+            customer = (Customer) session.get(Customer.class, id);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+
+        return customer;
+    }
+
+    public void updateCustomer(Customer customer) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            session.update(customer);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
 }
