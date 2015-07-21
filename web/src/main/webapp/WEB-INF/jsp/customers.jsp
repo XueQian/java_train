@@ -37,5 +37,5 @@
     </tbody>
 </table>
 
-<h3 style="position:absolute; left: 260px;"><a href="./customers/creation">Add Customer</a></h3>
+<h3 style="position:absolute; left: 260px;"><a href="./courses/private/creation">Add Customer</a></h3>
 </body>

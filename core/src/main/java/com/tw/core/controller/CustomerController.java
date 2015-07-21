@@ -46,7 +46,7 @@ public class CustomerController {
 
         Employee employee = customerService.getCustomerById(id).getEmployee();
 
-        Customer customer = new Customer(id,name,employee);
+        Customer customer = new Customer(id, name, employee);
 
         customerService.updateCustomer(customer);
         return new ModelAndView("redirect:/customers");
@@ -58,14 +58,5 @@ public class CustomerController {
         customerService.deleteCustomer(id);
 
         return new ModelAndView("redirect:/customers");
-    }
-
-    @RequestMapping(value = "/customers/creation", method = RequestMethod.GET)
-    public ModelAndView getAddCustomerPage() {
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("addCustomer");
-
-        return modelAndView;
     }
 }
