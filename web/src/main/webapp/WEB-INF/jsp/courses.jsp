@@ -63,8 +63,10 @@
                     <td><h4><c:out value="${course.name}"/></h4></td>
                     <td><h4><c:out value="${course.coach}"/></h4></td>
                     <td><h4><c:out value="${course.time}"/></h4></td>
-                    <td><a href="./courses/modification/<c:out value="${course.id}"/>"><h4>更新</h4></a></td>
-                    <td><a href="./courses/deletion/<c:out value="${course.id}"/>"><h4>删除</h4></a></td>
+                    <td><a role="button" class="btn btn-primary btn-lg"
+                           href=href="./courses/modification/<c:out value="${course.id}"/>">更新</a></td>
+                    <td><a role="button" class="btn btn-danger btn-lg"
+                           href="./courses/deletion/<c:out value="${course.id}"/>">删除</a></td>
                 </tr>
             </c:forEach>
 

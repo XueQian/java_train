@@ -60,8 +60,10 @@
                 <tr>
                     <td><h4><c:out value="${user.name}"/></h4></td>
                     <td><h4><c:out value="${user.password}"/></h4></td>
-                    <td><a href="./users/modification/<c:out value="${user.id}"/>"><h4>更新</h4></a></td>
-                    <td><a href="./users/deletion/<c:out value="${user.id}"/>"><h4>删除</h4></a></td>
+                    <td><a role="button" class="btn btn-primary btn-lg"
+                           href="./users/modification/<c:out value="${user.id}"/>">更新</a></td>
+                    <td><a role="button" class="btn btn-danger btn-lg"
+                           href="./users/deletion/<c:out value="${user.id}"/>">删除</a></td>
                 </tr>
             </c:forEach>
 

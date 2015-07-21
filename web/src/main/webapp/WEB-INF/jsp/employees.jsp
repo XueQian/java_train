@@ -62,8 +62,10 @@
                     <td><h4><c:out value="${employee.name}"/></h4></td>
                     <td><h4><c:out value="${employee.role}"/></h4></td>
                     <td><h4><c:out value="${employee.email}"/></h4></td>
-                    <td><a href="./employees/modification/<c:out value="${employee.id}"/>"><h4>更新</h4></a></td>
-                    <td><a href="./employees/deletion/<c:out value="${employee.id}"/>"><h4>删除</h4></a></td>
+                    <td><a role="button" class="btn btn-primary btn-lg"
+                           href="./employees/modification/<c:out value="${employee.id}"/>">更新</a></td>
+                    <td><a role="button" class="btn btn-danger btn-lg"
+                           href="./employees/deletion/<c:out value="${employee.id}"/>">删除</a></td>
                 </tr>
             </c:forEach>
 

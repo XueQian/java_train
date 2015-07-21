@@ -64,8 +64,10 @@
                     <td><h4><c:out value="${customer.sex}"/></h4></td>
                     <td><h4><c:out value="${customer.email}"/></h4></td>
                     <td><h4><c:out value="${customer.telephone}"/></h4></td>
-                    <td><a href="./customers/modification/<c:out value="${customer.id}"/>"><h4>更新</h4></a></td>
-                    <td><a href="./customers/deletion/<c:out value="${customer.id}"/>"><h4>删除</h4></a></td>
+                    <td><a role="button" class="btn btn-primary btn-lg"
+                           href="./customers/modification/<c:out value="${customer.id}"/>">更新</a></td>
+                    <td><a role="button" class="btn btn-danger btn-lg"
+                           href="./customers/deletion/<c:out value="${customer.id}"/>">删除</a></td>
                 </tr>
             </c:forEach>
 
