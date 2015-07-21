@@ -15,21 +15,31 @@ public class Customer {
 
     private int id;
     private String name;
+    private String sex;
+    private String email;
+    private String telephone;
     private Employee employee;
     private Set<Course> courses;
 
-    public Customer(String name){
+
+    public Customer(String name, String sex, String email, String telephone) {
         this.name = name;
+        this.sex = sex;
+        this.email = email;
+        this.telephone = telephone;
+    }
+
+    public Customer(int id, String name, String sex, String email, String telephone, Employee employee) {
+        this.id = id;
+        this.name = name;
+        this.sex = sex;
+        this.email = email;
+        this.telephone = telephone;
+        this.employee = employee;
     }
 
     public Customer(){
 
-    }
-
-    public Customer(int id, String name, Employee employee) {
-        this.id = id;
-        this.name = name;
-        this.employee = employee;
     }
 
     @Id
@@ -50,6 +60,33 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Column(name = "sex")
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    @Column(name="email")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Column(name = "telephone")
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
