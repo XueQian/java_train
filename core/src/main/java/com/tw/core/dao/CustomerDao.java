@@ -120,4 +120,21 @@ public class CustomerDao {
             throw e;
         }
     }
+
+    public Customer getCustomerByEmployee(Employee employee){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Customer customer;
+
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from Customer where employee=:employee");
+            query.setEntity("employee", employee);
+            customer = (Customer) query.uniqueResult();
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+        return customer;
+    }
 }
