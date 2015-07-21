@@ -94,7 +94,11 @@ public class CourseController {
 
         Employee employee = courseService.getCourseById(id).getEmployee();
 
-        if (employee != null) {
+        System.out.println(employee + "@@@@@@@@@@@@@@@");
+
+        if (employee != null && customerService.getCustomerByEmployee(employee) != null) {
+
+            System.out.println("##########################");
             customerService.deleteCustomer(employee);
         }
 
