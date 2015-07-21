@@ -106,4 +106,18 @@ public class CustomerDao {
             throw e;
         }
     }
+
+    public void deleteCustomer(int id) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            Customer customer = (Customer) session.load(Customer.class, id);
+            session.delete(customer);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
 }
