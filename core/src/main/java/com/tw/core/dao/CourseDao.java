@@ -35,23 +35,6 @@ public class CourseDao {
         return courseList;
     }
 
-    public List<Course> getCourseByName(String name) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        List courseList;
-
-        try {
-            session.beginTransaction();
-            Query query = session.createQuery("from Course where name=:name");
-            courseList = query.setString("name", name).list();
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-
-        return courseList;
-    }
-
     public List<Course> getCourseByTime(String time) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         List courseList;
