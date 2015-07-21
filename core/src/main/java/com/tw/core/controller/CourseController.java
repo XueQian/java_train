@@ -156,7 +156,7 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/courses/private/creation", method = RequestMethod.POST)
-    public ModelAndView addPrivateCoach(@RequestParam String customer, @RequestParam String course, @RequestParam String coach, @RequestParam String time) {
+    public ModelAndView addPrivateCoach(@RequestParam String customer,@RequestParam String sex,@RequestParam String email,@RequestParam String telephone, @RequestParam String course, @RequestParam String coach, @RequestParam String time) {
 
         if (isCustomerExist(customer)) {
             ModelAndView modelAndView = new ModelAndView();
@@ -165,7 +165,7 @@ public class CourseController {
             return modelAndView;
         }
 
-        Customer customerObject = new Customer(customer);
+        Customer customerObject = new Customer(customer,sex,email,telephone);
 
         Employee employee = new Employee(coach, "coach");
 
