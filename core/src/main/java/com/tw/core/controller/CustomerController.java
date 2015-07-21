@@ -51,4 +51,12 @@ public class CustomerController {
         customerService.updateCustomer(customer);
         return new ModelAndView("redirect:/customers");
     }
+
+    @RequestMapping(value = "/customers/deletion/{id}", method = RequestMethod.GET)
+    public ModelAndView deleteUser(@PathVariable int id) {
+
+        customerService.deleteCustomer(id);
+
+        return new ModelAndView("redirect:/customers");
+    }
 }
