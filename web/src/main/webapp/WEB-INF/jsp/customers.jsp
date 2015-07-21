@@ -20,7 +20,9 @@
     <thead>
     <tr>
         <th>Name</th>
-        <%--<th>Coach</th>--%>
+        <th>Sex</th>
+        <th>Email</th>
+        <th>Telephone</th>
         <th>Operation</th>
         <th>Operation</th>
     </tr>
@@ -29,7 +31,9 @@
     <c:forEach items="${customers}" var="customer">
         <tr>
             <td><c:out value="${customer.name}"/></td>
-            <%--<td><c:out value="${customer.coach}"/></td>--%>
+            <td><c:out value="${customer.sex}"/></td>
+            <td><c:out value="${customer.email}"/></td>
+            <td><c:out value="${customer.telephone}"/></td>
             <td><a href="./customers/modification/<c:out value="${customer.id}"/>">Update</a></td>
             <td><a href="./customers/deletion/<c:out value="${customer.id}"/>">Delete</a></td>
         </tr>

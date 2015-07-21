@@ -14,7 +14,10 @@
 <h2 >添加私教!!</h2>
 <form method="POST" action="" style="position:absolute; left: 350px;">
     Course : <input type="text" name="course" value = "私教" readonly="readonly"/> <br/>
-    Customer : <input type="text" name="customer"/> <br/>
+    Customer Name : <input type="text" name="customer"/> <br/>
+    Customer Sex : <input type="text" name="sex"/> <br/>
+    Customer Email : <input type="text" name="email"/> <br/>
+    Customer Telephone: <input type="text" name="telephone"/> <br/>
     Coach : <input type="text" name="coach"/> <br/>
     Time : <input type="date" name="time"/> <br/>
     <input type="submit" value="Submit"/>
