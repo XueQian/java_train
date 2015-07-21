@@ -36,7 +36,7 @@
                     </ul>
                 </li>
                 <li role="presentation"><a href="/web/employees"><h3>雇员管理</h3></a></li>
-                <li role="presentation"><a href="/web/customers"><h3>客户管理</h3></a></li>
+                <li role="presentation"><a href="/web/customers"><h3>顾客管理</h3></a></li>
             </ul>
         </nav>
 

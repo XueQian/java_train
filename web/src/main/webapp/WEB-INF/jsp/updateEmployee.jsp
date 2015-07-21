@@ -37,7 +37,7 @@
                         <li><a href="/web/users/creation"><h4>添加雇员</h4></a></li>
                     </ul>
                 </li>
-                <li role="presentation"><a href="/web/customers"><h3>客户管理</h3></a></li>
+                <li role="presentation"><a href="/web/customers"><h3>顾客管理</h3></a></li>
             </ul>
         </nav>
 

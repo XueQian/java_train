@@ -38,7 +38,7 @@
                 </li>
                 <li role="presentation"><a href="/web/users"><h3>用户管理</h3></a></li>
                 <li role="presentation"><a href="/web/employees"><h3>雇员管理</h3></a></li>
-                <li role="presentation"><a href="/web/customers"><h3>客户管理</h3></a></li>
+                <li role="presentation"><a href="/web/customers"><h3>顾客管理</h3></a></li>
             </ul>
         </nav>
 
@@ -67,7 +67,7 @@
                            aria-describedby="basic-addon1" name="course" value="私教" readonly="readonly">
                 </div>
                 <div class="col-md-6 col-md-offset-1 text-cente input-group">
-                    <span class="input-group-addon">客户名称</span>
+                    <span class="input-group-addon">顾客名称</span>
                     <input type="text" class="form-control" placeholder="customer"
                            aria-describedby="basic-addon1" name="customer">
                 </div>
