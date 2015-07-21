@@ -32,4 +32,12 @@ public class CustomerService {
     public List<Customer> getCustomers(){
         return customerDao.getCustomers();
     }
+
+    public Customer getCustomerById(int id){
+        return customerDao.getCustomerById(id);
+    }
+
+    public void updateCustomer(Customer customer){
+        customerDao.updateCustomer(customer);
+    }
 }
