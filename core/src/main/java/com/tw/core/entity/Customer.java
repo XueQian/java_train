@@ -26,6 +26,12 @@ public class Customer {
 
     }
 
+    public Customer(int id, String name, Employee employee) {
+        this.id = id;
+        this.name = name;
+        this.employee = employee;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
