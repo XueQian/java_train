@@ -20,7 +20,7 @@ public class CustomerController {
     CustomerService customerService;
 
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
-    public ModelAndView getEmployees() {
+    public ModelAndView getCustomers() {
 
         List<Customer> customerList = customerService.getCustomers();
 
@@ -58,5 +58,14 @@ public class CustomerController {
         customerService.deleteCustomer(id);
 
         return new ModelAndView("redirect:/customers");
+    }
+
+    @RequestMapping(value = "/customers/creation", method = RequestMethod.GET)
+    public ModelAndView getAddCustomerPage() {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("addCustomer");
+
+        return modelAndView;
     }
 }
