@@ -1,11 +1,10 @@
 package com.tw.core.controller;
 
 import com.tw.core.entity.Customer;
+import com.tw.core.entity.Employee;
 import com.tw.core.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -29,5 +28,27 @@ public class CustomerController {
         modelAndView.setViewName("customers");
         modelAndView.addObject("customers", customerList);
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/customers/modification/{id}", method = RequestMethod.GET)
+    public ModelAndView getUpdateCustomerPage(@PathVariable int id) {
+
+        Customer customer = customerService.getCustomerById(id);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("updateCustomer");
+        modelAndView.addObject("customer", customer);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/customers/modification/{id}", method = RequestMethod.POST)
+    public ModelAndView updateUser(@PathVariable int id, @RequestParam String name) {
+
+        Employee employee = customerService.getCustomerById(id).getEmployee();
+
+        Customer customer = new Customer(id,name,employee);
+
+        customerService.updateCustomer(customer);
+        return new ModelAndView("redirect:/customers");
     }
 }
