@@ -7,6 +7,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags"  prefix="spring"%>
+
+<spring:url value="/lib/css/bootstrap.min.css" var="bootstrapCss"/>
+<link href="${bootstrapCss}" rel="stylesheet"/>
+<spring:url value="/lib/js/bootstrap.min.js" var="bootstrapJs" />
+<spring:url value="/lib/js/jquery-1.11.1.min.js" var="jqueryJs" />
+<script src="${jqueryJs}"></script>
+<script src="${bootstrapJs}"></script>
+
 
 <html>
 <head>
