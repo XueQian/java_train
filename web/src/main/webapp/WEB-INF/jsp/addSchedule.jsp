@@ -62,13 +62,21 @@
 
                 <div class="col-md-6 col-md-offset-1 text-center input-group">
                     <span class="input-group-addon">课程名称</span>
-                    <input type="text" class="form-control" placeholder="course"
-                           aria-describedby="basic-addon1" name="name">
+                    <%--<input type="text" class="form-control" placeholder="course"--%>
+                           <%--aria-describedby="basic-addon1" name="name">--%>
+                    <select name="courseId">
+                        <c:forEach var="course" items="${courseList}">
+                            <option value="<c:out value="${course.id}"/>"><c:out value="${course.name}"/></option>
+                        </c:forEach>
+                    </select>
                 </div>
                 <div class="col-md-6 col-md-offset-1 text-cente input-group">
                     <span class="input-group-addon">教练名称</span>
-                    <input type="text" class="form-control" placeholder="coach"
-                           aria-describedby="basic-addon1" name="coach">
+                    <select name="coachId">
+                        <c:forEach var="coach" items="${coachList}">
+                            <option value="<c:out value="${coach.id}"/>"><c:out value="${coach.name}"/></option>
+                        </c:forEach>
+                    </select>
                 </div>
                 <div class="col-md-6 col-md-offset-1 text-cente input-group">
                     <span class="input-group-addon">课程时间</span>

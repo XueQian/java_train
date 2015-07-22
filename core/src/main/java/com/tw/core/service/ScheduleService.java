@@ -16,7 +16,15 @@ public class ScheduleService {
     @Autowired
     ScheduleDao scheduleDao;
 
-    public List<Schedule> getSchedules(){
+    public List<Schedule> getSchedules() {
         return scheduleDao.getSchedules();
+    }
+
+    public void addSchedule(Schedule schedule) {
+        scheduleDao.addSchedule(schedule);
+    }
+
+    public List<Schedule> getScheduleByTime(String time){
+        return scheduleDao.getScheduleByTime(time);
     }
 }

@@ -121,4 +121,21 @@ public class CourseDao {
             throw e;
         }
     }
+
+    public Course getCourseByName(String name){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Course course;
+
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from Customer where name=:name");
+            query.setString("name", name);
+            course = (Course) query.uniqueResult();
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+        return course;
+    }
 }

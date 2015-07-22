@@ -14,6 +14,15 @@ public class Schedule {
     private Employee employee;
     private Course course;
 
+    public Schedule() {
+    }
+
+    public Schedule(String time, Employee employee, Course course) {
+        this.time = time;
+        this.employee = employee;
+        this.course = course;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)

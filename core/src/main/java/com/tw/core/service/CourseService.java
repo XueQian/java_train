@@ -44,4 +44,8 @@ public class CourseService {
     public List<Course> getCourseByTime(String time){
         return courseDao.getCourseByTime(time);
     }
+
+    public Course getCourseByName(String name){
+        return courseDao.getCourseByName(name);
+    }
 }
