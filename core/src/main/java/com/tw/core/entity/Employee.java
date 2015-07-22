@@ -14,7 +14,7 @@ public class Employee {
     private String role;
     private String name;
     private String email;
-    private Set<Course> courses;
+    private Set<Schedule> schedules;
     private Set<Customer> customers;
 
     public Employee(String role, String name, String email) {
@@ -77,12 +77,12 @@ public class Employee {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
-    public Set<Course> getCourses() {
-        return courses;
+    public Set<Schedule> getSchedules() {
+        return schedules;
     }
 
-    public void setCourses(Set<Course> courses) {
-        this.courses = courses;
+    public void setSchedules(Set<Schedule> schedules) {
+        this.schedules = schedules;
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
