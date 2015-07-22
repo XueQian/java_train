@@ -40,4 +40,13 @@ public class ScheduleController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/schedules/creation", method = RequestMethod.GET)
+    public ModelAndView getAddCoursePage() {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("addSchedule");
+
+        return modelAndView;
+    }
+
 }
