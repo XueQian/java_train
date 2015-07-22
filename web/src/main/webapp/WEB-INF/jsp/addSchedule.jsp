@@ -59,7 +59,7 @@
         </div>
         <div class="panel-body">
             <form method="POST" action="">
-                <div class="col-md-6 col-md-offset-1 text-center input-group">
+                <div class="col-md-6 col-md-offset-1 input-group">
                     <span class="input-group-addon">课表名称</span>
                     <select name="courseId">
                         <c:forEach var="course" items="${courseList}">
@@ -67,7 +67,7 @@
                         </c:forEach>
                     </select>
                 </div>
-                <div class="col-md-6 col-md-offset-1 text-cente input-group">
+                <div class="col-md-6 col-md-offset-1 input-group">
                     <span class="input-group-addon">教练名称</span>
                     <select name="coachId">
                         <c:forEach var="coach" items="${coachList}">

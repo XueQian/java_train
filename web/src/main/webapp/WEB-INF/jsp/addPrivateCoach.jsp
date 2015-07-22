@@ -60,13 +60,12 @@
         </div>
         <div class="panel-body">
             <form method="POST" action="">
-
                 <div class="col-md-6 col-md-offset-1 text-center input-group">
                     <span class="input-group-addon">课表名称</span>
                     <input type="text" class="form-control"
                            aria-describedby="basic-addon1" name="course" value="私教" readonly="readonly">
                 </div>
-                <div class="col-md-6 col-md-offset-1 text-cente input-group">
+                <div class="col-md-6 col-md-offset-1 input-group">
                     <span class="input-group-addon">顾客名称</span>
                     <select name="customerId">
                         <c:forEach var="customer" items="${customerList}">
@@ -74,7 +73,7 @@
                         </c:forEach>
                     </select>
                 </div>
-                <div class="col-md-6 col-md-offset-1 text-cente input-group">
+                <div class="col-md-6 col-md-offset-1 input-group">
                     <span class="input-group-addon">教练名称</span>
                     <select name="coachId">
                         <c:forEach var="coach" items="${coachList}">

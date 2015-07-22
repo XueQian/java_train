@@ -12,6 +12,7 @@ public class Course {
 
     private int id;
     private String name;
+    private String description;
     private Set<Schedule> schedules;
     private Set<Customer> customers;
 
@@ -46,6 +47,14 @@ public class Course {
         this.name = name;
     }
 
+    @Column(name="description")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
     public Set<Schedule> getSchedules() {
