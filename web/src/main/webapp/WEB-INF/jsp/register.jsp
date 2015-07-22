@@ -21,24 +21,24 @@
 <body>
 
 <div class="container">
-    <div class="btn-toolbar bg-danger">
+    <%--<div class="btn-toolbar bg-danger">--%>
 
-        <nav class="navbar-default">
-            <ul class="nav nav-pills">
-                <li role="presentation"><a href="/web/courses"><h3>课程管理</h3></a></li>
-                <li role="presentation" class="active dropdown">
-                    <a href="/web/users" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-haspopup="true" aria-expanded="false"><h3>用户管理</h3> <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/web/users/creation"><h4>添加用户</h4></a></li>
-                    </ul>
-                </li>
-                <li role="presentation"><a href="/web/employees"><h3>雇员管理</h3></a></li>
-                <li role="presentation"><a href="/web/customers"><h3>顾客管理</h3></a></li>
-            </ul>
-        </nav>
+        <%--<nav class="navbar-default">--%>
+            <%--<ul class="nav nav-pills">--%>
+                <%--<li role="presentation"><a href="/web/courses"><h3>课程管理</h3></a></li>--%>
+                <%--<li role="presentation" class="active dropdown">--%>
+                    <%--<a href="/web/users" class="dropdown-toggle" data-toggle="dropdown" role="button"--%>
+                       <%--aria-haspopup="true" aria-expanded="false"><h3>用户管理</h3> <span class="caret"></span></a>--%>
+                    <%--<ul class="dropdown-menu">--%>
+                        <%--<li><a href="/web/users/creation"><h4>添加用户</h4></a></li>--%>
+                    <%--</ul>--%>
+                <%--</li>--%>
+                <%--<li role="presentation"><a href="/web/employees"><h3>雇员管理</h3></a></li>--%>
+                <%--<li role="presentation"><a href="/web/customers"><h3>顾客管理</h3></a></li>--%>
+            <%--</ul>--%>
+        <%--</nav>--%>
 
-    </div>
+    <%--</div>--%>
 
     <div class="panel panel-success well well-sm ">
 
