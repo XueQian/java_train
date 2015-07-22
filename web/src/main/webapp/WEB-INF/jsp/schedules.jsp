@@ -18,7 +18,7 @@
 
 <html>
 <head>
-    <title>SHOW COURSES!!</title>
+    <title>SHOW schedules!!</title>
 </head>
 <body>
 
@@ -28,11 +28,11 @@
         <nav class="navbar-default">
             <ul class="nav nav-pills">
                 <li role="presentation" class="active dropdown">
-                    <a href="/web/courses" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-haspopup="true" aria-expanded="false"><h3>课程管理</h3> <span class="caret"></span></a>
+                    <a href="/web/schedules" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false"><h3>课表管理</h3> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/web/courses/creation"><h4>添加公共课程</h4></a></li>
-                        <li><a href="/web/courses/private/creation"><h4>添加私教课程</h4></a></li>
+                        <li><a href="/web/schedules/creation"><h4>添加公共课</h4></a></li>
+                        <li><a href="/web/schedules/private/creation"><h4>添加私教课</h4></a></li>
                     </ul>
                 </li>
                 <li role="presentation"><a href="/web/users"><h3>用户管理</h3></a></li>
@@ -58,15 +58,15 @@
                 <th class="text-center"><h4>操作</h4></th>
             </tr>
 
-            <c:forEach items="${courses}" var="course">
+            <c:forEach items="${schedules}" var="schedule">
                 <tr>
-                    <td><h4><c:out value="${course.name}"/></h4></td>
-                    <td><h4><c:out value="${course.coach}"/></h4></td>
-                    <td><h4><c:out value="${course.time}"/></h4></td>
+                    <td><h4><c:out value="${schedule.name}"/></h4></td>
+                    <td><h4><c:out value="${schedule.coach}"/></h4></td>
+                    <td><h4><c:out value="${schedule.time}"/></h4></td>
                     <td><a role="button" class="btn btn-primary btn-lg"
-                           href="./courses/modification/<c:out value="${course.id}"/>">更新</a></td>
+                           href="./schedules/modification/<c:out value="${schedule.id}"/>">更新</a></td>
                     <td><a role="button" class="btn btn-danger btn-lg"
-                           href="./courses/deletion/<c:out value="${course.id}"/>">删除</a></td>
+                           href="./schedules/deletion/<c:out value="${schedule.id}"/>">删除</a></td>
                 </tr>
             </c:forEach>
 
