@@ -12,7 +12,7 @@
 </head>
 <body>
 <h1>该用户已存在私教!</h1>
-<a href="/web/courses">回到公共课主页</a>
-<a href="/web/courses/private/creation">重新添加私教</a>
+<a href="/web/schedules">回到公共课主页</a>
+<a href="/web/schedules/private/creation">重新添加私教</a>
 </body>
 </html>

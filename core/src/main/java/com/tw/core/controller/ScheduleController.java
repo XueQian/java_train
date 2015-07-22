@@ -1,10 +1,12 @@
 package com.tw.core.controller;
 
 import com.tw.core.entity.Course;
+import com.tw.core.entity.Customer;
 import com.tw.core.entity.Employee;
 import com.tw.core.entity.Schedule;
 import com.tw.core.model.ScheduleModel;
 import com.tw.core.service.CourseService;
+import com.tw.core.service.CustomerService;
 import com.tw.core.service.EmployeeService;
 import com.tw.core.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by qxue on 7/22/15.
@@ -32,6 +36,9 @@ public class ScheduleController {
 
     @Autowired
     CourseService courseService;
+
+    @Autowired
+    CustomerService customerService;
 
     @RequestMapping(value = "/schedules", method = RequestMethod.GET)
     public ModelAndView getSchedulePage() {
@@ -76,6 +83,54 @@ public class ScheduleController {
         Course course = courseService.getCourseById(coachId);
 
         Schedule schedule = new Schedule(time, employee, course);
+
+        scheduleService.addSchedule(schedule);
+
+        return new ModelAndView("redirect:/schedules");
+    }
+
+    @RequestMapping(value = "/schedules/private/creation", method = RequestMethod.GET)
+    public ModelAndView getAddPrivateCoachPage() {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("addPrivateCoach");
+
+        modelAndView.addObject("customerList", customerService.getCustomers());
+        modelAndView.addObject("coachList", employeeService.getEmployees());
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/schedules/private/creation", method = RequestMethod.POST)
+    public ModelAndView addPrivateCoach(@RequestParam int customerId, @RequestParam int coachId, @RequestParam String time) {
+        Customer customer = customerService.getCustomerById(customerId);
+
+        if (customer.getEmployee() != null) {
+
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("privateCoachIsExist");
+
+            return modelAndView;
+        }
+
+        if (!isCoachFree(coachId, time)) {
+
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("privateCoachIsBusy");
+            return modelAndView;
+        }
+
+        Employee employee = employeeService.getEmployeeById(coachId);
+
+        if (courseService.getCourseByName("私教") == null) {
+            courseService.addCourse(new Course("私教"));
+        }
+
+        customer.setEmployee(employee);
+
+        customerService.updateCustomer(customer);
+
+        Schedule schedule = new Schedule(time, employee, courseService.getCourseByName("私教"));
 
         scheduleService.addSchedule(schedule);
 

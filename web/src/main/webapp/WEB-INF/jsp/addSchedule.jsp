@@ -28,11 +28,11 @@
         <nav class="navbar-default">
             <ul class="nav nav-pills">
                 <li role="presentation" class="active dropdown">
-                    <a href="/web/courses" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                    <a href="/web/schedules" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false"><h3>课程管理</h3> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/web/courses/creation"><h4>添加公共课程</h4></a></li>
-                        <li><a href="/web/courses/private/creation"><h4>添加私教课程</h4></a></li>
+                        <li><a href="/web/schedules/creation"><h4>添加公共课程</h4></a></li>
+                        <li><a href="/web/schedules/private/creation"><h4>添加私教课程</h4></a></li>
                     </ul>
                 </li>
                 <li role="presentation"><a href="/web/users"><h3>用户管理</h3></a></li>

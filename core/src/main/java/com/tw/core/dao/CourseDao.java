@@ -128,7 +128,7 @@ public class CourseDao {
 
         try {
             session.beginTransaction();
-            Query query = session.createQuery("from Customer where name=:name");
+            Query query = session.createQuery("from Course where name=:name");
             query.setString("name", name);
             course = (Course) query.uniqueResult();
             session.getTransaction().commit();

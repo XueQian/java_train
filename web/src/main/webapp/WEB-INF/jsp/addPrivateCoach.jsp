@@ -29,11 +29,11 @@
         <nav class="navbar-default">
             <ul class="nav nav-pills">
                 <li role="presentation" class="active dropdown">
-                    <a href="/web/courses" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                    <a href="/web/schedules" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false"><h3>课程管理</h3> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/web/courses/creation"><h4>添加公共课程</h4></a></li>
-                        <li><a href="/web/courses/private/creation"><h4>添加私教课程</h4></a></li>
+                        <li><a href="/web/schedules/creation"><h4>添加公共课程</h4></a></li>
+                        <li><a href="/web/schedules/private/creation"><h4>添加私教课程</h4></a></li>
                     </ul>
                 </li>
                 <li role="presentation"><a href="/web/users"><h3>用户管理</h3></a></li>
@@ -68,28 +68,19 @@
                 </div>
                 <div class="col-md-6 col-md-offset-1 text-cente input-group">
                     <span class="input-group-addon">顾客名称</span>
-                    <input type="text" class="form-control" placeholder="customer"
-                           aria-describedby="basic-addon1" name="customer">
-                </div>
-                <div class="col-md-6 col-md-offset-1 text-center input-group">
-                    <span class="input-group-addon">性别</span>
-                    <input type="text" class="form-control" placeholder="sex"
-                           aria-describedby="basic-addon1" name="sex">
-                </div>
-                <div class="col-md-6 col-md-offset-1 text-cente input-group">
-                    <span class="input-group-addon">邮箱</span>
-                    <input type="text" class="form-control" placeholder="email"
-                           aria-describedby="basic-addon1" name="email">
-                </div>
-                <div class="col-md-6 col-md-offset-1 text-center input-group">
-                    <span class="input-group-addon">电话</span>
-                    <input type="text" class="form-control" placeholder="telephone"
-                           aria-describedby="basic-addon1" name="telephone">
+                    <select name="customerId">
+                        <c:forEach var="customer" items="${customerList}">
+                            <option value="<c:out value="${customer.id}"/>"><c:out value="${customer.name}"/></option>
+                        </c:forEach>
+                    </select>
                 </div>
                 <div class="col-md-6 col-md-offset-1 text-cente input-group">
                     <span class="input-group-addon">教练名称</span>
-                    <input type="text" class="form-control" placeholder="coach"
-                           aria-describedby="basic-addon1" name="coach">
+                    <select name="coachId">
+                        <c:forEach var="coach" items="${coachList}">
+                            <option value="<c:out value="${coach.id}"/>"><c:out value="${coach.name}"/></option>
+                        </c:forEach>
+                    </select>
                 </div>
                 <div class="col-md-6 col-md-offset-1 text-cente input-group">
                     <span class="input-group-addon">课程时间</span>
