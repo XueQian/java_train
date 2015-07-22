@@ -1,52 +1,45 @@
-//package com.tw.core.controller;
-//
-//import com.tw.core.entity.Course;
-//import com.tw.core.entity.Customer;
-//import com.tw.core.entity.Employee;
-//import com.tw.core.model.ScheduleModel;
-//import com.tw.core.service.CourseService;
-//import com.tw.core.service.CustomerService;
-//import com.tw.core.service.EmployeeService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.web.bind.annotation.*;
-//import org.springframework.web.servlet.ModelAndView;
-//
-//import java.util.*;
-//
-///**
-//* Created by qxue on 7/17/15.
-//*/
-//@RestController
-//@RequestMapping("/")
-//public class CourseController {
-//
-//    @Autowired
-//    private EmployeeService employeeService;
-//
-//    @Autowired
-//    private CourseService courseService;
-//
-//    @Autowired
-//    private CustomerService customerService;
-//
-//    @RequestMapping(value = "/courses", method = RequestMethod.GET)
-//    public ModelAndView getCoursePage() {
-//
-//        List<ScheduleModel> courseModels = new ArrayList<ScheduleModel>();
-//
-//        List<Course> courseList1 = courseService.getCourses();
-//
-//        for (Course course : courseList1) {
-//
-//            courseModels.add(new ScheduleModel(course.getName(), course.getEmployee().getName(), course.getTime()));
-//        }
-//
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("courses");
-//        modelAndView.addObject("courses", courseModels);
-//        return modelAndView;
-//    }
-//
+package com.tw.core.controller;
+
+import com.tw.core.entity.Course;
+import com.tw.core.entity.Customer;
+import com.tw.core.entity.Employee;
+import com.tw.core.model.ScheduleModel;
+import com.tw.core.service.CourseService;
+import com.tw.core.service.CustomerService;
+import com.tw.core.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.*;
+
+/**
+* Created by qxue on 7/17/15.
+*/
+@RestController
+@RequestMapping("/")
+public class CourseController {
+
+    @Autowired
+    private EmployeeService employeeService;
+
+    @Autowired
+    private CourseService courseService;
+
+    @Autowired
+    private CustomerService customerService;
+
+    @RequestMapping(value = "/courses", method = RequestMethod.GET)
+    public ModelAndView getCoursePage() {
+
+        List<Course> courseList = courseService.getCourses();
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("courses");
+        modelAndView.addObject("courses", courseList);
+        return modelAndView;
+    }
+
 //    @RequestMapping(value = "/courses/creation", method = RequestMethod.GET)
 //    public ModelAndView getAddCoursePage() {
 //
@@ -239,6 +232,6 @@
 //
 //        return flag;
 //    }
-//}
-//
-//
+}
+
+
