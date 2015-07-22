@@ -11,7 +11,7 @@
     <title>COACH IS BUSY!!</title>
 </head>
 <body>
-<h1>您所增加的课程教练时间冲突，请重新操作!</h1>
+<h1>您所增加的课表教练时间冲突，请重新操作!</h1>
 <a href="/web/schedules">回到课表主页</a>
 <a href="/web/schedules/creation">重新添加课表</a>
 </body>

@@ -27,7 +27,7 @@
 
         <nav class="navbar-default">
             <ul class="nav nav-pills">
-                <li role="presentation"><a href="/web/schedules"><h3>课程管理</h3></a></li>
+                <li role="presentation"><a href="/web/schedules"><h3>课表管理</h3></a></li>
                 <li role="presentation" class="active dropdown">
                     <a href="/web/users" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false"><h3>用户管理</h3> <span class="caret"></span></a>

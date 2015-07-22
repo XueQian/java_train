@@ -12,8 +12,8 @@
     <title>COACH IS BUSY!!</title>
 </head>
 <body>
-<h1>您所修改的课程教练时间冲突，请重新操作!</h1>
+<h1>您所修改的课表教练时间冲突，请重新操作!</h1>
 <a href="/web/schedules">回到公共课主页</a>
-<a href="/web/schedules/modification/<c:out value="${schedule.id}"/>">重新修改课程</a>
+<a href="/web/schedules/modification/<c:out value="${schedule.id}"/>">重新修改课表</a>
 </body>
 </html>

@@ -45,13 +45,13 @@
 
     <div class="panel panel-success well well-sm ">
         <div class="panel-heading">
-            <th><h3 id="itemList_category">健身房管理系统~课程</h3></th>
+            <th><h3 id="itemList_category">健身房管理系统~课表</h3></th>
         </div>
 
         <table class="table text-center table-responsive">
 
             <tr>
-                <th class="text-center"><h4>课程名称</h4></th>
+                <th class="text-center"><h4>课表名称</h4></th>
                 <th class="text-center"><h4>教练</h4></th>
                 <th class="text-center"><h4>时间</h4></th>
                 <th class="text-center"><h4>操作</h4></th>

@@ -29,10 +29,10 @@
             <ul class="nav nav-pills">
                 <li role="presentation" class="active dropdown">
                     <a href="/web/schedules" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-haspopup="true" aria-expanded="false"><h3>课程管理</h3> <span class="caret"></span></a>
+                       aria-haspopup="true" aria-expanded="false"><h3>课表管理</h3> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/web/schedules/creation"><h4>添加公共课程</h4></a></li>
-                        <li><a href="/web/schedules/private/creation"><h4>添加私教课程</h4></a></li>
+                        <li><a href="/web/schedules/creation"><h4>添加公共课表</h4></a></li>
+                        <li><a href="/web/schedules/private/creation"><h4>添加私教课表</h4></a></li>
                     </ul>
                 </li>
                 <li role="presentation"><a href="/web/users"><h3>用户管理</h3></a></li>
@@ -59,11 +59,8 @@
         </div>
         <div class="panel-body">
             <form method="POST" action="">
-
                 <div class="col-md-6 col-md-offset-1 text-center input-group">
-                    <span class="input-group-addon">课程名称</span>
-                    <%--<input type="text" class="form-control" placeholder="course"--%>
-                           <%--aria-describedby="basic-addon1" name="name">--%>
+                    <span class="input-group-addon">课表名称</span>
                     <select name="courseId">
                         <c:forEach var="course" items="${courseList}">
                             <option value="<c:out value="${course.id}"/>"><c:out value="${course.name}"/></option>
@@ -79,7 +76,7 @@
                     </select>
                 </div>
                 <div class="col-md-6 col-md-offset-1 text-cente input-group">
-                    <span class="input-group-addon">课程时间</span>
+                    <span class="input-group-addon">课表时间</span>
                     <input type="date" class="form-control"
                            aria-describedby="basic-addon1" name="time">
                 </div>
