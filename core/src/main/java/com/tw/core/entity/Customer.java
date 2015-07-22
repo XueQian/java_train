@@ -38,6 +38,14 @@ public class Customer {
         this.employee = employee;
     }
 
+    public Customer(String name, String sex, String email, String telephone, Employee employee) {
+        this.name = name;
+        this.sex = sex;
+        this.email = email;
+        this.telephone = telephone;
+        this.employee = employee;
+    }
+
     public Customer(){
 
     }
@@ -89,7 +97,7 @@ public class Customer {
         this.telephone = telephone;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")
     public Employee getEmployee() {
         return employee;

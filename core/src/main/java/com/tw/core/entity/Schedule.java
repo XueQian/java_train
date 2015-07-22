@@ -54,7 +54,7 @@ public class Schedule {
         this.time = time;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")
     public Employee getEmployee() {
         return employee;

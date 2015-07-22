@@ -40,7 +40,7 @@ public class UserController {
         }
         if (IsPasswordCorrect(name, password)) {
 
-            return new ModelAndView("redirect:" + "/courses");
+            return new ModelAndView("redirect:" + "/schedules");
         } else {
 
             return new ModelAndView("redirect:/");
@@ -82,7 +82,7 @@ public class UserController {
             }
 
             userService.addUser(user);
-            return new ModelAndView("redirect:/courses");
+            return new ModelAndView("redirect:/schedules");
         }
     }
 

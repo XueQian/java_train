@@ -2,6 +2,7 @@ package com.tw.core.controller;
 
 import com.tw.core.entity.Customer;
 import com.tw.core.entity.Employee;
+import com.tw.core.entity.User;
 import com.tw.core.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,11 +43,11 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/customers/modification/{id}", method = RequestMethod.POST)
-    public ModelAndView updateCustomer(@PathVariable int id, @RequestParam String name,@RequestParam String sex,@RequestParam String email,@RequestParam String telephone) {
+    public ModelAndView updateCustomer(@PathVariable int id, @RequestParam String name, @RequestParam String sex, @RequestParam String email, @RequestParam String telephone) {
 
         Employee employee = customerService.getCustomerById(id).getEmployee();
 
-        Customer customer = new Customer(id, name,sex,email,telephone, employee);
+        Customer customer = new Customer(id, name, sex, email, telephone, employee);
 
         customerService.updateCustomer(customer);
         return new ModelAndView("redirect:/customers");
@@ -59,4 +60,41 @@ public class CustomerController {
 
         return new ModelAndView("redirect:/customers");
     }
+
+    @RequestMapping(value = "/customers/creation", method = RequestMethod.GET)
+    public ModelAndView getAddUserPage() {
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("addCustomer");
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/customers/creation", method = RequestMethod.POST)
+    public ModelAndView addUser(@RequestParam String name, @RequestParam String sex, @RequestParam String email, @RequestParam String telephone) {
+
+        if (isCustomerExist(name)) {
+
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("customerIsExistWhenAddCustomer");
+
+            return modelAndView;
+        }
+
+        Customer customer = new Customer(name, sex, email, telephone, null);
+
+        customerService.addCustomer(customer);
+        return new ModelAndView("redirect:/customers");
+    }
+
+    private boolean isCustomerExist(String name) {
+
+        boolean flag = true;
+
+        if (customerService.getCustomerByName(name) == null) {
+            flag = false;
+        }
+        return flag;
+    }
+
 }

@@ -35,7 +35,7 @@
                     <a href="/web/customers" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false"><h3>顾客管理</h3> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/web/customers/creation"><h4>添加顾客</h4></a></li>
+                        <li><a href="/web/schedules/private/creation"><h4>添加顾客</h4></a></li>
                     </ul>
                 </li>
             </ul>
@@ -50,8 +50,8 @@
                 <div class="col-md-6">
                     <table>
                         <tr>
-                            <th><h2 id="goodsList_category">修改顾客信息</h2></th>
-                            <th><h4 class="text-right">MODIFY CUSTOMER INFO</h4></th>
+                            <th><h2 id="goodsList_category">添加顾客</h2></th>
+                            <th><h4 class="text-right">ADD CUSTOMER</h4></th>
                         </tr>
                     </table>
                 </div>
@@ -63,22 +63,22 @@
                 <div class="col-md-6 col-md-offset-1 text-center input-group">
                     <span class="input-group-addon">顾客名称</span>
                     <input type="text" class="form-control"
-                           aria-describedby="basic-addon1" name="name" value="<c:out value="${customer.name}" />">
+                           aria-describedby="basic-addon1" name="name" placeholder="name"/>
                 </div>
                 <div class="col-md-6 col-md-offset-1 text-cente input-group">
                     <span class="input-group-addon">性别</span>
                     <input type="text" class="form-control"
-                           aria-describedby="basic-addon1" name="sex" value="<c:out value="${customer.sex}" />">
+                           aria-describedby="basic-addon1" name="sex" placeholder="sex"/>
                 </div>
                 <div class="col-md-6 col-md-offset-1 text-cente input-group">
                     <span class="input-group-addon">邮箱</span>
                     <input type="text" class="form-control"
-                           aria-describedby="basic-addon1" name="email" value="<c:out value="${customer.email}" />">
+                           aria-describedby="basic-addon1" name="email" placeholder="email"/>
                 </div>
                 <div class="col-md-6 col-md-offset-1 text-cente input-group">
                     <span class="input-group-addon">电话</span>
                     <input type="text" class="form-control"
-                           aria-describedby="basic-addon1" name="telephone" value="<c:out value="${customer.telephone}" />">
+                           aria-describedby="basic-addon1" name="telephone" placeholder="telephone"/>
                 </div>
                 <div class="col-md-6 col-md-offset-1 text-center">
                     <input class="bg-success btn btn-primary btn-lg " type="submit" value="保存">

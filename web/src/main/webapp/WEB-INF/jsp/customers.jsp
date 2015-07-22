@@ -34,7 +34,7 @@
                     <a href="/web/customers" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false"><h3>顾客管理</h3> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/web/schedules/private/creation"><h4>添加顾客</h4></a></li>
+                        <li><a href="/web/customers/creation"><h4>添加顾客</h4></a></li>
                     </ul>
                 </li>
             </ul>
