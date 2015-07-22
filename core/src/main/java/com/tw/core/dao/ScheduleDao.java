@@ -88,4 +88,18 @@ public class ScheduleDao {
             throw e;
         }
     }
+
+    public void deleteSchedule(int id) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            Schedule schedule = (Schedule) session.load(Schedule.class, id);
+            session.delete(schedule);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
 }

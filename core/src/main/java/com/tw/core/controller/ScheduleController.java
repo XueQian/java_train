@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 /**
  * Created by qxue on 7/22/15.
  */
@@ -167,6 +164,22 @@ public class ScheduleController {
         Schedule schedule = new Schedule(id,time,employee,course);
 
         scheduleService.updateSchedule(schedule);
+        return new ModelAndView("redirect:/schedules");
+    }
+
+    @RequestMapping(value = "/schedules/deletion/{id}", method = RequestMethod.GET)
+    public ModelAndView deleteSchedule(@PathVariable int id) {
+
+        Employee employee = scheduleService.getScheduleById(id).getEmployee();
+
+        Customer customer = customerService.getCustomerByEmployee(employee);
+
+        if(employee != null && customer.getEmployee()!= null){
+            customer = new Customer(customer.getId(),customer.getName(),customer.getSex(),customer.getEmail(),customer.getTelephone(),null);
+            customerService.updateCustomer(customer);
+        }
+
+        scheduleService.deleteSchedule(id);
         return new ModelAndView("redirect:/schedules");
     }
 
