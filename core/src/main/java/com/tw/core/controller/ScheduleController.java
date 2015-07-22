@@ -67,7 +67,7 @@ public class ScheduleController {
         if (!isCoachFree(coachId, time)) {
 
             ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("addCourseCoachIsBusy");
+            modelAndView.setViewName("coachIsBusyWhenAddSchedule");
             return modelAndView;
         }
 
