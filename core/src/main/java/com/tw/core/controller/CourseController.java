@@ -38,9 +38,7 @@ public class CourseController {
 
         for (Course course : courseList1) {
 
-            Course course1 = employeeService.getEmployeeByCourse(course.getId());
-
-            courseModels.add(new CourseModel(course.getId(), course.getName(), course1.getEmployee().getName(), course1.getTime()));
+            courseModels.add(new CourseModel(course.getId(), course.getName(), course.getEmployee().getName(), course.getTime()));
         }
 
         ModelAndView modelAndView = new ModelAndView();
