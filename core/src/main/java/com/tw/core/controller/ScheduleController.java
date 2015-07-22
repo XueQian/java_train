@@ -10,10 +10,7 @@ import com.tw.core.service.CustomerService;
 import com.tw.core.service.EmployeeService;
 import com.tw.core.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -48,7 +45,7 @@ public class ScheduleController {
         List<Schedule> scheduleList = scheduleService.getSchedules();
 
         for (Schedule schedule : scheduleList) {
-            scheduleModels.add(new ScheduleModel(schedule.getCourse().getName(), schedule.getEmployee().getName(), schedule.getTime()));
+            scheduleModels.add(new ScheduleModel(schedule.getId(),schedule.getCourse().getName(), schedule.getEmployee().getName(), schedule.getTime()));
         }
 
         ModelAndView modelAndView = new ModelAndView();
@@ -134,6 +131,42 @@ public class ScheduleController {
 
         scheduleService.addSchedule(schedule);
 
+        return new ModelAndView("redirect:/schedules");
+    }
+
+    @RequestMapping(value = "/schedules/modification/{id}", method = RequestMethod.GET)
+    public ModelAndView getUpdateSchedulePage(@PathVariable int id) {
+
+        Schedule schedule = scheduleService.getScheduleById(id);
+
+        ScheduleModel scheduleModel = new ScheduleModel(schedule.getCourse().getName(),schedule.getEmployee().getName(),schedule.getTime());
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("updateSchedule");
+        modelAndView.addObject("schedule", scheduleModel);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/schedules/modification/{id}", method = RequestMethod.POST)
+    public ModelAndView updateSchedule(@PathVariable int id, @RequestParam String name, @RequestParam String coach, @RequestParam String time) {
+
+        Employee employee = employeeService.getEmployeeByName(coach);
+
+        if(!isCoachFree(employee.getId(),time)){
+
+            Schedule schedule = new Schedule(id);
+
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("coachIsBusyWhenUpdateSchedule");
+            modelAndView.addObject("schedule", schedule);
+            return modelAndView;
+        }
+
+        Course course = courseService.getCourseByName(name);
+
+        Schedule schedule = new Schedule(id,time,employee,course);
+
+        scheduleService.updateSchedule(schedule);
         return new ModelAndView("redirect:/schedules");
     }
 

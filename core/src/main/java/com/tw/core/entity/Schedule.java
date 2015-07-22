@@ -17,7 +17,18 @@ public class Schedule {
     public Schedule() {
     }
 
+    public Schedule(int id) {
+        this.id = id;
+    }
+
     public Schedule(String time, Employee employee, Course course) {
+        this.time = time;
+        this.employee = employee;
+        this.course = course;
+    }
+
+    public Schedule(int id, String time, Employee employee, Course course) {
+        this.id = id;
         this.time = time;
         this.employee = employee;
         this.course = course;

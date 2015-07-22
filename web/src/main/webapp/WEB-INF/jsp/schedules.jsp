@@ -61,7 +61,7 @@
             <c:forEach items="${schedules}" var="schedule">
                 <tr>
                     <td><h4><c:out value="${schedule.name}"/></h4></td>
-                    <td><h4><c:out value="${schedule.coach}"/></h4></td>
+                    <td><h4><c:out value="${schedule.employee}"/></h4></td>
                     <td><h4><c:out value="${schedule.time}"/></h4></td>
                     <td><a role="button" class="btn btn-primary btn-lg"
                            href="./schedules/modification/<c:out value="${schedule.id}"/>">更新</a></td>

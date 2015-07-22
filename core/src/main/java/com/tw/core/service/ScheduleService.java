@@ -27,4 +27,12 @@ public class ScheduleService {
     public List<Schedule> getScheduleByTime(String time){
         return scheduleDao.getScheduleByTime(time);
     }
+
+    public Schedule getScheduleById(int id){
+        return scheduleDao.getScheduleById(id);
+    }
+
+    public void updateSchedule(Schedule schedule){
+        scheduleDao.updateSchedule(schedule);
+    }
 }

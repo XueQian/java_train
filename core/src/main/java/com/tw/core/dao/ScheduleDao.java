@@ -60,4 +60,32 @@ public class ScheduleDao {
 
         return scheduleList;
     }
+
+    public Schedule getScheduleById(int id) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Schedule schedule;
+
+        try {
+            session.beginTransaction();
+            schedule = (Schedule) session.get(Schedule.class, id);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+        return schedule;
+    }
+
+    public void updateSchedule(Schedule schedule) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            session.update(schedule);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
 }

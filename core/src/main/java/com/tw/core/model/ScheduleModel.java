@@ -39,11 +39,11 @@ public class ScheduleModel {
         this.name = name;
     }
 
-    public String getCoach() {
+    public String getEmployee() {
         return employee;
     }
 
-    public void setCoach(String employee) {
+    public void setEmployee(String employee) {
         this.employee = employee;
     }
 

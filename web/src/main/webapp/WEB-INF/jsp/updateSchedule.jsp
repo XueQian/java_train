@@ -51,7 +51,7 @@
                 <div class="col-md-6">
                     <table>
                         <tr>
-                            <th><h2 id="goodsList_category">修改公共课</h2></th>
+                            <th><h2>修改公共课</h2></th>
                             <th><h4 class="text-right">MODIFY COURSE</h4></th>
                         </tr>
                     </table>
@@ -64,17 +64,17 @@
                 <div class="col-md-6 col-md-offset-1 text-center input-group">
                     <span class="input-group-addon">课程名称</span>
                     <input type="text" class="form-control"
-                           aria-describedby="basic-addon1" name="name" value="<c:out value="${course.name}" />">
+                           aria-describedby="basic-addon1" name="name" value="<c:out value="${schedule.name}"/>" readonly="readonly">
                 </div>
                 <div class="col-md-6 col-md-offset-1 text-cente input-group">
                     <span class="input-group-addon">教练名称</span>
                     <input type="text" class="form-control"
-                           aria-describedby="basic-addon1" name="coach" value="<c:out value="${course.coach}" />">
+                           aria-describedby="basic-addon1" name="coach" value="<c:out value="${schedule.employee}" />" readonly="readonly">
                 </div>
                 <div class="col-md-6 col-md-offset-1 text-cente input-group">
                     <span class="input-group-addon">课程时间</span>
                     <input type="date" class="form-control"
-                           aria-describedby="basic-addon1" name="time" value="<c:out value="${course.time}" />">
+                           aria-describedby="basic-addon1" name="time" value="<c:out value="${schedule.time}" />">
                 </div>
                 <div class="col-md-6 col-md-offset-1 text-center">
                     <input class="bg-success btn btn-primary btn-lg " type="submit" value="保存">
