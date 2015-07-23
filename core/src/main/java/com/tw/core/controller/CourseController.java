@@ -49,21 +49,14 @@ public class CourseController {
 
         return new ModelAndView("redirect:/courses");
     }
-//
-//    @RequestMapping(value = "/courses/deletion/{id}", method = RequestMethod.GET)
-//    public ModelAndView deleteCourse(@PathVariable int id) {
-//
-//        Employee employee = courseService.getCourseById(id).getEmployee();
-//
-//        if (employee != null && customerService.getCustomerByEmployee(employee) != null) {
-//
-//            customerService.deleteCustomer(employee);
-//        }
-//
-//        courseService.deleteCourse(id);
-//        return new ModelAndView("redirect:/courses");
-//    }
-//
+
+    @RequestMapping(value = "/courses/deletion/{id}", method = RequestMethod.GET)
+    public ModelAndView deleteCourse(@PathVariable int id) {
+
+        courseService.deleteCourse(id);
+        return new ModelAndView("redirect:/courses");
+    }
+
 //    @RequestMapping(value = "/courses/modification/{id}", method = RequestMethod.GET)
 //    public ModelAndView getUpdateCoursePage(@PathVariable int id) {
 //
