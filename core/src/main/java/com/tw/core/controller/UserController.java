@@ -69,7 +69,7 @@ public class UserController {
 
             Employee employee = new Employee(role, employeeName, email);
 
-            if (!isEmployeeExist(userName)) {
+            if (!isEmployeeExist(employeeName)) {
 
                 employeeService.addEmployee(employee);
             }
@@ -136,6 +136,7 @@ public class UserController {
         if (employeeService.getEmployeeByName(name) == null) {
             flag = false;
         }
+
         return flag;
     }
 
