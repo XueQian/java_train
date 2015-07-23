@@ -97,7 +97,7 @@ public class Customer {
         this.telephone = telephone;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
     public Employee getEmployee() {
         return employee;
@@ -107,7 +107,7 @@ public class Customer {
         this.employee = employee;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
     @JoinTable(name = "customer_course", joinColumns = {@JoinColumn(name = "customer_id")},
             inverseJoinColumns = {@JoinColumn(name = "course_id")})
     public Set<Course> getCourses() {

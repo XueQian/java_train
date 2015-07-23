@@ -2,20 +2,13 @@ package com.tw.core.dao;
 
 import com.tw.core.entity.Course;
 import com.tw.core.entity.Employee;
-import com.tw.core.entity.User;
 import com.tw.core.util.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.transform.RootEntityResultTransformer;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-/**
- * Created by qxue on 7/16/15.
- */
 @Repository
 public class CourseDao {
 

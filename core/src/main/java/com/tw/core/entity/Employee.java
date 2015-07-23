@@ -76,7 +76,7 @@ public class Employee {
         this.email = email;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee",cascade=CascadeType.ALL)
     public Set<Schedule> getSchedules() {
         return schedules;
     }
@@ -85,7 +85,7 @@ public class Employee {
         this.schedules = schedules;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee",cascade=CascadeType.ALL)
     public Set<Customer> getCustomers() {
         return customers;
     }

@@ -1,6 +1,5 @@
 package com.tw.core.controller;
 
-import com.tw.core.entity.Customer;
 import com.tw.core.entity.Employee;
 import com.tw.core.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;

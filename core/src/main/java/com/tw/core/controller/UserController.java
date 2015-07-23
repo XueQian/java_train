@@ -75,6 +75,8 @@ public class UserController {
             }
 
             User user = null;
+
+            employee = employeeService.getEmployeeByName(employeeName);
             try {
                 user = new User(userName, MD5Util.getMD5(password), employee);
             } catch (Exception e) {
@@ -82,7 +84,7 @@ public class UserController {
             }
 
             userService.addUser(user);
-            return new ModelAndView("redirect:/schedules");
+            return new ModelAndView("redirect:/users");
         }
     }
 

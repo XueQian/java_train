@@ -56,7 +56,7 @@ public class Course {
         this.description = description;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "course",cascade=CascadeType.ALL)
     public Set<Schedule> getSchedules() {
         return schedules;
     }
@@ -65,7 +65,7 @@ public class Course {
         this.schedules = schedules;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "courses")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "courses",cascade=CascadeType.ALL)
     public Set<Customer> getCustomers() {
         return customers;
     }
