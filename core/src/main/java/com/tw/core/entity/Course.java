@@ -14,7 +14,6 @@ public class Course {
     private String name;
     private String description;
     private Set<Schedule> schedules;
-    private Set<Customer> customers;
 
     public Course() {
     }
@@ -52,7 +51,7 @@ public class Course {
         this.name = name;
     }
 
-    @Column(name="description")
+    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -61,22 +60,13 @@ public class Course {
         this.description = description;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "course",cascade=CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "course", cascade = CascadeType.ALL)
     public Set<Schedule> getSchedules() {
         return schedules;
     }
 
     public void setSchedules(Set<Schedule> schedules) {
         this.schedules = schedules;
-    }
-
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "courses",cascade=CascadeType.ALL)
-    public Set<Customer> getCustomers() {
-        return customers;
-    }
-
-    public void setCustomers(Set<Customer> customers) {
-        this.customers = customers;
     }
 }
 

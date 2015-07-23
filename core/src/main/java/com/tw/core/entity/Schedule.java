@@ -1,6 +1,7 @@
 package com.tw.core.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by qxue on 7/22/15.
@@ -13,6 +14,7 @@ public class Schedule {
     private String time;
     private Employee employee;
     private Course course;
+    private Set<Customer> customers;
 
     public Schedule() {
     }
@@ -72,5 +74,14 @@ public class Schedule {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "schedules",cascade=CascadeType.ALL)
+    public Set<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
     }
 }

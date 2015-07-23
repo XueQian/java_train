@@ -19,8 +19,7 @@ public class Customer {
     private String email;
     private String telephone;
     private Employee employee;
-    private Set<Course> courses;
-
+    private Set<Schedule> schedules;
 
     public Customer(String name, String sex, String email, String telephone) {
         this.name = name;
@@ -46,7 +45,7 @@ public class Customer {
         this.employee = employee;
     }
 
-    public Customer(){
+    public Customer() {
 
     }
 
@@ -79,7 +78,7 @@ public class Customer {
         this.sex = sex;
     }
 
-    @Column(name="email")
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -107,14 +106,14 @@ public class Customer {
         this.employee = employee;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
-    @JoinTable(name = "customer_course", joinColumns = {@JoinColumn(name = "customer_id")},
-            inverseJoinColumns = {@JoinColumn(name = "course_id")})
-    public Set<Course> getCourses() {
-        return courses;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "customer_schedule", joinColumns = {@JoinColumn(name = "customer_id")},
+            inverseJoinColumns = {@JoinColumn(name = "schedule_id")})
+    public Set<Schedule> getSchedules() {
+        return schedules;
     }
 
-    public void setCourses(Set<Course> courses) {
-        this.courses = courses;
+    public void setSchedules(Set<Schedule> schedules) {
+        this.schedules = schedules;
     }
 }
