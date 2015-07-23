@@ -54,6 +54,14 @@
 
 .tableCss {
     margin-left: 134px;
+    margin-top: 30px;
+    width: 78%;
+    box-shadow: -1px 0px 20px rgba(86, 242, 9, 0.61);
+    border: 1px solid #4ac7e7;
+}
+
+.formCss {
+    margin-left: 134px;
     margin-top: 120px;
     width: 78%;
     box-shadow: -1px 0px 20px rgba(86, 242, 9, 0.61);
@@ -165,5 +173,28 @@ tr:nth-child(odd) td {
     border-top-color: #1b435e;
     background: #1b435e;
 }
+
+input, text {
+    padding: 9px;
+    border: solid 1px #E5E5E5;
+    font: normal 13px/100% Verdana, Tahoma, sans-serif;
+    width: 321px;
+    box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+    margin-top: 15px;
+}
+
+text {
+    width: 400px;
+    max-width: 400px;
+    height: 150px;
+    line-height: 150%;
+}
+
+input:hover, text:hover,
+input:focus, text:focus {
+    border-color: #23c97d;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+}
+
 
 

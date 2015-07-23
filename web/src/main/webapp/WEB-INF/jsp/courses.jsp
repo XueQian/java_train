@@ -49,6 +49,20 @@
     </ul>
 </div>
 
+<div class="formCss">
+    <form method="POST" action="" class="form">
+
+        课程名称 : <label>
+        <input id="input1" type="text" name="name"/>
+    </label>
+        描述 : <label>
+        <input id="input2"
+               type="text" name="description"/>
+    </label>
+        <input id="submit" type="submit" value="Submit"/>
+    </form>
+</div>
+
 <div class="tableCss">
     <table>
         <thead>
@@ -64,16 +78,14 @@
             <tr>
                 <td><c:out value="${course.name}"/></td>
                 <td><c:out value="${course.description}"/></td>
-                <td id="update"><a id="button1" href="./courses/modification/<c:out value="${course.id}"/>">Update</a></td>
+                <td id="update"><a id="button1" href="./courses/modification/<c:out value="${course.id}"/>">Update</a>
+                </td>
                 <td id="delete"><a id="button2" href="./courses/deletion/<c:out value="${course.id}"/>">Delete</a></td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
-
-
-
 
 </body>
 </html>

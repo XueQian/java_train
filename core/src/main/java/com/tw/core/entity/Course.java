@@ -23,6 +23,11 @@ public class Course {
         this.name = name;
     }
 
+    public Course(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public Course(int id) {
         this.id = id;
     }

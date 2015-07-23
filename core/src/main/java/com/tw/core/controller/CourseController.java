@@ -40,45 +40,15 @@ public class CourseController {
         return modelAndView;
     }
 
-//    @RequestMapping(value = "/courses/creation", method = RequestMethod.GET)
-//    public ModelAndView getAddCoursePage() {
-//
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("addCourse");
-//
-//        return modelAndView;
-//    }
-//
-//    @RequestMapping(value = "/courses/creation", method = RequestMethod.POST)
-//    public ModelAndView addCourse(@RequestParam String name, @RequestParam String coach, @RequestParam String time) {
-//
-//        Employee employee = new Employee(coach, "coach");
-//
-//        if (isCoachExist(coach)) {
-//
-//            employee.setId(employeeService.getEmployeeByName(coach).getId());
-//
-//            if (!isCoachFree(coach, time)) {
-//
-//                ModelAndView modelAndView = new ModelAndView();
-//                modelAndView.setViewName("addCourseCoachIsBusy");
-//                return modelAndView;
-//            }
-//        } else {
-//
-//            courseService.addEmployeeCourse(employee);
-//        }
-//
-//        Course course = new Course(name, employee, time);
-//
-//        Set<Course> courseSet = new HashSet<Course>();
-//        courseSet.add(course);
-//        employee.setCourses(courseSet);
-//
-//        courseService.addCourse(course);
-//
-//        return new ModelAndView("redirect:/courses");
-//    }
+    @RequestMapping(value = "/courses", method = RequestMethod.POST)
+    public ModelAndView addCourse(@RequestParam String name, @RequestParam String description) {
+
+        Course course = new Course(name,description);
+
+        courseService.addCourse(course);
+
+        return new ModelAndView("redirect:/courses");
+    }
 //
 //    @RequestMapping(value = "/courses/deletion/{id}", method = RequestMethod.GET)
 //    public ModelAndView deleteCourse(@PathVariable int id) {
