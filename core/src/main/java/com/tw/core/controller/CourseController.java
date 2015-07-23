@@ -58,7 +58,7 @@ public class CourseController {
     }
 
 //    @RequestMapping(value = "/courses/modification/{id}", method = RequestMethod.GET)
-//    public ModelAndView getUpdateCoursePage(@PathVariable int id) {
+//    public ModelAndView getUpdate`CoursePage(@PathVariable int id) {
 //
 //        Course course = courseService.getCourseById(id);
 //        ScheduleModel courseModel = new ScheduleModel(course.getName(), course.getEmployee().getName(), course.getTime());
