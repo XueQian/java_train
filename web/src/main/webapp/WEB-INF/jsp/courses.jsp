@@ -10,7 +10,7 @@
 
 <html>
 <head>
-    <link href="./css/navigationBar.css" rel="stylesheet" type="text/css">
+    <link href="./css/courses.css" rel="stylesheet" type="text/css">
     <title>SHOW COURSES!!</title>
 </head>
 <body>
