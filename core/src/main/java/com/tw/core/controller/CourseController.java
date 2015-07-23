@@ -57,144 +57,30 @@ public class CourseController {
         return new ModelAndView("redirect:/courses");
     }
 
-//    @RequestMapping(value = "/courses/modification/{id}", method = RequestMethod.GET)
-//    public ModelAndView getUpdate`CoursePage(@PathVariable int id) {
-//
-//        Course course = courseService.getCourseById(id);
-//        ScheduleModel courseModel = new ScheduleModel(course.getName(), course.getEmployee().getName(), course.getTime());
-//
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("updateCourse");
-//        modelAndView.addObject("course", courseModel);
-//        return modelAndView;
-//    }
-//
-//    @RequestMapping(value = "/courses/modification/{id}", method = RequestMethod.POST)
-//    public ModelAndView updateCourse(@PathVariable int id, @RequestParam String name, @RequestParam String coach, @RequestParam String time) {
-//
-//        Employee employee = new Employee(coach, "coach");
-//
-//        if (isCoachExist(coach)) {
-//            employee.setId(employeeService.getEmployeeByName(coach).getId());
-//
-//            if (!isCoachFree(coach, time)) {
-//
-//                Course course = new Course(id);
-//
-//                ModelAndView modelAndView = new ModelAndView();
-//                modelAndView.setViewName("updateCourseCoachIsBusy");
-//                modelAndView.addObject("course", course);
-//                return modelAndView;
-//            }
-//        } else {
-//            courseService.addEmployeeCourse(employee);
-//        }
-//
-//        Course course = new Course(id, name, employee, time);
-//
-//        Set<Course> courseSet = new HashSet<Course>();
-//        courseSet.add(course);
-//        employee.setCourses(courseSet);
-//        courseService.updateCourse(course);
-//
-//        return new ModelAndView("redirect:/courses");
-//    }
-//
-//    @RequestMapping(value = "/courses/private/creation", method = RequestMethod.GET)
-//    public ModelAndView getAddPrivateCoachPage() {
-//
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("addPrivateCoach");
-//
-//        return modelAndView;
-//    }
-//
-//    @RequestMapping(value = "/courses/private/creation", method = RequestMethod.POST)
-//    public ModelAndView addPrivateCoach(@RequestParam String customer,@RequestParam String sex,@RequestParam String email,@RequestParam String telephone, @RequestParam String course, @RequestParam String coach, @RequestParam String time) {
-//
-//        if (isCustomerExist(customer)) {
-//            ModelAndView modelAndView = new ModelAndView();
-//            modelAndView.setViewName("customerExist");
-//
-//            return modelAndView;
-//        }
-//
-//        Customer customerObject = new Customer(customer,sex,email,telephone);
-//
-//        Employee employee = new Employee(coach, "coach");
-//
-//        if (isCoachExist(coach)) {
-//            employee.setId(employeeService.getEmployeeByName(coach).getId());
-//
-//            if (!isCoachFree(coach, time)) {
-//
-//                ModelAndView modelAndView = new ModelAndView();
-//                modelAndView.setViewName("privateCoachIsBusy");
-//                return modelAndView;
-//            }
-//
-//        } else {
-//            courseService.addEmployeeCourse(employee);
-//        }
-//
-//        Course courseObject = new Course(course, employee, time);
-//
-//        Set<Customer> customerSet = new HashSet<Customer>();
-//        customerSet.add(customerObject);
-//
-//        courseObject.setCustomers(customerSet);
-//
-//        courseService.addCourse(courseObject);
-//
-//        Set<Course> courseSet = new HashSet<Course>();
-//        courseSet.add(courseObject);
-//
-//        customerObject.setCourses(courseSet);
-//        customerObject.setEmployee(employee);
-//
-//        customerService.addCustomer(customerObject);
-//        return new ModelAndView("redirect:/courses");
-//    }
-//
-//    private boolean isCoachExist(String coachName) {
-//
-//        boolean flag = true;
-//
-//        if (employeeService.getEmployeeByName(coachName) == null) {
-//            flag = false;
-//        }
-//        return flag;
-//    }
-//
-//    private boolean isCustomerExist(String name) {
-//
-//        boolean flag = true;
-//
-//        if (customerService.getCustomerByName(name) == null) {
-//            flag = false;
-//        }
-//
-//        return flag;
-//    }
-//
-//    private boolean isCoachFree(String coachName, String time) {
-//
-//        boolean flag = true;
-//
-//        List<Course> courseList = courseService.getCourseByTime(time);
-//
-//        List<String> employeeNameList = new ArrayList<String>();
-//
-//        for (Course course : courseList) {
-//            employeeNameList.add(courseList.indexOf(course), course.getEmployee().getName());
-//        }
-//
-//        if (employeeNameList.contains(coachName)) {
-//            flag = false;
-//        }
-//
-//        return flag;
-//    }
+    @RequestMapping(value = "/courses/modification/{id}", method = RequestMethod.GET)
+    public ModelAndView getUpdateCoursePage(@PathVariable int id) {
+
+        Course course = courseService.getCourseById(id);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("updateCourse");
+        modelAndView.addObject("course", course);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/courses/modification/{id}", method = RequestMethod.POST)
+    public ModelAndView updateCourse(@PathVariable int id, @RequestParam String name,@RequestParam String description) {
+
+        if(courseService.getCourseByName(name)!= null){
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("");
+            return modelAndView;
+        }
+
+        courseService.updateCourse(new Course(id,name,description));
+
+        return new ModelAndView("redirect:/courses");
+    }
 }
 
 
