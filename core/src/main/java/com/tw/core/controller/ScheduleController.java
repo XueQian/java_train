@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 /**
  * Created by qxue on 7/22/15.
  */
@@ -42,7 +45,7 @@ public class ScheduleController {
         List<Schedule> scheduleList = scheduleService.getSchedules();
 
         for (Schedule schedule : scheduleList) {
-            scheduleModels.add(new ScheduleModel(schedule.getId(),schedule.getCourse().getName(), schedule.getEmployee().getName(), schedule.getTime()));
+            scheduleModels.add(new ScheduleModel(schedule.getId(), schedule.getCourse().getName(), schedule.getEmployee().getName(), schedule.getTime()));
         }
 
         ModelAndView modelAndView = new ModelAndView();
@@ -72,9 +75,9 @@ public class ScheduleController {
             return modelAndView;
         }
 
-        Employee employee = employeeService.getEmployeeById(courseId);
+        Employee employee = employeeService.getEmployeeById(coachId);
 
-        Course course = courseService.getCourseById(coachId);
+        Course course = courseService.getCourseById(courseId);
 
         Schedule schedule = new Schedule(time, employee, course);
 
@@ -122,11 +125,15 @@ public class ScheduleController {
 
         customer.setEmployee(employee);
 
-        customerService.updateCustomer(customer);
-
         Schedule schedule = new Schedule(time, employee, courseService.getCourseByName("私教"));
 
-        scheduleService.addSchedule(schedule);
+        Set<Schedule> scheduleSet = new HashSet<Schedule>();
+        scheduleSet.add(schedule);
+
+        customer.setSchedules(scheduleSet);
+
+        customerService.updateCustomer(customer);
+//        scheduleService.addSchedule(schedule);
 
         return new ModelAndView("redirect:/schedules");
     }
@@ -136,7 +143,7 @@ public class ScheduleController {
 
         Schedule schedule = scheduleService.getScheduleById(id);
 
-        ScheduleModel scheduleModel = new ScheduleModel(schedule.getCourse().getName(),schedule.getEmployee().getName(),schedule.getTime());
+        ScheduleModel scheduleModel = new ScheduleModel(schedule.getCourse().getName(), schedule.getEmployee().getName(), schedule.getTime());
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("updateSchedule");
@@ -149,7 +156,7 @@ public class ScheduleController {
 
         Employee employee = employeeService.getEmployeeByName(coach);
 
-        if(!isCoachFree(employee.getId(),time)){
+        if (!isCoachFree(employee.getId(), time)) {
 
             Schedule schedule = new Schedule(id);
 
@@ -161,7 +168,7 @@ public class ScheduleController {
 
         Course course = courseService.getCourseByName(name);
 
-        Schedule schedule = new Schedule(id,time,employee,course);
+        Schedule schedule = new Schedule(id, time, employee, course);
 
         scheduleService.updateSchedule(schedule);
         return new ModelAndView("redirect:/schedules");
@@ -174,8 +181,8 @@ public class ScheduleController {
 
         Customer customer = customerService.getCustomerByEmployee(employee);
 
-        if(employee != null && customer.getEmployee()!= null){
-            customer = new Customer(customer.getId(),customer.getName(),customer.getSex(),customer.getEmail(),customer.getTelephone(),null);
+        if (employee != null && customer.getEmployee() != null) {
+            customer = new Customer(customer.getId(), customer.getName(), customer.getSex(), customer.getEmail(), customer.getTelephone(), null);
             customerService.updateCustomer(customer);
         }
 
