@@ -35,9 +35,9 @@ telephone varchar(10),
 employee_id int,
 constraint foreign key(employee_id) references employee(id) on delete cascade);
 
-create table customer_course(
+create table customer_schedule(
 id int not null primary key auto_increment,
 customer_id int not null,
 constraint foreign key(customer_id) references customer(id) on delete cascade,
-course_id int not null,constraint foreign key(course_id) references course(id) on delete cascade);
+schedule_id int not null,constraint foreign key(schedule_id) references schedule(id) on delete cascade);
 
