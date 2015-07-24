@@ -76,12 +76,12 @@ public class Schedule {
         this.course = course;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "schedules",cascade=CascadeType.ALL)
-    public Set<Customer> getCustomers() {
-        return customers;
-    }
-
-    public void setCustomers(Set<Customer> customers) {
-        this.customers = customers;
-    }
+//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "schedules",cascade=CascadeType.ALL)
+//    public Set<Customer> getCustomers() {
+//        return customers;
+//    }
+//
+//    public void setCustomers(Set<Customer> customers) {
+//        this.customers = customers;
+//    }
 }

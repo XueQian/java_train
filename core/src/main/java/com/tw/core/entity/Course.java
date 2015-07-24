@@ -13,7 +13,7 @@ public class Course {
     private int id;
     private String name;
     private String description;
-    private Set<Schedule> schedules;
+//    private Set<Schedule> schedules;
 
     public Course() {
     }
@@ -66,14 +66,14 @@ public class Course {
         this.description = description;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "course", cascade = CascadeType.ALL)
-    public Set<Schedule> getSchedules() {
-        return schedules;
-    }
-
-    public void setSchedules(Set<Schedule> schedules) {
-        this.schedules = schedules;
-    }
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "course", cascade = CascadeType.ALL)
+//    public Set<Schedule> getSchedules() {
+//        return schedules;
+//    }
+//
+//    public void setSchedules(Set<Schedule> schedules) {
+//        this.schedules = schedules;
+//    }
 }
 
 
