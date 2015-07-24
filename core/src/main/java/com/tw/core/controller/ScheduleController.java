@@ -181,7 +181,7 @@ public class ScheduleController {
 
         Customer customer = customerService.getCustomerByEmployee(employee);
 
-        if (employee != null && customer.getEmployee() != null) {
+        if (employee != null && customer != null) {
             customer = new Customer(customer.getId(), customer.getName(), customer.getSex(), customer.getEmail(), customer.getTelephone(), null);
             customerService.updateCustomer(customer);
         }
