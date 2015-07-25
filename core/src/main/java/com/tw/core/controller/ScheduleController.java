@@ -49,23 +49,30 @@ public class ScheduleController {
         }
 
         ModelAndView modelAndView = new ModelAndView();
+
         modelAndView.setViewName("schedules");
+
+        modelAndView.addObject("coachList", employeeService.getEmployees());
+        modelAndView.addObject("courseList", courseService.getCourses());
+
+        modelAndView.addObject("customerList", customerService.getCustomers());
+
         modelAndView.addObject("schedules", scheduleModels);
         return modelAndView;
     }
 
-    @RequestMapping(value = "/schedules/creation", method = RequestMethod.GET)
-    public ModelAndView getAddSchedulePage() {
+//    @RequestMapping(value = "/schedules/creation", method = RequestMethod.GET)
+//    public ModelAndView getAddSchedulePage() {
+//
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.addObject("coachList", employeeService.getEmployees());
+//        modelAndView.addObject("courseList", courseService.getCourses());
+//        modelAndView.setViewName("addSchedule");
+//
+//        return modelAndView;
+//    }
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("coachList", employeeService.getEmployees());
-        modelAndView.addObject("courseList", courseService.getCourses());
-        modelAndView.setViewName("addSchedule");
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/schedules/creation", method = RequestMethod.POST)
+    @RequestMapping(value = "/schedules", method = RequestMethod.POST)
     public ModelAndView addSchedule(@RequestParam int courseId, @RequestParam int coachId, @RequestParam String time) {
 
         if (!isCoachFree(coachId, time)) {
