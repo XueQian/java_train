@@ -43,7 +43,51 @@
 
     </div>
 
-    <div class="panel panel-success well well-sm ">
+    <div class="panel panel-success well well-sm col-lg-12">
+
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-6">
+                    <table>
+                        <tr>
+                            <th><h2 id="goodsList_category">添加顾客</h2></th>
+                            <th><h4 class="text-right">ADD CUSTOMER</h4></th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form method="POST" action="">
+
+                <div class="col-md-6 col-md-offset-1 text-center input-group">
+                    <span class="input-group-addon">顾客名称</span>
+                    <input type="text" class="form-control"
+                           aria-describedby="basic-addon1" name="name" placeholder="name"/>
+                </div>
+                <div class="col-md-6 col-md-offset-1 text-cente input-group">
+                    <span class="input-group-addon">性别</span>
+                    <input type="text" class="form-control"
+                           aria-describedby="basic-addon1" name="sex" placeholder="sex"/>
+                </div>
+                <div class="col-md-6 col-md-offset-1 text-cente input-group">
+                    <span class="input-group-addon">邮箱</span>
+                    <input type="text" class="form-control"
+                           aria-describedby="basic-addon1" name="email" placeholder="email"/>
+                </div>
+                <div class="col-md-6 col-md-offset-1 text-cente input-group">
+                    <span class="input-group-addon">电话</span>
+                    <input type="text" class="form-control"
+                           aria-describedby="basic-addon1" name="telephone" placeholder="telephone"/>
+                </div>
+                <div class="col-md-6 col-md-offset-1 text-center">
+                    <input class="bg-success btn btn-primary btn-lg " type="submit" value="保存">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-success well well-sm col-lg-12">
         <div class="panel-heading">
             <th><h3 id="itemList_category">健身房管理系统~顾客</h3></th>
         </div>

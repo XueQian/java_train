@@ -61,16 +61,7 @@ public class CustomerController {
         return new ModelAndView("redirect:/customers");
     }
 
-    @RequestMapping(value = "/customers/creation", method = RequestMethod.GET)
-    public ModelAndView getAddUserPage() {
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("addCustomer");
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/customers/creation", method = RequestMethod.POST)
+    @RequestMapping(value = "/customers", method = RequestMethod.POST)
     public ModelAndView addUser(@RequestParam String name, @RequestParam String sex, @RequestParam String email, @RequestParam String telephone) {
 
         if (isCustomerExist(name)) {
