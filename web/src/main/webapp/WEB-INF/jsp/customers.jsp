@@ -31,13 +31,7 @@
                 <li role="presentation"><a href="/web/schedules"><h3>课表管理</h3></a></li>
                 <li role="presentation"><a href="/web/users"><h3>用户管理</h3></a></li>
                 <li role="presentation"><a href="/web/employees"><h3>雇员管理</h3></a></li>
-                <li role="presentation" class="active dropdown">
-                    <a href="/web/customers" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-haspopup="true" aria-expanded="false"><h3>顾客管理</h3> <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/web/customers/creation"><h4>添加顾客</h4></a></li>
-                    </ul>
-                </li>
+                <li role="presentation"><a href="/web/customers"><h3>顾客管理</h3></a></li>
             </ul>
         </nav>
 
