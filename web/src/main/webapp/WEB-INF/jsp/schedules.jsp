@@ -44,7 +44,90 @@
 
     </div>
 
-    <div class="panel panel-success well well-sm ">
+    <div class="panel panel-success well well-sm col-lg-6">
+
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-9">
+                    <h2 id="goodsList_category">增加公共课</h2>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form method="POST" action="">
+                <div class="col-md-6 col-md-offset-1 input-group">
+                    <span class="input-group-addon">课表名称</span>
+                    <select name="courseId">
+                        <c:forEach var="course" items="${courseList}">
+                            <option value="<c:out value="${course.id}"/>"><c:out value="${course.name}"/></option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="col-md-6 col-md-offset-1 input-group">
+                    <span class="input-group-addon">教练名称</span>
+                    <select name="coachId">
+                        <c:forEach var="coach" items="${coachList}">
+                            <option value="<c:out value="${coach.id}"/>"><c:out value="${coach.name}"/></option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="col-md-6 col-md-offset-1 text-cente input-group">
+                    <span class="input-group-addon">课表时间</span>
+                    <input type="date" class="form-control"
+                           aria-describedby="basic-addon1" name="time">
+                </div>
+                <div class="col-md-6 col-md-offset-1 text-center">
+                    <input class="bg-success btn btn-primary btn-lg " type="submit" value="保存">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-success well well-sm col-lg-6">
+
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 id="goodsList_category">增加私教</h2>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form method="POST" action="">
+                <div class="col-md-6 col-md-offset-1 text-center input-group">
+                    <span class="input-group-addon">课表名称</span>
+                    <input type="text" class="form-control"
+                           aria-describedby="basic-addon1" name="course" value="私教" readonly="readonly">
+                </div>
+                <div class="col-md-6 col-md-offset-1 input-group">
+                    <span class="input-group-addon">顾客名称</span>
+                    <select name="customerId">
+                        <c:forEach var="customer" items="${customerList}">
+                            <option value="<c:out value="${customer.id}"/>"><c:out value="${customer.name}"/></option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="col-md-6 col-md-offset-1 input-group">
+                    <span class="input-group-addon">教练名称</span>
+                    <select name="coachId">
+                        <c:forEach var="coach" items="${coachList}">
+                            <option value="<c:out value="${coach.id}"/>"><c:out value="${coach.name}"/></option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="col-md-6 col-md-offset-1 text-center input-group">
+                    <span class="input-group-addon">课表时间</span>
+                    <input type="date" class="form-control"
+                           aria-describedby="basic-addon1" name="time">
+                </div>
+                <div class="col-md-6 col-md-offset-1 text-center">
+                    <input class="bg-success btn btn-primary btn-lg " type="submit" value="保存">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-success well well-sm col-lg-12">
         <div class="panel-heading">
             <th><h3 id="itemList_category">健身房管理系统~课表</h3></th>
         </div>
