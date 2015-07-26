@@ -62,13 +62,11 @@ public class ScheduleController {
     }
 
     @RequestMapping(value = "/schedules/creation", method = RequestMethod.POST)
-    public ModelAndView addSchedule(@RequestParam int courseId, @RequestParam int coachId, @RequestParam String time) {
+    public String addSchedule(@RequestParam int courseId, @RequestParam int coachId, @RequestParam String time) {
 
         if (!isCoachFree(coachId, time)) {
 
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("coachIsBusyWhenAddSchedule");
-            return modelAndView;
+            return "the coach is busy";
         }
 
         Employee employee = employeeService.getEmployeeById(coachId);
@@ -79,7 +77,7 @@ public class ScheduleController {
 
         scheduleService.addSchedule(schedule);
 
-        return new ModelAndView("redirect:/schedules");
+        return "add schedule is ok";
     }
 
     @RequestMapping(value = "/schedules/private/creation", method = RequestMethod.POST)

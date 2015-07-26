@@ -9,12 +9,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
+<spring:url value="/lib/js/bootstrap.min.js" var="bootstrapJs"/>
 <spring:url value="/lib/css/bootstrap.min.css" var="bootstrapCss"/>
 <link href="${bootstrapCss}" rel="stylesheet"/>
-<spring:url value="/lib/js/bootstrap.min.js" var="bootstrapJs"/>
 <spring:url value="/lib/js/jquery-1.11.1.min.js" var="jqueryJs"/>
+<spring:url value="/js/schedule.js" var="addSchedule"/>
 <script src="${jqueryJs}"></script>
 <script src="${bootstrapJs}"></script>
+<script src="${addSchedule}"></script>
 
 <html>
 <head>
@@ -42,12 +44,12 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-9">
-                    <h2 id="goodsList_category">增加公共课</h2>
+                    <h2>增加公共课</h2>
                 </div>
             </div>
         </div>
         <div class="panel-body">
-            <form method="POST" action="/web/schedules/creation">
+            <form method="POST" action="/web/schedules/creation" id="addSchedule">
                 <div class="col-md-6 col-md-offset-1 input-group">
                     <span class="input-group-addon">课表名称</span>
                     <select name="courseId">
@@ -81,7 +83,7 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-6">
-                    <h2 id="goodsList_category">增加私教</h2>
+                    <h2>增加私教</h2>
                 </div>
             </div>
         </div>
