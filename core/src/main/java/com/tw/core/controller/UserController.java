@@ -8,7 +8,9 @@ import com.tw.core.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import java.util.List;
+
 /**
  * Created by qxue on 7/15/15.
  */
@@ -20,32 +22,6 @@ public class UserController {
 
     @Autowired
     private EmployeeService employeeService;
-
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView getLoginPage() {
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login");
-        return modelAndView;
-    }
-
-    @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView login(@RequestParam String name, @RequestParam String password) {
-
-        if (userService.getUserByName(name) == null) {
-
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("userIsNotExist");
-            return modelAndView;
-        }
-        if (IsPasswordCorrect(name, password)) {
-
-            return new ModelAndView("redirect:" + "/schedules");
-        } else {
-
-            return new ModelAndView("redirect:/");
-        }
-    }
 
     @RequestMapping(value = "/users/creation", method = RequestMethod.GET)
     public ModelAndView getAddUserPage() {
@@ -150,22 +126,6 @@ public class UserController {
 
         return flag;
     }
-
-    private boolean IsPasswordCorrect(String name, String password) {
-
-        User userDatabase = userService.getUserByName(name);
-
-        String passwordMD5 = null;
-
-        try {
-            passwordMD5 = MD5Util.getMD5(password);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return userDatabase.getPassword().equals(passwordMD5);
-    }
-
 
     private String changePassword(int id, String password) {
 
