@@ -54,15 +54,13 @@ public class CustomerController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/customers/modification/{id}", method = RequestMethod.POST)
-    public ModelAndView updateCustomer(@PathVariable int id, @RequestParam String name, @RequestParam String sex, @RequestParam String email, @RequestParam String telephone) {
+    @RequestMapping(value = "/customers/modification/{id}", method = RequestMethod.PUT)
+    public void updateCustomer(@PathVariable int id, @RequestParam String name, @RequestParam String sex, @RequestParam String email, @RequestParam String telephone) {
 
         Employee employee = customerService.getCustomerById(id).getEmployee();
-
         Customer customer = new Customer(id, name, sex, email, telephone, employee);
 
         customerService.updateCustomer(customer);
-        return new ModelAndView("redirect:/customers");
     }
 
     @RequestMapping(value = "/customers/deletion/{id}", method = RequestMethod.GET)
