@@ -11,7 +11,7 @@ $(document).ready(function() {
             success: function(data) {
                 if(data === 'the coach is busy') {
 
-                    alert("您所添加的教练时间冲突，请重新操作");
+                    alert("您所修改的教练时间冲突，请重新操作");
                 } else {
                     window.location = "/web/schedules";
                 }

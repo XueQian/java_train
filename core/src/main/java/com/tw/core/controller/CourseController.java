@@ -65,18 +65,16 @@ public class CourseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/courses/modification/{id}", method = RequestMethod.POST)
-    public ModelAndView updateCourse(@PathVariable int id, @RequestParam String name,@RequestParam String description) {
+    @RequestMapping(value = "/courses/modification/{id}", method = RequestMethod.PUT)
+    public String updateCourse(@PathVariable int id, @RequestParam String name,@RequestParam String description) {
 
         if(courseService.getCourseByName(name)!= null){
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("");
-            return modelAndView;
-        }
 
+            return "the course is exist";
+        }
         courseService.updateCourse(new Course(id,name,description));
 
-        return new ModelAndView("redirect:/courses");
+        return "update course is ok";
     }
 }
 
