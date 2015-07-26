@@ -56,7 +56,7 @@
                             <input class="bg-success btn btn-primary btn-lg " type="submit" value="登录">
                         </div>
                         <div class="col-xs-6 col-sm-4 text-center">
-                            <p><a class="btn btn-primary btn-lg" role="button" a href="./users/creation">注册</a></p>
+                            <p><a class="btn btn-primary btn-lg" role="button" a href="./register">注册</a></p>
                         </div>
 
                     </div>

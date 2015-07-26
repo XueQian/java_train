@@ -20,48 +20,24 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private EmployeeService employeeService;
-
-    @RequestMapping(value = "/users/creation", method = RequestMethod.GET)
-    public ModelAndView getAddUserPage() {
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("register");
-
-        return modelAndView;
-    }
-
     @RequestMapping(value = "/users/creation", method = RequestMethod.POST)
-    public ModelAndView addUser(@RequestParam String userName, @RequestParam String password, @RequestParam String employeeName, @RequestParam String email, @RequestParam String role) {
+    public String addUser(@RequestParam String name, @RequestParam String password) {
 
-        if (isUserExist(userName)) {
+        if (isUserExist(name)) {
 
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("addUserExist");
-
-            return modelAndView;
-        } else {
-
-            Employee employee = new Employee(role, employeeName, email);
-
-            if (!isEmployeeExist(employeeName)) {
-
-                employeeService.addEmployee(employee);
-            }
-
-            User user = null;
-
-            employee = employeeService.getEmployeeByName(employeeName);
-            try {
-                user = new User(userName, MD5Util.getMD5(password), employee);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            userService.addUser(user);
-            return new ModelAndView("redirect:/users");
+            return "the user is exist";
         }
+
+        User user = null;
+
+        try {
+            user = new User(name, MD5Util.getMD5(password), null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        userService.addUser(user);
+        return "add use is ok";
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
@@ -103,17 +79,6 @@ public class UserController {
 
         userService.deleteUser(id);
         return new ModelAndView("redirect:/users");
-    }
-
-    private boolean isEmployeeExist(String name) {
-
-        boolean flag = true;
-
-        if (employeeService.getEmployeeByName(name) == null) {
-            flag = false;
-        }
-
-        return flag;
     }
 
     private boolean isUserExist(String name) {

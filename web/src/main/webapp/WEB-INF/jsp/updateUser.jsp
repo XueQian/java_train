@@ -45,7 +45,6 @@
     </div>
 
     <div class="panel panel-success well well-sm ">
-
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-6">
@@ -77,6 +76,7 @@
             </form>
         </div>
     </div>
+
     <div class="footer">
         <p><span class="glyphicon glyphicon-heart"></span> Have a nice day!!</p>
     </div>
