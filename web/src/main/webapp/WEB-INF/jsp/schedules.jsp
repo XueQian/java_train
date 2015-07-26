@@ -13,10 +13,12 @@
 <spring:url value="/lib/css/bootstrap.min.css" var="bootstrapCss"/>
 <link href="${bootstrapCss}" rel="stylesheet"/>
 <spring:url value="/lib/js/jquery-1.11.1.min.js" var="jqueryJs"/>
-<spring:url value="/js/schedule.js" var="addSchedule"/>
+<spring:url value="/js/addschedule.js" var="addSchedule"/>
+<spring:url value="/js/addPrivateCoach.js" var="addPrivateCoach"/>
 <script src="${jqueryJs}"></script>
 <script src="${bootstrapJs}"></script>
 <script src="${addSchedule}"></script>
+<script src="${addPrivateCoach}"></script>
 
 <html>
 <head>
@@ -88,7 +90,7 @@
             </div>
         </div>
         <div class="panel-body">
-            <form method="POST" action="/web/schedules/private/creation">
+            <form method="POST" action="/web/schedules/private/creation" id="addPrivateCoach">
                 <div class="col-md-6 col-md-offset-1 text-center input-group">
                     <span class="input-group-addon">课表名称</span>
                     <input type="text" class="form-control"

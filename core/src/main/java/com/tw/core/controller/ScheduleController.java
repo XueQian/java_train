@@ -81,7 +81,8 @@ public class ScheduleController {
     }
 
     @RequestMapping(value = "/schedules/private/creation", method = RequestMethod.POST)
-    public ModelAndView addPrivateCoach(@RequestParam int customerId, @RequestParam int coachId, @RequestParam String time) {
+    public  String addPrivateCoach(@RequestParam int customerId, @RequestParam int coachId, @RequestParam String time) {
+
         Customer customer = customerService.getCustomerById(customerId);
 
         if (customer.getEmployee() != null) {
@@ -89,14 +90,15 @@ public class ScheduleController {
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("privateCoachIsExist");
 
-            return modelAndView;
+            return "the customer has a private coach";
         }
 
         if (!isCoachFree(coachId, time)) {
 
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("privateCoachIsBusy");
-            return modelAndView;
+
+            return "the coach is busy";
         }
 
         Employee employee = employeeService.getEmployeeById(coachId);
@@ -115,9 +117,7 @@ public class ScheduleController {
         customer.setSchedules(scheduleSet);
 
         customerService.updateCustomer(customer);
-//        scheduleService.addSchedule(schedule);
-
-        return new ModelAndView("redirect:/schedules");
+        return "add private coach is ok";
     }
 
     @RequestMapping(value = "/schedules/modification/{id}", method = RequestMethod.GET)
