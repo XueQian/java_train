@@ -9,9 +9,9 @@ $(document).ready(function() {
             url: "/web/schedules/creation",
             data: form.serialize(),
             success: function (result) {
-                if(result == 'coach is busy'){
+                if(result == 'the coach is busy'){
 
-                    alert("您所添加的");
+                    alert("您所添加的教练时间冲突，请重新操作");
                 }else{
                     window.location = "../web/schedules";
                 }
