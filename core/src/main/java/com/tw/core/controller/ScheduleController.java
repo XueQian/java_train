@@ -81,7 +81,7 @@ public class ScheduleController {
     }
 
     @RequestMapping(value = "/schedules/private/creation", method = RequestMethod.POST)
-    public  String addPrivateCoach(@RequestParam int customerId, @RequestParam int coachId, @RequestParam String time) {
+    public String addPrivateCoach(@RequestParam int customerId, @RequestParam int coachId, @RequestParam String time) {
 
         Customer customer = customerService.getCustomerById(customerId);
 
@@ -125,7 +125,7 @@ public class ScheduleController {
 
         Schedule schedule = scheduleService.getScheduleById(id);
 
-        ScheduleModel scheduleModel = new ScheduleModel(schedule.getCourse().getName(), schedule.getEmployee().getName(), schedule.getTime());
+        ScheduleModel scheduleModel = new ScheduleModel(schedule.getId(),schedule.getCourse().getName(), schedule.getEmployee().getName(), schedule.getTime());
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("updateSchedule");
@@ -133,27 +133,21 @@ public class ScheduleController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/schedules/modification/{id}", method = RequestMethod.POST)
-    public ModelAndView updateSchedule(@PathVariable int id, @RequestParam String name, @RequestParam String coach, @RequestParam String time) {
+    @RequestMapping(value = "/schedules/modification/{id}", method = RequestMethod.PUT)
+    public String updateSchedule(@PathVariable int id, @RequestParam String name, @RequestParam String coach, @RequestParam String time) {
 
         Employee employee = employeeService.getEmployeeByName(coach);
-
-        if (!isCoachFree(employee.getId(), time)) {
-
-            Schedule schedule = new Schedule(id);
-
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("coachIsBusyWhenUpdateSchedule");
-            modelAndView.addObject("schedule", schedule);
-            return modelAndView;
-        }
-
         Course course = courseService.getCourseByName(name);
 
         Schedule schedule = new Schedule(id, time, employee, course);
 
+        if (!isCoachFree(employee.getId(), time)) {
+
+            return "the coach is busy";
+        }
         scheduleService.updateSchedule(schedule);
-        return new ModelAndView("redirect:/schedules");
+
+        return "update schedule is ok";
     }
 
     @RequestMapping(value = "/schedules/deletion/{id}", method = RequestMethod.GET)
