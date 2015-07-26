@@ -57,7 +57,7 @@
 }
 
 .tableCss {
-    margin-left: 134px;
+    margin-left: 171px;
     margin-top: 30px;
     width: 78%;
     box-shadow: -1px 0px 20px rgba(86, 242, 9, 0.61);
@@ -65,7 +65,7 @@
 }
 
 .formCss {
-    margin-left: 134px;
+    margin-left: 171px;
     margin-top: 120px;
     width: 78%;
     box-shadow: -1px 0px 20px rgba(86, 242, 9, 0.61);
@@ -75,7 +75,7 @@
 table {
     color: #333;
     font-family: Helvetica, Arial, sans-serif;
-    width: 1093px;
+    width: 1031px;
     border-collapse: collapse;
     border-spacing: 0;
 }
@@ -162,7 +162,7 @@ input, text {
     padding: 9px;
     border: solid 1px #E5E5E5;
     font: normal 13px/100% Verdana, Tahoma, sans-serif;
-    width: 321px;
+    width: 300px;
     box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
     margin-top: 15px;
 }
