@@ -2,7 +2,6 @@ package com.tw.core.controller;
 
 import com.tw.core.entity.Customer;
 import com.tw.core.entity.Employee;
-import com.tw.core.entity.User;
 import com.tw.core.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,20 +31,16 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/customers/creation", method = RequestMethod.POST)
-    public ModelAndView addUser(@RequestParam String name, @RequestParam String sex, @RequestParam String email, @RequestParam String telephone) {
+    public String addUser(@RequestParam String name, @RequestParam String sex, @RequestParam String email, @RequestParam String telephone) {
 
         if (isCustomerExist(name)) {
-
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("customerIsExistWhenAddCustomer");
-
-            return modelAndView;
+            return "the customer is exist";
         }
 
         Customer customer = new Customer(name, sex, email, telephone, null);
 
         customerService.addCustomer(customer);
-        return new ModelAndView("redirect:/customers");
+        return "add customer is ok";
     }
 
     @RequestMapping(value = "/customers/modification/{id}", method = RequestMethod.GET)

@@ -10,11 +10,13 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <spring:url value="/lib/css/bootstrap.min.css" var="bootstrapCss"/>
-<link href="${bootstrapCss}" rel="stylesheet"/>
 <spring:url value="/lib/js/bootstrap.min.js" var="bootstrapJs"/>
 <spring:url value="/lib/js/jquery-1.11.1.min.js" var="jqueryJs"/>
+<spring:url value="/js/addCustomer.js" var ="addCustomer"/>
+<link href="${bootstrapCss}" rel="stylesheet"/>
 <script src="${jqueryJs}"></script>
 <script src="${bootstrapJs}"></script>
+<script src="${addCustomer}"></script>
 
 <html>
 <head>
@@ -52,7 +54,7 @@
             </div>
         </div>
         <div class="panel-body">
-            <form method="POST" action="/web/customers/creation">
+            <form method="POST" action="/web/customers/creation" id="addCustomer">
 
                 <div class="col-md-6 col-md-offset-1 text-center input-group">
                     <span class="input-group-addon">顾客名称</span>
