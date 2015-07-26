@@ -2,7 +2,6 @@ package com.tw.core.controller;
 
 import com.tw.core.entity.Employee;
 import com.tw.core.entity.User;
-import com.tw.core.service.EmployeeService;
 import com.tw.core.service.UserService;
 import com.tw.core.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,16 +61,14 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.POST)
-    public ModelAndView updateUser(@PathVariable int id, @RequestParam String name, @RequestParam String password) {
+    @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.PUT)
+    public void updateUser(@PathVariable int id, @RequestParam String name, @RequestParam String password) {
 
         Employee employee = userService.getUserById(id).getEmployee();
 
         User user = new User(id, name, changePassword(id, password), employee);
 
         userService.updateUser(user);
-
-        return new ModelAndView("redirect:/users");
     }
 
     @RequestMapping(value = "/users/deletion/{id}", method = RequestMethod.GET)

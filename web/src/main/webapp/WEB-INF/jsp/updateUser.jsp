@@ -10,11 +10,13 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <spring:url value="/lib/css/bootstrap.min.css" var="bootstrapCss"/>
-<link href="${bootstrapCss}" rel="stylesheet"/>
 <spring:url value="/lib/js/bootstrap.min.js" var="bootstrapJs"/>
 <spring:url value="/lib/js/jquery-1.11.1.min.js" var="jqueryJs"/>
+<spring:url value="/js/updateUser.js" var="updateUser"/>
 <script src="${jqueryJs}"></script>
+<link href="${bootstrapCss}" rel="stylesheet"/>
 <script src="${bootstrapJs}"></script>
+<script src="${updateUser}"></script>
 
 <html>
 <head>
@@ -58,10 +60,11 @@
             </div>
         </div>
         <div class="panel-body">
-            <form method="POST" action="">
+            <form method="POST" action="" id="updateUser">
 
                 <div class="col-md-6 col-md-offset-1 text-center input-group">
                     <span class="input-group-addon">用户名称</span>
+                    <input id="userId" value="${user.id}" hidden="hidden"/>
                     <input type="text" class="form-control"
                            aria-describedby="basic-addon1" name="name" value="<c:out value="${user.name}" />">
                 </div>
