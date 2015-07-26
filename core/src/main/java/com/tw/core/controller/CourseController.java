@@ -14,8 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.*;
 
 /**
-* Created by qxue on 7/17/15.
-*/
+ * Created by qxue on 7/17/15.
+ */
 @RestController
 @RequestMapping("/")
 public class CourseController {
@@ -37,11 +37,11 @@ public class CourseController {
     @RequestMapping(value = "/courses/creation", method = RequestMethod.POST)
     public String addCourse(@RequestParam String name, @RequestParam String description) {
 
-        if(courseService.getCourseByName(name)!= null){
+        if (courseService.getCourseByName(name) != null) {
             return "the course is exist";
         }
 
-        Course course = new Course(name,description);
+        Course course = new Course(name, description);
         courseService.addCourse(course);
 
         return "add course is ok";
@@ -66,15 +66,9 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/courses/modification/{id}", method = RequestMethod.PUT)
-    public String updateCourse(@PathVariable int id, @RequestParam String name,@RequestParam String description) {
+    public void updateCourse(@PathVariable int id, @RequestParam String name, @RequestParam String description) {
 
-        if(courseService.getCourseByName(name)!= null){
-
-            return "the course is exist";
-        }
-        courseService.updateCourse(new Course(id,name,description));
-
-        return "update course is ok";
+        courseService.updateCourse(new Course(id, name, description));
     }
 }
 

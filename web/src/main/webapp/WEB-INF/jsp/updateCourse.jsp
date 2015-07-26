@@ -35,7 +35,7 @@
     <form method="POST" action="" class="form" id="updateCourse">
         <input id="courseId" value="${course.id}" hidden="hidden"/>
 
-        <div id="input1">课程名称 <input type="text" name="name" value="<c:out value="${course.name}" />"/><br/></div>
+        <div id="input1">课程名称 <input type="text" name="name" value="<c:out value="${course.name}" />" readonly="readonly"/><br/></div>
 
         <div id="input2">课程描述<input type="text" name="description" value="<c:out value="${course.description}" />"/>
             <br/></div>
