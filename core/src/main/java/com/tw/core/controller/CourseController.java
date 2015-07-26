@@ -21,13 +21,7 @@ import java.util.*;
 public class CourseController {
 
     @Autowired
-    private EmployeeService employeeService;
-
-    @Autowired
     private CourseService courseService;
-
-    @Autowired
-    private CustomerService customerService;
 
     @RequestMapping(value = "/courses", method = RequestMethod.GET)
     public ModelAndView getCoursePage() {
@@ -40,14 +34,17 @@ public class CourseController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/courses", method = RequestMethod.POST)
-    public ModelAndView addCourse(@RequestParam String name, @RequestParam String description) {
+    @RequestMapping(value = "/courses/creation", method = RequestMethod.POST)
+    public String addCourse(@RequestParam String name, @RequestParam String description) {
+
+        if(courseService.getCourseByName(name)!= null){
+            return "the course is exist";
+        }
 
         Course course = new Course(name,description);
-
         courseService.addCourse(course);
 
-        return new ModelAndView("redirect:/courses");
+        return "add course is ok";
     }
 
     @RequestMapping(value = "/courses/deletion/{id}", method = RequestMethod.GET)
