@@ -10,11 +10,13 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <spring:url value="/lib/css/bootstrap.min.css" var="bootstrapCss"/>
-<link href="${bootstrapCss}" rel="stylesheet"/>
 <spring:url value="/lib/js/bootstrap.min.js" var="bootstrapJs"/>
 <spring:url value="/lib/js/jquery-1.11.1.min.js" var="jqueryJs"/>
+<spring:url value="/js/addEmployee.js" var="addEmployee"/>
 <script src="${jqueryJs}"></script>
+<link href="${bootstrapCss}" rel="stylesheet"/>
 <script src="${bootstrapJs}"></script>
+<script src="${addEmployee}"></script>
 
 <html>
 <head>
@@ -43,7 +45,41 @@
 
     </div>
 
-    <div class="panel panel-success well well-sm ">
+    <div class="panel panel-success well well-sm col-lg-12">
+
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>添加雇员信息</h2>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form method="POST" action="/web/employees/creation" id="addEmployee">
+
+                <div class="col-md-6 col-md-offset-1 text-center input-group">
+                    <span class="input-group-addon">雇员名称</span>
+                    <input type="text" class="form-control"
+                           aria-describedby="basic-addon1" name="name">
+                </div>
+                <div class="col-md-6 col-md-offset-1 text-cente input-group">
+                    <span class="input-group-addon">职位</span>
+                    <input type="text" class="form-control"
+                           aria-describedby="basic-addon1" name="role">
+                </div>
+                <div class="col-md-6 col-md-offset-1 text-cente input-group">
+                    <span class="input-group-addon">邮箱</span>
+                    <input type="text" class="form-control"
+                           aria-describedby="basic-addon1" name="email">
+                </div>
+                <div class="col-md-6 col-md-offset-1 text-center">
+                    <input class="bg-success btn btn-primary btn-lg " type="submit" value="保存">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="panel panel-success well well-sm col-lg-12">
         <div class="panel-heading">
             <th><h3 id="itemList_category">健身房管理系统~雇员</h3></th>
         </div>

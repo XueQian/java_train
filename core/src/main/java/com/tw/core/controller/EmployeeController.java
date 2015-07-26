@@ -29,6 +29,21 @@ public class EmployeeController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/employees/creation", method = RequestMethod.POST)
+    public String addEmployee( @RequestParam String name, @RequestParam String role,@RequestParam String email) {
+
+        if (isEmployeeExist(name)) {
+
+           return "the employee is exist";
+        }
+
+        Employee employee = new Employee(role, name, email);
+
+        employeeService.addEmployee(employee);
+
+        return "add employee is ok";
+    }
+
     @RequestMapping(value = "/employees/modification/{id}", method = RequestMethod.GET)
     public ModelAndView getUpdateEmployeePage(@PathVariable int id) {
 
@@ -77,6 +92,5 @@ public class EmployeeController {
         }
         return flag;
     }
-
 
 }
