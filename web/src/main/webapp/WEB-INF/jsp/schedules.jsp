@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="panel-body">
-            <form method="POST" action="">
+            <form method="POST" action="/web/schedules/creation">
                 <div class="col-md-6 col-md-offset-1 input-group">
                     <span class="input-group-addon">课表名称</span>
                     <select name="courseId">
@@ -93,7 +93,7 @@
             </div>
         </div>
         <div class="panel-body">
-            <form method="POST" action="">
+            <form method="POST" action="/web/schedules/private/creation">
                 <div class="col-md-6 col-md-offset-1 text-center input-group">
                     <span class="input-group-addon">课表名称</span>
                     <input type="text" class="form-control"

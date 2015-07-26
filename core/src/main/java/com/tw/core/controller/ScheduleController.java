@@ -61,18 +61,7 @@ public class ScheduleController {
         return modelAndView;
     }
 
-//    @RequestMapping(value = "/schedules/creation", method = RequestMethod.GET)
-//    public ModelAndView getAddSchedulePage() {
-//
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("coachList", employeeService.getEmployees());
-//        modelAndView.addObject("courseList", courseService.getCourses());
-//        modelAndView.setViewName("addSchedule");
-//
-//        return modelAndView;
-//    }
-
-    @RequestMapping(value = "/schedules", method = RequestMethod.POST)
+    @RequestMapping(value = "/schedules/creation", method = RequestMethod.POST)
     public ModelAndView addSchedule(@RequestParam int courseId, @RequestParam int coachId, @RequestParam String time) {
 
         if (!isCoachFree(coachId, time)) {
@@ -91,18 +80,6 @@ public class ScheduleController {
         scheduleService.addSchedule(schedule);
 
         return new ModelAndView("redirect:/schedules");
-    }
-
-    @RequestMapping(value = "/schedules/private/creation", method = RequestMethod.GET)
-    public ModelAndView getAddPrivateCoachPage() {
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("addPrivateCoach");
-
-        modelAndView.addObject("customerList", customerService.getCustomers());
-        modelAndView.addObject("coachList", employeeService.getEmployees());
-
-        return modelAndView;
     }
 
     @RequestMapping(value = "/schedules/private/creation", method = RequestMethod.POST)
