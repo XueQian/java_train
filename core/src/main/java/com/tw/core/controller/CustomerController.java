@@ -31,6 +31,23 @@ public class CustomerController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/customers/creation", method = RequestMethod.POST)
+    public ModelAndView addUser(@RequestParam String name, @RequestParam String sex, @RequestParam String email, @RequestParam String telephone) {
+
+        if (isCustomerExist(name)) {
+
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("customerIsExistWhenAddCustomer");
+
+            return modelAndView;
+        }
+
+        Customer customer = new Customer(name, sex, email, telephone, null);
+
+        customerService.addCustomer(customer);
+        return new ModelAndView("redirect:/customers");
+    }
+
     @RequestMapping(value = "/customers/modification/{id}", method = RequestMethod.GET)
     public ModelAndView getUpdateCustomerPage(@PathVariable int id) {
 
@@ -58,23 +75,6 @@ public class CustomerController {
 
         customerService.deleteCustomer(id);
 
-        return new ModelAndView("redirect:/customers");
-    }
-
-    @RequestMapping(value = "/customers", method = RequestMethod.POST)
-    public ModelAndView addUser(@RequestParam String name, @RequestParam String sex, @RequestParam String email, @RequestParam String telephone) {
-
-        if (isCustomerExist(name)) {
-
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("customerIsExistWhenAddCustomer");
-
-            return modelAndView;
-        }
-
-        Customer customer = new Customer(name, sex, email, telephone, null);
-
-        customerService.addCustomer(customer);
         return new ModelAndView("redirect:/customers");
     }
 

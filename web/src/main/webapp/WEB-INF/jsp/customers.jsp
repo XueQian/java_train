@@ -52,7 +52,7 @@
             </div>
         </div>
         <div class="panel-body">
-            <form method="POST" action="">
+            <form method="POST" action="/web/customers/creation">
 
                 <div class="col-md-6 col-md-offset-1 text-center input-group">
                     <span class="input-group-addon">顾客名称</span>
