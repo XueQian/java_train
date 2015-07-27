@@ -55,24 +55,12 @@ public class EmployeeController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/employees/modification/{id}", method = RequestMethod.POST)
-    public ModelAndView updateEmployee(@PathVariable int id, @RequestParam String name, @RequestParam String role,@RequestParam String email) {
-
-        if (isEmployeeExist(name)) {
-
-            Employee employee = employeeService.getEmployeeById(id);
-
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("updateEmployeeExist");
-            modelAndView.addObject("employee", employee);
-            return modelAndView;
-        }
+    @RequestMapping(value = "/employees/modification/{id}", method = RequestMethod.PUT)
+    public void updateEmployee(@PathVariable int id, @RequestParam String name, @RequestParam String role,@RequestParam String email) {
 
         Employee employee = new Employee(id, role, name, email);
 
         employeeService.updateEmployee(employee);
-
-        return new ModelAndView("redirect:/employees");
     }
 
     @RequestMapping(value = "/employees/deletion/{id}", method = RequestMethod.GET)

@@ -52,12 +52,13 @@
             </div>
         </div>
         <div class="panel-body">
-            <form method="POST" action="">
+            <form method="POST" action="" id="updateEmployee">
 
                 <div class="col-md-6 col-md-offset-1 text-center input-group">
                     <span class="input-group-addon">雇员名称</span>
+                    <input id="employeeId" value="${employee.id}" hidden="hidden"/>
                     <input type="text" class="form-control"
-                           aria-describedby="basic-addon1" name="name" value="<c:out value="${employee.name}" />">
+                           aria-describedby="basic-addon1" name="name" value="<c:out value="${employee.name}" />" readonly="readonly">
                 </div>
                 <div class="col-md-6 col-md-offset-1 text-cente input-group">
                     <span class="input-group-addon">职位</span>
@@ -82,6 +83,7 @@
 
 <script src="../../lib/js/jquery-1.11.1.min.js"></script>
 <script src="../../lib/js/bootstrap.min.js"></script>
+<script src="../../js/updateEmployee.js"></script>
 
 </body>
 </html>
