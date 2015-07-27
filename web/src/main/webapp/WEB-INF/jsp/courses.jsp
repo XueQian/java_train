@@ -7,17 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-
-<spring:url value="/lib/js/jquery-1.11.1.min.js" var="jqueryJs"/>
-<script src="${jqueryJs}"></script>
-<spring:url value="/js/addCourse.js" var="addCourse"/>
-<script src="${addCourse}"></script>
 
 <html>
 <head>
-    <link href="./css/courses.css" rel="stylesheet" type="text/css">
     <title>SHOW COURSES!!</title>
+    <link href="./css/courses.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -68,6 +62,9 @@
         </tbody>
     </table>
 </div>
+
+<script src="lib/js/jquery-1.11.1.min.js"></script>
+<script src="js/addCourse.js"></script>
 
 </body>
 </html>

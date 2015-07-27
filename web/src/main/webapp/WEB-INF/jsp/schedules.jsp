@@ -7,22 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-
-<spring:url value="/lib/js/bootstrap.min.js" var="bootstrapJs"/>
-<spring:url value="/lib/css/bootstrap.min.css" var="bootstrapCss"/>
-<link href="${bootstrapCss}" rel="stylesheet"/>
-<spring:url value="/lib/js/jquery-1.11.1.min.js" var="jqueryJs"/>
-<spring:url value="/js/addschedule.js" var="addSchedule"/>
-<spring:url value="/js/addPrivateCoach.js" var="addPrivateCoach"/>
-<script src="${jqueryJs}"></script>
-<script src="${bootstrapJs}"></script>
-<script src="${addSchedule}"></script>
-<script src="${addPrivateCoach}"></script>
 
 <html>
 <head>
     <title>SHOW schedules!!</title>
+    <link href="./lib/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
@@ -32,7 +21,7 @@
         <nav class="navbar-default">
             <ul class="nav nav-pills">
                 <li role="presentation"><a href="/web/courses"><h3>课程管理</h3></a></li>
-                <li role="presentation"><a href="/web/schedules"><h3>课表管理</h3></a> </li>
+                <li role="presentation"><a href="/web/schedules"><h3>课表管理</h3></a></li>
                 <li role="presentation"><a href="/web/users"><h3>用户管理</h3></a></li>
                 <li role="presentation"><a href="/web/employees"><h3>雇员管理</h3></a></li>
                 <li role="presentation"><a href="/web/customers"><h3>顾客管理</h3></a></li>
@@ -159,6 +148,11 @@
     </div>
 
 </div>
+
+<script src="./lib/js/jquery-1.11.1.min.js"></script>
+<script src="./lib/js/bootstrap.min.js"></script>
+<script src="./js/addPrivateCoach.js"></script>
+<script src="./js/addSchedule.js"></script>
 
 </body>
 </html>

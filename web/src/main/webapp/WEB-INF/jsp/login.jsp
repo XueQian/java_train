@@ -7,20 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-
-<spring:url value="/lib/js/bootstrap.min.js" var="bootstrapJs"/>
-<spring:url value="/lib/css/bootstrap.min.css" var="bootstrapCss"/>
-<link href="${bootstrapCss}" rel="stylesheet"/>
-<spring:url value="/lib/js/jquery-1.11.1.min.js" var="jqueryJs"/>
-<spring:url value="/js/login.js" var="login"/>
-<script src="${jqueryJs}"></script>
-<script src="${bootstrapJs}"></script>
-<script src="${login}"></script>
 
 <html>
 <head>
     <title>login</title>
+    <link href="./lib/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -65,6 +56,10 @@
         </div>
     </div>
 </div>
+
+<script src="./lib/js/jquery-1.11.1.min.js"></script>
+<script src="./lib/js/bootstrap.min.js"></script>
+<script src="./js/login.js"></script>
 
 </body>
 </html>

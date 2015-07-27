@@ -7,20 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-
-<spring:url value="/lib/css/bootstrap.min.css" var="bootstrapCss"/>
-<spring:url value="/lib/js/bootstrap.min.js" var="bootstrapJs"/>
-<spring:url value="/lib/js/jquery-1.11.1.min.js" var="jqueryJs"/>
-<spring:url value="/js/addCustomer.js" var ="addCustomer"/>
-<link href="${bootstrapCss}" rel="stylesheet"/>
-<script src="${jqueryJs}"></script>
-<script src="${bootstrapJs}"></script>
-<script src="${addCustomer}"></script>
 
 <html>
 <head>
     <title>customer management</title>
+    <link href="./lib/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -120,6 +111,10 @@
     </div>
 
 </div>
+
+<script src="./lib/js/jquery-1.11.1.min.js"></script>
+<script src="./lib/js/bootstrap.min.js"></script>
+<script src="./js/addCustomer.js"></script>
 
 </body>
 </html>

@@ -7,20 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
-<spring:url value="/lib/css/bootstrap.min.css" var="bootstrapCss"/>
-<link href="${bootstrapCss}" rel="stylesheet"/>
-<spring:url value="/lib/js/jquery-1.11.1.min.js" var="jqueryJs"/>
-<spring:url value="/lib/js/bootstrap.min.js" var="bootstrapJs"/>
-<spring:url value="/js/updateSchedule.js" var="updateSchedule"/>
-<script src="${jqueryJs}"></script>
-<script src="${bootstrapJs}"></script>
-<script src="${updateSchedule}"></script>
 
 <html>
 <head>
     <title>update course</title>
+    <link href="../../lib/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
@@ -93,6 +85,10 @@
     </div>
 
 </div>
+
+<script src="../../lib/js/jquery-1.11.1.min.js"></script>
+<script src="../../lib/js/bootstrap.min.js"></script>
+<script src="../../js/updateSchedule.js"></script>
 
 </body>
 </html>
