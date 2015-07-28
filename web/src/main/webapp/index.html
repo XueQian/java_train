@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <!--<meta name="viewport" content="width=device-width">-->
+    <link rel="stylesheet" href="lib/css/bootstrap.css"/>
 </head>
-<body>
+
+<body ng-app="gymSystem">
+
+<div class="container">
+    <div class="btn-toolbar bg-danger">
+        <nav class="navbar-default">
+            <ul class="nav nav-pills">
+                <li role="presentation"><a href="/web/#/courses"><h3>课程管理</h3></a></li>
+                <li role="presentation"><a href="/web/#/schedules"><h3>课表管理</h3></a></li>
+                <li role="presentation"><a href="/web/#/users"><h3>用户管理</h3></a></li>
+                <li role="presentation"><a href="/web/#/employees"><h3>雇员管理</h3></a></li>
+                <li role="presentation"><a href="/web/#/customers"><h3>顾客管理</h3></a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div ng-view=""></div>
+
+<script src="lib/js/angular.js"></script>
+<script src="lib/js/angular-route.js"></script>
+<script src="lib/js/jquery-1.11.1.min.js"></script>
+<script src="lib/js/bootstrap.js"></script>
+
+<script src="scripts/app.js"></script>
+
+<script src="scripts/controller/course.js"></script>
 
 </body>
 </html>
