@@ -25,10 +25,6 @@ public class EmployeeService {
         return employeeDao.getEmployeeByName(name);
     }
 
-    public Course getEmployeeByCourse(int courseId) {
-        return employeeDao.getEmployeeByCourse(courseId);
-    }
-
     public List<Employee> getEmployees() {
         return employeeDao.getEmployees();
     }

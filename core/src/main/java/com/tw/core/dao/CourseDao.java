@@ -28,37 +28,6 @@ public class CourseDao {
         return courseList;
     }
 
-    public List<Course> getCourseByTime(String time) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        List courseList;
-
-        try {
-            session.beginTransaction();
-            Query query = session.createQuery("from Course where time=:time");
-            courseList = query.setString("time", time).list();
-            session.getTransaction().commit();
-
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-
-        return courseList;
-    }
-
-    public void addEmployeeCourse(Employee employee) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-
-        try {
-            session.beginTransaction();
-            session.save(employee);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-    }
-
     public void addCourse(Course course) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 

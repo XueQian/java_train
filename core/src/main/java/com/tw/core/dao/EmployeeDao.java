@@ -46,25 +46,6 @@ public class EmployeeDao {
         return employee;
     }
 
-    public Course getEmployeeByCourse(int courseId) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Course course;
-
-        try {
-            session.beginTransaction();
-            Query query = session.createQuery("from Employee e join e.courses course where course.id=:id");
-            query.setResultTransformer(RootEntityResultTransformer.INSTANCE);
-            query.setInteger("id", courseId);
-            course = (Course) query.uniqueResult();
-
-            session.getTransaction().commit();
-        }catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-        return course;
-    }
-
     public List<Employee> getEmployees() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 

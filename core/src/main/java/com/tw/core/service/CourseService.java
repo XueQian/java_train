@@ -21,10 +21,6 @@ public class CourseService {
         return courseDao.getCourses();
     }
 
-    public void addEmployeeCourse(Employee employee) {
-        courseDao.addEmployeeCourse(employee);
-    }
-
     public void addCourse(Course course) {
         courseDao.addCourse(course);
     }
@@ -39,10 +35,6 @@ public class CourseService {
 
     public void updateCourse(Course course){
         courseDao.updateCourse(course);
-    }
-
-    public List<Course> getCourseByTime(String time){
-        return courseDao.getCourseByTime(time);
     }
 
     public Course getCourseByName(String name){

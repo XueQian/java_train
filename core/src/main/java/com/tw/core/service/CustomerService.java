@@ -25,10 +25,6 @@ public class CustomerService {
         return customerDao.getCustomerByName(name);
     }
 
-    public void deleteCustomer(Employee employee){
-        customerDao.deleteCustomer(employee);
-    }
-
     public List<Customer> getCustomers(){
         return customerDao.getCustomers();
     }
