@@ -24,14 +24,9 @@ public class CourseController {
     private CourseService courseService;
 
     @RequestMapping(value = "/courses", method = RequestMethod.GET)
-    public ModelAndView getCoursePage() {
+    public @ResponseBody List<Course> getCourses() {
 
-        List<Course> courseList = courseService.getCourses();
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("courses");
-        modelAndView.addObject("courses", courseList);
-        return modelAndView;
+        return courseService.getCourses();
     }
 
     @RequestMapping(value = "/courses/creation", method = RequestMethod.POST)
