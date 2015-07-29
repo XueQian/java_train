@@ -17,6 +17,13 @@ var module = angular.module('gymSystem').controller('courseController', function
         CourserService.addCourse($scope.course, function() {
             getCourses();
         });
+    };
+
+    $scope.deleteCourse = function(id) {
+
+        CourserService.deleteCourse(id, function() {
+            getCourses();
+        });
     }
 });
 
@@ -53,6 +60,12 @@ module.factory('CourserService', function($http) {
                     })
                 }
             });
+        },
+        deleteCourse: function(id, callback) {
+
+            $http.delete('api/courses/deletion/' + id).success(function() {
+                callback();
+            });
         }
     };
 
@@ -63,4 +76,7 @@ module.factory('CourserService', function($http) {
         });
     }
 });
+
+
+
 
