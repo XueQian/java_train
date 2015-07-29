@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gymSystem').controller('courseController', function($scope, CourserService) {
+angular.module('gymSystem').controller('courseController', function($scope, CourseService) {
 
     getCourses();
 
@@ -8,14 +8,14 @@ angular.module('gymSystem').controller('courseController', function($scope, Cour
 
         $scope.addFlag = false;
 
-        CourserService.addCourse($scope.course, function() {
+        CourseService.addCourse($scope.course, function() {
             getCourses();
         });
     };
 
     $scope.deleteCourse = function(id) {
 
-        CourserService.deleteCourse(id, function() {
+        CourseService.deleteCourse(id, function() {
             getCourses();
         });
     };
@@ -30,29 +30,34 @@ angular.module('gymSystem').controller('courseController', function($scope, Cour
         $scope.addFlag = true;
     };
 
-    //function modifyCourse() {
-    //
-    //    //CategoryService.getCategory($routeParams.id, function (data) {
-    //    //    $scope.category = data;
-    //    //});
-    //    //
-    //    //$scope.modifyCategory = function (category) {
-    //    //    CategoryService.modifyCategory(category, function (data) {
-    //    //        $scope.categories = data;
-    //    //    });
-    //    //};
-    //    //
-    //}
-    //
-    //$scope.modifyCourse = function(modifyCourse) {
-    //
-    //};
+    $scope.hideModifyCourse = function() {
+
+        $scope.modifyFlag = true;
+    };
+
+    $scope.getModifyCourse = function(id) {
+
+        $scope.modifyFlag = false;
+
+        CourseService.getCourse(id, function(data) {
+            $scope.courseToBeModified = data;
+        });
+    };
+
+    $scope.modifyCourse = function(course) {
+
+        CourseService.modifyCourse(course, function() {
+
+            getCourses();
+        })
+    };
 
     function getCourses() {
 
         $scope.addFlag = true;
+        $scope.modifyFlag = true;
 
-        CourserService.getCourses(function(data) {
+        CourseService.getCourses(function(data) {
 
             $scope.courses = data;
         });
