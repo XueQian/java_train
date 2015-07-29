@@ -28,9 +28,14 @@ angular.module('gymSystem').service('CourseService', function($http) {
                         description: course.description
                     }
                 }).success(function() {
-
                     callback();
-                })
+                });
+
+                //$http.post('api/courses/creation',{name:course.name,description:course.description})
+                //    .success(
+                //        function(){
+                //        callback();
+                //    })
             }
         });
     };
