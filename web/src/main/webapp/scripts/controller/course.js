@@ -6,7 +6,7 @@ var module = angular.module('gymSystem').controller('courseController', function
 
     $scope.addCourse = function() {
 
-        $scope.flag = false;
+        $scope.addFlag = false;
 
         CourserService.addCourse($scope.course, function() {
             getCourses();
@@ -22,17 +22,36 @@ var module = angular.module('gymSystem').controller('courseController', function
 
     $scope.showAddCourse = function() {
 
-        $scope.flag = false;
+        $scope.addFlag = false;
     };
 
     $scope.hideAddCourse = function() {
 
-        $scope.flag = true;
+        $scope.addFlag = true;
+    };
+
+
+    function modifyCourse(){
+
+        //CategoryService.getCategory($routeParams.id, function (data) {
+        //    $scope.category = data;
+        //});
+        //
+        //$scope.modifyCategory = function (category) {
+        //    CategoryService.modifyCategory(category, function (data) {
+        //        $scope.categories = data;
+        //    });
+        //};
+        //
+    }
+    $scope.modifyCourse = function(modifyCourse){
+
+
     };
 
     function getCourses() {
 
-        $scope.flag = true;
+        $scope.addFlag = true;
 
         CourserService.getCourses(function(data) {
 
@@ -80,6 +99,12 @@ module.factory('CourserService', function($http) {
             $http.delete('api/courses/deletion/' + id).success(function() {
                 callback();
             });
+        },
+        getCourse:function(id,callback){
+
+            $http.get('api/course/'+id).success(function(data){
+                callback(data);
+            })
         }
     };
 
@@ -90,6 +115,7 @@ module.factory('CourserService', function($http) {
         });
     }
 });
+
 
 
 
