@@ -1,3 +1,13 @@
-/**
- * Created by qxue on 7/29/15.
- */
+'use strict';
+
+angular.module('gymSystem').service('EmployeeService', function($http) {
+
+    this.getEmployees = function(callback) {
+
+        $http.get('api/employees').
+            success(function(data) {
+
+                callback(data);
+            });
+    };
+});
