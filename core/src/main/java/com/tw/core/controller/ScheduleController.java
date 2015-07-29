@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by qxue on 7/22/15.
@@ -44,48 +41,37 @@ public class ScheduleController {
         return scheduleService.getSchedules();
     }
 
-//    @RequestMapping(value = "/schedules", method = RequestMethod.GET)
-//    public ModelAndView getSchedulePage() {
-//
-//        List<ScheduleModel> scheduleModels = new ArrayList<ScheduleModel>();
-//
-//        List<Schedule> scheduleList = scheduleService.getSchedules();
-//
-//        for (Schedule schedule : scheduleList) {
-//            scheduleModels.add(new ScheduleModel(schedule.getId(), schedule.getCourse().getName(), schedule.getEmployee().getName(), schedule.getTime()));
-//        }
-//
-//        ModelAndView modelAndView = new ModelAndView();
-//
-//        modelAndView.setViewName("schedules");
-//
-//        modelAndView.addObject("coachList", employeeService.getEmployees());
-//        modelAndView.addObject("courseList", courseService.getCourses());
-//
-//        modelAndView.addObject("customerList", customerService.getCustomers());
-//
-//        modelAndView.addObject("schedules", scheduleModels);
-//        return modelAndView;
-//    }
-
     @RequestMapping(value = "/schedules/creation", method = RequestMethod.POST)
-    public String addSchedule(@RequestParam int courseId, @RequestParam int coachId, @RequestParam String time) {
+    public void addSchedule(@RequestParam int courseId, @RequestParam int employeeId, @RequestParam String time) {
 
-        if (!isCoachFree(coachId, time)) {
+        System.out.println("@@@@@@@@@@@@"+courseId+"######"+employeeId+"$$$$$$$"+time);
 
-            return "the coach is busy";
-        }
-
-        Employee employee = employeeService.getEmployeeById(coachId);
-
+        Employee employee = employeeService.getEmployeeById(employeeId);
         Course course = courseService.getCourseById(courseId);
 
         Schedule schedule = new Schedule(time, employee, course);
 
         scheduleService.addSchedule(schedule);
-
-        return "add schedule is ok";
     }
+
+//    @RequestMapping(value = "/schedules", method = RequestMethod.POST)
+//    public String addSchedule(@RequestParam int courseId, @RequestParam int coachId, @RequestParam String time) {
+//
+//        if (!isCoachFree(coachId, time)) {
+//
+//            return "the coach is busy";
+//        }
+//
+//        Employee employee = employeeService.getEmployeeById(coachId);
+//
+//        Course course = courseService.getCourseById(courseId);
+//
+//        Schedule schedule = new Schedule(time, employee, course);
+//
+//        scheduleService.addSchedule(schedule);
+//
+//        return "add schedule is ok";
+//    }
 
     @RequestMapping(value = "/schedules/private/creation", method = RequestMethod.POST)
     public String addPrivateCoach(@RequestParam int customerId, @RequestParam int coachId, @RequestParam String time) {
