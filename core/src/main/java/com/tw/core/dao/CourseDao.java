@@ -34,15 +34,10 @@ public class CourseDao {
     public void deleteCourse(int id) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        try {
-            session.beginTransaction();
-            Course course = (Course) session.load(Course.class, id);
-            session.delete(course);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
+        session.beginTransaction();
+        Course course = (Course) session.load(Course.class, id);
+        session.delete(course);
+        session.getTransaction().commit();
     }
 
     public Course getCourseById(int id) {
