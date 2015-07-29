@@ -26,15 +26,9 @@ public class CourseDao {
     public void addCourse(Course course) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        try {
-            session.beginTransaction();
-            session.save(course);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-
+        session.beginTransaction();
+        session.save(course);
+        session.getTransaction().commit();
     }
 
     public void deleteCourse(int id) {
