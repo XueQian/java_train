@@ -33,14 +33,9 @@ public class ScheduleDao {
     public void addSchedule(Schedule schedule) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        try {
-            session.beginTransaction();
-            session.save(schedule);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
+        session.beginTransaction();
+        session.save(schedule);
+        session.getTransaction().commit();
     }
 
     public List<Schedule> getScheduleByTime(String time) {
