@@ -2,17 +2,11 @@
 
 var module = angular.module('gymSystem').controller('courseController', function($scope, CourserService) {
 
-    function getCourses() {
-
-        CourserService.getCourses(function(data) {
-
-            $scope.courses = data;
-        });
-    }
-
     getCourses();
 
     $scope.addCourse = function() {
+
+        $scope.flag = false;
 
         CourserService.addCourse($scope.course, function() {
             getCourses();
@@ -23,6 +17,26 @@ var module = angular.module('gymSystem').controller('courseController', function
 
         CourserService.deleteCourse(id, function() {
             getCourses();
+        });
+    };
+
+    $scope.showAddCourse = function() {
+
+        $scope.flag = false;
+    };
+
+    $scope.hideAddCourse = function() {
+
+        $scope.flag = true;
+    };
+
+    function getCourses() {
+
+        $scope.flag = true;
+
+        CourserService.getCourses(function(data) {
+
+            $scope.courses = data;
         });
     }
 });
