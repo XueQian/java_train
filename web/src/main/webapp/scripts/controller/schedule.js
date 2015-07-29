@@ -1,3 +1,14 @@
-/**
- * Created by qxue on 7/29/15.
- */
+'use strict';
+
+angular.module('gymSystem').controller('scheduleController', function($scope, ScheduleService) {
+
+    getSchedules();
+
+    function getSchedules() {
+
+        ScheduleService.getSchedules(function(data) {
+
+            $scope.schedules = data;
+        });
+    }
+});
