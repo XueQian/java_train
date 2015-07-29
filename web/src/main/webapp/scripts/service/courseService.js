@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gymSystem').service('CourserService', function($http) {
+angular.module('gymSystem').service('CourseService', function($http) {
 
     this.getCourses = function(callback) {
 
@@ -42,12 +42,28 @@ angular.module('gymSystem').service('CourserService', function($http) {
         });
     };
 
-    //this.getCourse = function(id, callback) {
-    //
-    //    $http.get('api/course/' + id).success(function(data) {
-    //        callback(data);
-    //    })
-    //};
+    this.getCourse = function(id, callback) {
+
+        $http.get('api/courses/' + id).success(function(data) {
+            callback(data);
+        })
+    };
+
+    this.modifyCourse = function(course,callback){
+
+        $http({
+            method: 'PUT',
+            url: 'api/courses/'+course.id,
+            params: {
+                id:course.id,
+                name: course.name,
+                description: course.description
+            }
+        }).success(function() {
+
+            callback();
+        })
+    };
 
     function hasExistCourse(course, courseList) {
 
@@ -57,6 +73,8 @@ angular.module('gymSystem').service('CourserService', function($http) {
     }
 
 });
+
+
 
 
 
