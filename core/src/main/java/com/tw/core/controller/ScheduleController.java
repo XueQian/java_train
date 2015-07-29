@@ -37,29 +37,36 @@ public class ScheduleController {
     @Autowired
     CustomerService customerService;
 
+
     @RequestMapping(value = "/schedules", method = RequestMethod.GET)
-    public ModelAndView getSchedulePage() {
+    public List<Schedule> getSchedules() {
 
-        List<ScheduleModel> scheduleModels = new ArrayList<ScheduleModel>();
-
-        List<Schedule> scheduleList = scheduleService.getSchedules();
-
-        for (Schedule schedule : scheduleList) {
-            scheduleModels.add(new ScheduleModel(schedule.getId(), schedule.getCourse().getName(), schedule.getEmployee().getName(), schedule.getTime()));
-        }
-
-        ModelAndView modelAndView = new ModelAndView();
-
-        modelAndView.setViewName("schedules");
-
-        modelAndView.addObject("coachList", employeeService.getEmployees());
-        modelAndView.addObject("courseList", courseService.getCourses());
-
-        modelAndView.addObject("customerList", customerService.getCustomers());
-
-        modelAndView.addObject("schedules", scheduleModels);
-        return modelAndView;
+        return scheduleService.getSchedules();
     }
+
+//    @RequestMapping(value = "/schedules", method = RequestMethod.GET)
+//    public ModelAndView getSchedulePage() {
+//
+//        List<ScheduleModel> scheduleModels = new ArrayList<ScheduleModel>();
+//
+//        List<Schedule> scheduleList = scheduleService.getSchedules();
+//
+//        for (Schedule schedule : scheduleList) {
+//            scheduleModels.add(new ScheduleModel(schedule.getId(), schedule.getCourse().getName(), schedule.getEmployee().getName(), schedule.getTime()));
+//        }
+//
+//        ModelAndView modelAndView = new ModelAndView();
+//
+//        modelAndView.setViewName("schedules");
+//
+//        modelAndView.addObject("coachList", employeeService.getEmployees());
+//        modelAndView.addObject("courseList", courseService.getCourses());
+//
+//        modelAndView.addObject("customerList", customerService.getCustomers());
+//
+//        modelAndView.addObject("schedules", scheduleModels);
+//        return modelAndView;
+//    }
 
     @RequestMapping(value = "/schedules/creation", method = RequestMethod.POST)
     public String addSchedule(@RequestParam int courseId, @RequestParam int coachId, @RequestParam String time) {
@@ -125,7 +132,7 @@ public class ScheduleController {
 
         Schedule schedule = scheduleService.getScheduleById(id);
 
-        ScheduleModel scheduleModel = new ScheduleModel(schedule.getId(),schedule.getCourse().getName(), schedule.getEmployee().getName(), schedule.getTime());
+        ScheduleModel scheduleModel = new ScheduleModel(schedule.getId(), schedule.getCourse().getName(), schedule.getEmployee().getName(), schedule.getTime());
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("updateSchedule");
