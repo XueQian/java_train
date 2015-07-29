@@ -24,13 +24,10 @@ public class CourseController {
     private CourseService courseService;
 
     @RequestMapping(value = "/courses", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    List<Course> getCourses() {
+    public List<Course> getCourses() {
 
         return courseService.getCourses();
     }
-
 
     @RequestMapping(value = "/courses/creation", method = RequestMethod.POST)
     public void addCourse(@RequestParam String name, @RequestParam String description) {
@@ -44,18 +41,14 @@ public class CourseController {
         courseService.deleteCourse(id);
     }
 
-    @RequestMapping(value = "/courses/modification/{id}", method = RequestMethod.GET)
-    public ModelAndView getUpdateCoursePage(@PathVariable int id) {
 
-        Course course = courseService.getCourseById(id);
+    @RequestMapping(value = "/courses/{id}", method = RequestMethod.GET)
+    public Course getCourse(@PathVariable int id) {
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("updateCourse");
-        modelAndView.addObject("course", course);
-        return modelAndView;
+        return courseService.getCourseById(id);
     }
 
-    @RequestMapping(value = "/courses/modification/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/courses/{id}", method = RequestMethod.PUT)
     public void updateCourse(@PathVariable int id, @RequestParam String name, @RequestParam String description) {
 
         courseService.updateCourse(new Course(id, name, description));
