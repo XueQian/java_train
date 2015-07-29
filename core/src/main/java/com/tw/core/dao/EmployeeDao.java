@@ -16,6 +16,17 @@ import java.util.List;
 @Repository
 public class EmployeeDao {
 
+    public List<Employee> getEmployees() {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        List<Employee> employeeList;
+        session.beginTransaction();
+        employeeList = session.createQuery("from Employee").list();
+        session.getTransaction().commit();
+
+        return employeeList;
+    }
+
     public void addEmployee(Employee employee) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
@@ -44,23 +55,6 @@ public class EmployeeDao {
             throw e;
         }
         return employee;
-    }
-
-    public List<Employee> getEmployees() {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-
-        List<Employee> employeeList;
-
-        try {
-            session.beginTransaction();
-            employeeList = session.createQuery("from Employee").list();
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-
-        return employeeList;
     }
 
     public Employee getEmployeeById(int id) {
