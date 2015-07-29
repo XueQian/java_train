@@ -40,17 +40,14 @@
             <tr>
                 <th class="text-center"><h4>课程名称</h4></th>
                 <th class="text-center"><h4>课程描述</h4></th>
-                <!--<th class="text-center"><h4>操作</h4></th>-->
+                <th class="text-center"><h4>操作</h4></th>
                 <!--<th class="text-center"><h4>操作</h4></th>-->
             </tr>
 
             <tr ng-repeat="course in courses">
                 <td><h4>{{course.name}}</h4></td>
                 <td><h4>{{course.description}}</h4></td>
-                <!--<td><a role="button" class="btn btn-primary btn-lg"-->
-                <!--href="./customers/modification/<c:out value="${customer.id}"/>">更新</a></td>-->
-                <!--<td><a role="button" class="btn btn-danger btn-lg"-->
-                <!--href="./customers/deletion/<c:out value="${customer.id}"/>">删除</a></td>-->
+                <td><button type="button" class="btn btn-danger " ng-click="deleteCourse(course.id)">删除</button></td>
             </tr>
 
         </table>
