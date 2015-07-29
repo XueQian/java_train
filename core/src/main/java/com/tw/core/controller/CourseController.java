@@ -24,22 +24,19 @@ public class CourseController {
     private CourseService courseService;
 
     @RequestMapping(value = "/courses", method = RequestMethod.GET)
-    public @ResponseBody List<Course> getCourses() {
+    public
+    @ResponseBody
+    List<Course> getCourses() {
 
         return courseService.getCourses();
     }
 
-    @RequestMapping(value = "/courses/creation", method = RequestMethod.POST)
-    public String addCourse(@RequestParam String name, @RequestParam String description) {
 
-        if (courseService.getCourseByName(name) != null) {
-            return "the course is exist";
-        }
+    @RequestMapping(value = "/courses/creation", method = RequestMethod.POST)
+    public void addCourse(@RequestParam String name, @RequestParam String description) {
 
         Course course = new Course(name, description);
         courseService.addCourse(course);
-
-        return "add course is ok";
     }
 
     @RequestMapping(value = "/courses/deletion/{id}", method = RequestMethod.GET)
