@@ -18,13 +18,13 @@ public class ScheduleDao {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         List<Schedule> scheduleList;
 
-        try {
-            session.beginTransaction();
-            scheduleList = session.createQuery("from Schedule").list();
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
+        session.beginTransaction();
+        scheduleList = session.createQuery("from Schedule").list();
+        session.getTransaction().commit();
+
+        for (Schedule schedule : scheduleList) {
+            schedule.getCourse().getDescription();
+            schedule.getEmployee().getSchedules();
         }
 
         return scheduleList;
