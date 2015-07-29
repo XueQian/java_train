@@ -40,6 +40,27 @@ public class CourseDao {
         session.getTransaction().commit();
     }
 
+    public Course getCourseByName(String name) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Course course;
+
+        session.beginTransaction();
+        Query query = session.createQuery("from Course where name=:name");
+        query.setString("name", name);
+        course = (Course) query.uniqueResult();
+        session.getTransaction().commit();
+
+        return course;
+    }
+
+    public void updateCourse(Course course) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        session.beginTransaction();
+        session.update(course);
+        session.getTransaction().commit();
+    }
+
     public Course getCourseById(int id) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Course course;
@@ -47,36 +68,6 @@ public class CourseDao {
         try {
             session.beginTransaction();
             course = (Course) session.get(Course.class, id);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-        return course;
-    }
-
-    public void updateCourse(Course course) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-
-        try {
-            session.beginTransaction();
-            session.update(course);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-    }
-
-    public Course getCourseByName(String name) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Course course;
-
-        try {
-            session.beginTransaction();
-            Query query = session.createQuery("from Course where name=:name");
-            query.setString("name", name);
-            course = (Course) query.uniqueResult();
             session.getTransaction().commit();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
