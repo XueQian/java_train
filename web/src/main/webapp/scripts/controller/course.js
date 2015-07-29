@@ -44,9 +44,9 @@ angular.module('gymSystem').controller('courseController', function($scope, Cour
         });
     };
 
-    $scope.modifyCourse = function(course) {
+    $scope.modifyCourse = function(courseToBeModified) {
 
-        CourseService.modifyCourse(course, function() {
+        CourseService.modifyCourse(courseToBeModified, function() {
 
             getCourses();
         })
