@@ -18,8 +18,12 @@
             <tr ng-repeat="course in courses">
                 <td><h4>{{course.name}}</h4></td>
                 <td><h4>{{course.description}}</h4></td>
-                <td><button type="button" class="btn btn-danger " ng-click="deleteCourse(course.id)">删除</button></td>
-                <td><button type="button" class="btn btn-primary " ng-click="deleteCourse(course.id)">修改</button></td>
+                <td>
+                    <button type="button" class="btn btn-danger " ng-click="deleteCourse(course.id)">删除</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary " ng-click="getModifyCourse(course.id)">修改</button>
+                </td>
             </tr>
 
         </table>
@@ -55,34 +59,34 @@
         </div>
     </div>
 
-    <!--<div class="panel panel-success well well-sm col-lg-3" ng-hide="modifyFlag">-->
+    <div class="panel panel-success well well-sm col-lg-3" ng-hide="modifyFlag">
 
-        <!--<div class="panel-heading">-->
-            <!--<div class="row">-->
-                <!--<div class="col-md-10">-->
-                    <!--<h2>修改课程</h2>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="panel-body">-->
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-10">
+                    <h2>修改课程</h2>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
 
-            <!--<div class="col-md-11 col-md-offset-1 text-center input-group">-->
-                <!--<span class="input-group-addon">课程名称</span>-->
-                <!--<input type="text" class="form-control"-->
-                       <!--aria-describedby="basic-addon1" placeholder="name" ng-model="modifyCourse.name"/>-->
-            <!--</div>-->
-            <!--<div class="col-md-11 col-md-offset-1 text-cente input-group">-->
-                <!--<span class="input-group-addon">课程描述</span>-->
-                <!--<input type="text" class="form-control"-->
-                       <!--aria-describedby="basic-addon1" placeholder="description" ng-model="modifyCourse.description"/>-->
-            <!--</div>-->
+            <div class="col-md-11 col-md-offset-1 text-center input-group">
+                <span class="input-group-addon">课程名称</span>
+                <input type="text" class="form-control"
+                       aria-describedby="basic-addon1" placeholder="name" ng-model="courseToBeModified.name"/>
+            </div>
+            <div class="col-md-11 col-md-offset-1 text-cente input-group">
+                <span class="input-group-addon">课程描述</span>
+                <input type="text" class="form-control"
+                       aria-describedby="basic-addon1" placeholder="description" ng-model="courseToBeModified.description"/>
+            </div>
 
-            <!--<div class="col-md-11 col-md-offset-1 text-center">-->
-                <!--<a class="btn btn-primary" role="button" ng-click="ng-click="modifyCourse(modifyCourse)"">确定</a>-->
-                <!--<a class="btn btn-default" role="button" ng-click="hideModifyFlag()">取消</a>-->
-            <!--</div>-->
+            <div class="col-md-11 col-md-offset-1 text-center">
+                <a class="btn btn-primary" role="button" ng-click="modifyCourse(courseToBeModified)">确定</a>
+                <a class="btn btn-default" role="button" ng-click="hideModifyCourse()">取消</a>
+            </div>
 
-        <!--</div>-->
-    <!--</div>-->
+        </div>
+    </div>
 
 </div>
