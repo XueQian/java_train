@@ -19,14 +19,9 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
-    public ModelAndView getEmployees() {
+    public @ResponseBody List<Employee> getEmployees() {
 
-        List<Employee> employeeList = employeeService.getEmployees();
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("employees");
-        modelAndView.addObject("employees", employeeList);
-        return modelAndView;
+        return employeeService.getEmployees();
     }
 
     @RequestMapping(value = "/employees/creation", method = RequestMethod.POST)
