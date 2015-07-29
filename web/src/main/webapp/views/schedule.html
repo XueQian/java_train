@@ -3,7 +3,7 @@
     <div class="panel panel-success well well-sm col-lg-9">
         <div class="panel-heading">
             <h3>健身房管理系统~课表</h3>
-            <!--<button type="button" class="btn btn-primary" ng-click="showAddCourse()">添加课表</button>-->
+            <button type="button" class="btn btn-primary" ng-click="showAddSchedule()">添加课表</button>
         </div>
 
         <table class="table text-center table-responsive">
@@ -21,14 +21,58 @@
                 <td><h4>{{schedule.employee.name}}</h4></td>
                 <td><h4>{{schedule.time}}</h4></td>
                 <!--<td>-->
-                    <!--<button type="button" class="btn btn-danger " ng-click="deleteCourse(course.id)">删除</button>-->
+                <!--<button type="button" class="btn btn-danger " ng-click="deleteCourse(course.id)">删除</button>-->
                 <!--</td>-->
                 <!--<td>-->
-                    <!--<button type="button" class="btn btn-primary " ng-click="getModifyCourse(course.id)">修改</button>-->
+                <!--<button type="button" class="btn btn-primary " ng-click="getModifyCourse(course.id)">修改</button>-->
                 <!--</td>-->
             </tr>
 
         </table>
+    </div>
+
+    <div class="panel panel-success well well-sm col-lg-3" ng-hide="addFlag">
+
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-10">
+                    <h2>添加课表</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-md-11 col-md-offset-1 text-center">
+                    课程名称
+                    <select ng-model="courseId">
+                        <option ng-repeat="course in courses" value={{course.id}}>{{course.name}}</option>
+                    </select>
+                </div>
+
+                <div class="col-md-11 col-md-offset-1 text-center">
+                    教练名称
+                    <select ng-model="employeeId">
+                        <option ng-repeat="employee in employees" value={{employee.id}}>{{employee.name}}</option>
+                    </select>
+                </div>
+
+                <div class="col-md-11 col-md-offset-1 text-center">
+                    时间
+                    <input type="date" class="form-control"
+                           aria-describedby="basic-addon1" name="time" ng-model="time">
+                </div>
+
+                <div class="col-md-11 col-md-offset-1 text-center">
+                    操作
+                    <a class="btn btn-primary" role="button" ng-click="addSchedule(employeeId,courseId,time)">确定</a>
+                    <a class="btn btn-default" role="button" ng-click="hideAddSchedule()">取消</a>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
 </div>
