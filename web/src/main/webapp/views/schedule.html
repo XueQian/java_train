@@ -4,10 +4,10 @@
         <div class="panel-heading">
             <h3>健身房管理系统~课表</h3>
             <button type="button" class="btn btn-primary" ng-click="showAddSchedule()">添加课表</button>
+            <button type="button" class="btn btn-primary" ng-click="showAddPrivateCoach()">预约私教</button>
         </div>
 
         <table class="table text-center table-responsive">
-
             <tr>
                 <th class="text-center"><h4>课表名称</h4></th>
                 <th class="text-center"><h4>教练名称</h4></th>
@@ -27,7 +27,6 @@
                 <!--<button type="button" class="btn btn-primary " ng-click="getModifyCourse(course.id)">修改</button>-->
                 <!--</td>-->
             </tr>
-
         </table>
     </div>
 
@@ -42,19 +41,19 @@
         </div>
 
         <div class="panel-body">
-
             <div class="row">
-
                 <div class="form-group col-md-11 col-md-offset-1 text-center">
                     <label for="sel1">课程名称</label>
-                    <select class="form-control" id="sel1" ng-model="course" ng-options="course.name for course in courses">
+                    <select class="form-control" id="sel1" ng-model="course"
+                            ng-options="course.name for course in courses">
                         <option value="">选个课程呗</option>
                     </select>
                 </div>
 
                 <div class="form-group col-md-11 col-md-offset-1 text-center">
                     <label for="sel2">教练名称</label>
-                    <select class="form-control" id="sel2" ng-model="employee" ng-options="employee.name for employee in employees">
+                    <select class="form-control" id="sel2" ng-model="employee"
+                            ng-options="employee.name for employee in employees">
                         <option value="">找个教练~\(≧▽≦)/~啦啦啦</option>
                     </select>
                 </div>
@@ -70,9 +69,58 @@
                     <a class="btn btn-default" role="button" ng-click="hideAddSchedule()">取消</a>
                 </div>
             </div>
+        </div>
+    </div>
 
+    <div class="panel panel-success well well-sm col-lg-3" ng-hide="addPrivateFlag">
+
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-10">
+                    <h2>预约私教</h2>
+                </div>
+            </div>
         </div>
 
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-md-11 col-md-offset-1 text-center">
+                    <label for="sel3">课程名称</label>
+                    <select class="form-control" id="sel3" ng-model="privateCourse"
+                            ng-options="privateCourse.name for privateCourse in courses">
+                        <option value="">选个课程呗</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-11 col-md-offset-1 text-center">
+                    <label for="sel4">顾客名称</label>
+                    <select class="form-control" id="sel4" ng-model="privateCustomer"
+                            ng-options="privateCustomer.name for privateCustomer in customers">
+                        <option value="">哼╭(╯^╰)╮顾客是who</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-11 col-md-offset-1 text-center">
+                    <label for="sel5">教练名称</label>
+                    <select class="form-control" id="sel5" ng-model="privateEmployee"
+                            ng-options="privateEmployee.name for privateEmployee in employees">
+                        <option value="">找个教练~\(≧▽≦)/~啦啦啦</option>
+                    </select>
+                </div>
+
+                <div class="col-md-11 col-md-offset-1 text-center">
+                    时间
+                    <input type="date" class="form-control"
+                           aria-describedby="basic-addon1" name="time" ng-model="privateTime">
+                </div>
+
+                <div class="col-md-11 col-md-offset-1 text-center">
+                    <a class="btn btn-primary" role="button"
+                       ng-click="addPrivateCoach(privateCourse.id,privateCustomer.id,privateEmployee.id,privateTime)">确定</a>
+                    <a class="btn btn-default" role="button" ng-click="hideAddPrivateCoach()">取消</a>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
