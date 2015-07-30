@@ -15,8 +15,11 @@ angular
                 templateUrl: 'views/schedule.html',
                 controller: 'scheduleController'
             })
+            .when('/customers', {
+                templateUrl: 'views/customer.html',
+                controller: 'customerController'
+            })
             .otherwise({
                 redirectTo: '/1111111'
             });
-
     });
