@@ -1,3 +1,14 @@
-/**
- * Created by qxue on 7/30/15.
- */
+'use strict';
+
+angular.module('gymSystem').controller('customerController', function($scope, CustomerService) {
+
+    getCustomers();
+
+    function getCustomers() {
+
+        CustomerService.getCustomers(function(data) {
+
+            $scope.customers = data;
+        });
+    }
+});
