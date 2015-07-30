@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<div class="container">
 
-</body>
-</html>
+    <div class="panel panel-success well well-sm col-lg-9">
+        <div class="panel-heading">
+            <h3>健身房管理系统~顾客</h3>
+            <button type="button" class="btn btn-primary" ng-click="showAddCourse()">添加顾客</button>
+        </div>
+
+        <table class="table text-center table-responsive">
+
+            <tr>
+                <th class="text-center"><h4>顾客名称</h4></th>
+                <th class="text-center"><h4>性别</h4></th>
+                <th class="text-center"><h4>邮箱</h4></th>
+                <th class="text-center"><h4>电话</h4>
+                <th class="text-center"><h4>私教</h4></th>
+                <th class="text-center"><h4>操作</h4></th>
+                <th class="text-center"><h4>操作</h4></th>
+            </tr>
+
+            <tr ng-repeat="customer in customers">
+                <td><h4>{{customer.name}}</h4></td>
+                <td><h4>{{customer.sex}}</h4></td>
+                <td><h4>{{customer.email}}</h4></td>
+                <td><h4>{{customer.telephone}}</h4></td>
+                <td><h4>{{customer.employee.name}}</h4></td>
+                <td>
+                    <button type="button" class="btn btn-danger " ng-click="deleteCourse(course.id)">删除</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary " ng-click="getModifyCourse(course.id)">修改</button>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+</div>
