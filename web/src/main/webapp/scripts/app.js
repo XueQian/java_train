@@ -19,6 +19,10 @@ angular
                 templateUrl: 'views/customer.html',
                 controller: 'customerController'
             })
+            .when('/users', {
+                templateUrl: 'views/user.html',
+                controller: 'userController'
+            })
             .otherwise({
                 redirectTo: '/1111111'
             });
