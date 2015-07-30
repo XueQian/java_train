@@ -16,14 +16,9 @@ public class UserDao {
 
         List<User> userList;
 
-        try {
-            session.beginTransaction();
-            userList = session.createQuery("from User").list();
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
+        session.beginTransaction();
+        userList = session.createQuery("from User").list();
+        session.getTransaction().commit();
 
         return userList;
     }
