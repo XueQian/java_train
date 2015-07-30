@@ -35,9 +35,17 @@ angular.module('gymSystem').controller('scheduleController', function($scope, Sc
         loadData();
     };
 
-    $scope.hideAddPrivateCoach = function(){
+    $scope.hideAddPrivateCoach = function() {
 
         $scope.addPrivateFlag = true;
+    };
+
+    $scope.addPrivateCoach = function(customerId, employeeId, time) {
+
+        ScheduleService.addPrivateCoach(customerId, employeeId, time, function() {
+
+            getSchedules();
+        });
     };
 
     function getSchedules() {
@@ -63,7 +71,7 @@ angular.module('gymSystem').controller('scheduleController', function($scope, Sc
             $scope.employees = data;
         });
 
-        CustomerService.getCustomers(function(data){
+        CustomerService.getCustomers(function(data) {
 
             $scope.customers = data;
         })
