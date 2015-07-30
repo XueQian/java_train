@@ -54,6 +54,13 @@ angular.module('gymSystem').service('ScheduleService', function($http) {
             }
         });
     };
+
+    this.deleteSchedule = function(id, callback) {
+
+        $http.delete('api/schedules/' + id).success(function() {
+            callback();
+        });
+    };
 });
 
 
