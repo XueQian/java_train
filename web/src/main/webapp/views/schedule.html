@@ -44,16 +44,17 @@
         <div class="panel-body">
 
             <div class="row">
-                <div class="col-md-11 col-md-offset-1 text-center">
-                    课程名称
-                    <select ng-model="courseId">
+
+                <div class="form-group col-md-11 col-md-offset-1 text-center">
+                    <label for="sel1">课程名称</label>
+                    <select class="form-control" id="sel1" ng-model="courseId">
                         <option ng-repeat="course in courses" value={{course.id}}>{{course.name}}</option>
                     </select>
                 </div>
 
-                <div class="col-md-11 col-md-offset-1 text-center">
-                    教练名称
-                    <select ng-model="employeeId">
+                <div class="form-group col-md-11 col-md-offset-1 text-center">
+                    <label for="sel2">教练名称</label>
+                    <select class="form-control" id="sel2" ng-model="employeeId">
                         <option ng-repeat="employee in employees" value={{employee.id}}>{{employee.name}}</option>
                     </select>
                 </div>
