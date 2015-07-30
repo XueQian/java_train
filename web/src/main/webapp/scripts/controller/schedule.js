@@ -16,7 +16,11 @@ angular.module('gymSystem').controller('scheduleController', function($scope, Sc
         EmployeeService.getEmployees(function(data) {
 
             $scope.employees = data;
-        })
+        });
+
+        $scope.employee = null;
+        $scope.course = null;
+        $scope.time = null;
     };
 
     $scope.addSchedule = function(employeeId, courseId, time) {
