@@ -1,3 +1,14 @@
-/**
- * Created by qxue on 7/30/15.
- */
+'use strict';
+
+angular.module('gymSystem').controller('employeeController', function($scope, EmployeeService) {
+
+    getEmployees();
+
+    function getEmployees() {
+
+        EmployeeService.getEmployees(function(data){
+
+            $scope.employees = data;
+        })
+    }
+});
