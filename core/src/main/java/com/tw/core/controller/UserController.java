@@ -2,12 +2,16 @@ package com.tw.core.controller;
 
 import com.tw.core.entity.Employee;
 import com.tw.core.entity.User;
+import com.tw.core.service.CourseService;
+import com.tw.core.service.EmployeeService;
 import com.tw.core.service.UserService;
 import com.tw.core.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +22,13 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public List<User> getUsers() {
+
+        return userService.getUsers();
+    }
+
 
     @RequestMapping(value = "/users/creation", method = RequestMethod.POST)
     public String addUser(@RequestParam String name, @RequestParam String password) {
@@ -37,17 +48,6 @@ public class UserController {
 
         userService.addUser(user);
         return "add use is ok";
-    }
-
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public ModelAndView getUsers() {
-
-        List<User> userList = userService.getUsers();
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("users");
-        modelAndView.addObject("users", userList);
-        return modelAndView;
     }
 
     @RequestMapping(value = "/users/modification/{id}", method = RequestMethod.GET)
