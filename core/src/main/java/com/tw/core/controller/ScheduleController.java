@@ -4,14 +4,11 @@ import com.tw.core.entity.Course;
 import com.tw.core.entity.Customer;
 import com.tw.core.entity.Employee;
 import com.tw.core.entity.Schedule;
-import com.tw.core.model.ScheduleModel;
 import com.tw.core.service.CourseService;
 import com.tw.core.service.CustomerService;
 import com.tw.core.service.EmployeeService;
 import com.tw.core.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -117,53 +114,25 @@ public class ScheduleController {
         scheduleService.deleteSchedule(id);
     }
 
+    @RequestMapping(value = "/schedules/{id}", method = RequestMethod.PUT)
+    public void updateSchedule(@RequestBody Schedule schedule, HttpServletResponse response) {
 
-    @RequestMapping(value = "/schedules/modification/{id}", method = RequestMethod.GET)
-    public ModelAndView getUpdateSchedulePage(@PathVariable int id) {
+        Employee employee = employeeService.getEmployeeByName(schedule.getEmployee().getName());
+        Course course = courseService.getCourseByName(schedule.getCourse().getName());
 
-        Schedule schedule = scheduleService.getScheduleById(id);
+        Schedule newSchedule = new Schedule(schedule.getId(), schedule.getTime(), employee, course);
 
-        ScheduleModel scheduleModel = new ScheduleModel(schedule.getId(), schedule.getCourse().getName(), schedule.getEmployee().getName(), schedule.getTime());
+        System.out.println(schedule.getTime());
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("updateSchedule");
-        modelAndView.addObject("schedule", scheduleModel);
-        return modelAndView;
-    }
+        if (!isCoachFree(employee.getId(), schedule.getTime())) {
 
-    @RequestMapping(value = "/schedules/modification/{id}", method = RequestMethod.PUT)
-    public String updateSchedule(@PathVariable int id, @RequestParam String name, @RequestParam String coach,
-                                 @RequestParam String time) {
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
 
-        Employee employee = employeeService.getEmployeeByName(coach);
-        Course course = courseService.getCourseByName(name);
-
-        Schedule schedule = new Schedule(id, time, employee, course);
-
-        if (!isCoachFree(employee.getId(), time)) {
-
-            return "the coach is busy";
+        } else {
+            scheduleService.updateSchedule(newSchedule);
+            response.setStatus(HttpServletResponse.SC_OK);
         }
-        scheduleService.updateSchedule(schedule);
-
-        return "update schedule is ok";
     }
-
-//    @RequestMapping(value = "/schedules/deletion/{id}", method = RequestMethod.GET)
-//    public ModelAndView deleteSchedule(@PathVariable int id) {
-//
-//        Employee employee = scheduleService.getScheduleById(id).getEmployee();
-//
-//        Customer customer = customerService.getCustomerByEmployee(employee);
-//
-//        if (employee != null && customer != null) {
-//            customer = new Customer(customer.getId(), customer.getName(), customer.getSex(), customer.getEmail(), customer.getTelephone(), null);
-//            customerService.updateCustomer(customer);
-//        }
-//
-//        scheduleService.deleteSchedule(id);
-//        return new ModelAndView("redirect:/schedules");
-//    }
 
     private boolean isCoachFree(int employeeId, String time) {
 
