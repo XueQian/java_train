@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gymSystem').controller('scheduleController', function($scope, ScheduleService,CourseService,EmployeeService) {
+angular.module('gymSystem').controller('scheduleController', function($scope, ScheduleService, CourseService, EmployeeService) {
 
     getSchedules();
 
@@ -13,18 +13,18 @@ angular.module('gymSystem').controller('scheduleController', function($scope, Sc
             $scope.courses = data;
         });
 
-        EmployeeService.getEmployees(function(data){
+        EmployeeService.getEmployees(function(data) {
 
             $scope.employees = data;
         })
     };
 
-    $scope.addSchedule = function(){
+    $scope.addSchedule = function(employeeId, courseId, time) {
 
-       ScheduleService.addSchedule($scope.employeeId,$scope.courseId,$scope.time,function(){
+        ScheduleService.addSchedule(employeeId, courseId, time, function() {
 
-           getSchedules();
-       });
+            getSchedules();
+        });
     };
 
     $scope.hideAddSchedule = function() {
