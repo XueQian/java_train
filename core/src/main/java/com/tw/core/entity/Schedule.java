@@ -1,6 +1,7 @@
 package com.tw.core.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -14,13 +15,8 @@ public class Schedule {
     private String time;
     private Employee employee;
     private Course course;
-    private Set<Customer> customers;
 
     public Schedule() {
-    }
-
-    public Schedule(int id) {
-        this.id = id;
     }
 
     public Schedule(String time, Employee employee, Course course) {
@@ -75,13 +71,4 @@ public class Schedule {
     public void setCourse(Course course) {
         this.course = course;
     }
-
-//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "schedules",cascade=CascadeType.ALL)
-//    public Set<Customer> getCustomers() {
-//        return customers;
-//    }
-//
-//    public void setCustomers(Set<Customer> customers) {
-//        this.customers = customers;
-//    }
 }
