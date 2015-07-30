@@ -23,6 +23,8 @@ angular.module('gymSystem').controller('courseController', function($scope, Cour
     $scope.showAddCourse = function() {
 
         $scope.addFlag = false;
+        $scope.course.name = null;
+        $scope.course.description = null;
     };
 
     $scope.hideAddCourse = function() {
