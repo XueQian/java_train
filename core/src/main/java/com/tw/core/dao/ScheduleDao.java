@@ -23,8 +23,14 @@ public class ScheduleDao {
         session.getTransaction().commit();
 
         for (Schedule schedule : scheduleList) {
-            schedule.getCourse().getDescription();
-            schedule.getEmployee().getSchedules();
+
+            if(schedule.getCourse() != null){
+                schedule.getCourse().getDescription();
+            }
+
+            if(schedule.getEmployee() != null) {
+                schedule.getEmployee().getSchedules();
+            }
         }
 
         return scheduleList;

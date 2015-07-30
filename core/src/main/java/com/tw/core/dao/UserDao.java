@@ -20,6 +20,13 @@ public class UserDao {
         userList = session.createQuery("from User").list();
         session.getTransaction().commit();
 
+        for (User user : userList) {
+
+            if (user.getEmployee() != null) {
+                user.getEmployee().getEmail();
+            }
+        }
+
         return userList;
     }
 

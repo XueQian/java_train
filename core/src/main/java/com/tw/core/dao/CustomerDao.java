@@ -24,8 +24,11 @@ public class CustomerDao {
         customerList = session.createQuery("from Customer").list();
         session.getTransaction().commit();
 
-        for(Customer customer:customerList){
-            customer.getEmployee().getEmail();
+        for (Customer customer : customerList) {
+
+            if (customer.getEmployee() != null) {
+                customer.getEmployee().getEmail();
+            }
         }
 
         return customerList;
