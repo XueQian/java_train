@@ -11,6 +11,7 @@
             <tr>
                 <th class="text-center"><h4>用户名称</h4></th>
                 <th class="text-center"><h4>密码</h4></th>
+                <th class="text-center"><h4>雇员名称</h4></th>
                 <th class="text-center"><h4>操作</h4></th>
                 <th class="text-center"><h4>操作</h4></th>
             </tr>
@@ -18,6 +19,7 @@
             <tr ng-repeat="user in users">
                 <td><h4>{{user.name}}</h4></td>
                 <td><h4>{{user.password}}</h4></td>
+                <td><h4>{{user.employee.name}}</h4></td>
                 <td>
                     <button type="button" class="btn btn-danger " ng-click="deleteCourse(course.id)">删除</button>
                 </td>
