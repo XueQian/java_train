@@ -38,6 +38,15 @@ public class ScheduleDao {
         session.getTransaction().commit();
     }
 
+    public void deleteSchedule(int id) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        session.beginTransaction();
+        Schedule schedule = (Schedule) session.load(Schedule.class, id);
+        session.delete(schedule);
+        session.getTransaction().commit();
+    }
+
     public List<Schedule> getScheduleByTime(String time) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         List scheduleList;
@@ -77,20 +86,6 @@ public class ScheduleDao {
         try {
             session.beginTransaction();
             session.update(schedule);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-    }
-
-    public void deleteSchedule(int id) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-
-        try {
-            session.beginTransaction();
-            Schedule schedule = (Schedule) session.load(Schedule.class, id);
-            session.delete(schedule);
             session.getTransaction().commit();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
