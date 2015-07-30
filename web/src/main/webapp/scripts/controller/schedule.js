@@ -35,6 +35,11 @@ angular.module('gymSystem').controller('scheduleController', function($scope, Sc
         loadData();
     };
 
+    $scope.hideAddPrivateCoach = function(){
+
+        $scope.addPrivateFlag = true;
+    };
+
     function getSchedules() {
 
         $scope.addFlag = true;
