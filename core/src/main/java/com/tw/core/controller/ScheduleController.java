@@ -62,9 +62,9 @@ public class ScheduleController {
         }
     }
 
-    @RequestMapping(value = "/schedules/private/creation", method = RequestMethod.POST)
-    public String addPrivateCoach(@RequestParam int customerId, @RequestParam int coachId,
-                                  @RequestParam String time) {
+    @RequestMapping(value = "/schedules/private", method = RequestMethod.POST)
+    public void addPrivateCoach(@RequestParam int customerId, @RequestParam int employeeId,
+                                @RequestParam String time, HttpServletResponse response) {
 
         Customer customer = customerService.getCustomerById(customerId);
 
@@ -73,34 +73,33 @@ public class ScheduleController {
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("privateCoachIsExist");
 
-            return "the customer has a private coach";
-        }
-
-        if (!isCoachFree(coachId, time)) {
+            response.setStatus(HttpServletResponse.SC_EXPECTATION_FAILED);
+        } else if (!isCoachFree(employeeId, time)) {
 
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("privateCoachIsBusy");
 
-            return "the coach is busy";
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
+        } else {
+
+            Employee employee = employeeService.getEmployeeById(employeeId);
+
+            if (courseService.getCourseByName("私教") == null) {
+                courseService.addCourse(new Course("私教"));
+            }
+
+            customer.setEmployee(employee);
+
+            Schedule schedule = new Schedule(time, employee, courseService.getCourseByName("私教"));
+
+            Set<Schedule> scheduleSet = new HashSet<Schedule>();
+            scheduleSet.add(schedule);
+
+            customer.setSchedules(scheduleSet);
+
+            customerService.updateCustomer(customer);
+            response.setStatus(HttpServletResponse.SC_OK);
         }
-
-        Employee employee = employeeService.getEmployeeById(coachId);
-
-        if (courseService.getCourseByName("私教") == null) {
-            courseService.addCourse(new Course("私教"));
-        }
-
-        customer.setEmployee(employee);
-
-        Schedule schedule = new Schedule(time, employee, courseService.getCourseByName("私教"));
-
-        Set<Schedule> scheduleSet = new HashSet<Schedule>();
-        scheduleSet.add(schedule);
-
-        customer.setSchedules(scheduleSet);
-
-        customerService.updateCustomer(customer);
-        return "add private coach is ok";
     }
 
     @RequestMapping(value = "/schedules/modification/{id}", method = RequestMethod.GET)
