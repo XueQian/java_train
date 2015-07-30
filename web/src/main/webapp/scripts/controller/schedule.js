@@ -48,6 +48,14 @@ angular.module('gymSystem').controller('scheduleController', function($scope, Sc
         });
     };
 
+    $scope.deleteSchedule = function(id) {
+
+        ScheduleService.deleteSchedule(id, function() {
+
+            getSchedules();
+        })
+    };
+
     function getSchedules() {
 
         $scope.addFlag = true;
