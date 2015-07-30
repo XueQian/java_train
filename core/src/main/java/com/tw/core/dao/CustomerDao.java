@@ -18,17 +18,12 @@ public class CustomerDao {
     public void addCustomer(Customer customer) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        try {
-            session.beginTransaction();
-            session.save(customer);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
+        session.beginTransaction();
+        session.save(customer);
+        session.getTransaction().commit();
     }
 
-    public Customer getCustomerByName(String name){
+    public Customer getCustomerByName(String name) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Customer customer;
 
@@ -105,7 +100,7 @@ public class CustomerDao {
         }
     }
 
-    public Customer getCustomerByEmployee(Employee employee){
+    public Customer getCustomerByEmployee(Employee employee) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Customer customer;
 
