@@ -15,6 +15,22 @@ import java.util.List;
 @Repository
 public class CustomerDao {
 
+    public List<Customer> getCustomers() {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        List<Customer> customerList;
+
+        session.beginTransaction();
+        customerList = session.createQuery("from Customer").list();
+        session.getTransaction().commit();
+
+        for(Customer customer:customerList){
+            customer.getEmployee().getEmail();
+        }
+
+        return customerList;
+    }
+
     public void addCustomer(Customer customer) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
@@ -38,23 +54,6 @@ public class CustomerDao {
             throw e;
         }
         return customer;
-    }
-
-    public List<Customer> getCustomers() {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-
-        List<Customer> customerList;
-
-        try {
-            session.beginTransaction();
-            customerList = session.createQuery("from Customer").list();
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-
-        return customerList;
     }
 
     public Customer getCustomerById(int id) {
