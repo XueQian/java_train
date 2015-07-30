@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gymSystem').controller('scheduleController', function($scope, ScheduleService, CourseService, EmployeeService) {
+angular.module('gymSystem').controller('scheduleController', function($scope, ScheduleService, CourseService, EmployeeService, CustomerService) {
 
     getSchedules();
 
@@ -8,15 +8,7 @@ angular.module('gymSystem').controller('scheduleController', function($scope, Sc
 
         $scope.addFlag = false;
 
-        CourseService.getCourses(function(data) {
-
-            $scope.courses = data;
-        });
-
-        EmployeeService.getEmployees(function(data) {
-
-            $scope.employees = data;
-        });
+        loadData();
 
         $scope.employee = null;
         $scope.course = null;
@@ -36,13 +28,39 @@ angular.module('gymSystem').controller('scheduleController', function($scope, Sc
         $scope.addFlag = true;
     };
 
+    $scope.showAddPrivateCoach = function() {
+
+        $scope.addPrivateFlag = false;
+
+        loadData();
+    };
+
     function getSchedules() {
 
         $scope.addFlag = true;
+        $scope.addPrivateFlag = true;
 
         ScheduleService.getSchedules(function(data) {
 
             $scope.schedules = data;
         });
+    }
+
+    function loadData() {
+
+        CourseService.getCourses(function(data) {
+
+            $scope.courses = data;
+        });
+
+        EmployeeService.getEmployees(function(data) {
+
+            $scope.employees = data;
+        });
+
+        CustomerService.getCustomers(function(data){
+
+            $scope.customers = data;
+        })
     }
 });
