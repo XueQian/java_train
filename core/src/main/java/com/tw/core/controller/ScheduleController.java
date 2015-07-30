@@ -102,6 +102,22 @@ public class ScheduleController {
         }
     }
 
+    @RequestMapping(value = "/schedules/{id}", method = RequestMethod.DELETE)
+    public void deleteSchedule(@PathVariable int id) {
+
+        Employee employee = scheduleService.getScheduleById(id).getEmployee();
+
+        Customer customer = customerService.getCustomerByEmployee(employee);
+
+        if (employee != null && customer != null) {
+            customer = new Customer(customer.getId(), customer.getName(), customer.getSex(), customer.getEmail(), customer.getTelephone(), null);
+            customerService.updateCustomer(customer);
+        }
+
+        scheduleService.deleteSchedule(id);
+    }
+
+
     @RequestMapping(value = "/schedules/modification/{id}", method = RequestMethod.GET)
     public ModelAndView getUpdateSchedulePage(@PathVariable int id) {
 
@@ -133,21 +149,21 @@ public class ScheduleController {
         return "update schedule is ok";
     }
 
-    @RequestMapping(value = "/schedules/deletion/{id}", method = RequestMethod.GET)
-    public ModelAndView deleteSchedule(@PathVariable int id) {
-
-        Employee employee = scheduleService.getScheduleById(id).getEmployee();
-
-        Customer customer = customerService.getCustomerByEmployee(employee);
-
-        if (employee != null && customer != null) {
-            customer = new Customer(customer.getId(), customer.getName(), customer.getSex(), customer.getEmail(), customer.getTelephone(), null);
-            customerService.updateCustomer(customer);
-        }
-
-        scheduleService.deleteSchedule(id);
-        return new ModelAndView("redirect:/schedules");
-    }
+//    @RequestMapping(value = "/schedules/deletion/{id}", method = RequestMethod.GET)
+//    public ModelAndView deleteSchedule(@PathVariable int id) {
+//
+//        Employee employee = scheduleService.getScheduleById(id).getEmployee();
+//
+//        Customer customer = customerService.getCustomerByEmployee(employee);
+//
+//        if (employee != null && customer != null) {
+//            customer = new Customer(customer.getId(), customer.getName(), customer.getSex(), customer.getEmail(), customer.getTelephone(), null);
+//            customerService.updateCustomer(customer);
+//        }
+//
+//        scheduleService.deleteSchedule(id);
+//        return new ModelAndView("redirect:/schedules");
+//    }
 
     private boolean isCoachFree(int employeeId, String time) {
 
