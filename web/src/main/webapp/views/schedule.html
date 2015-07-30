@@ -12,20 +12,20 @@
                 <th class="text-center"><h4>课表名称</h4></th>
                 <th class="text-center"><h4>教练名称</h4></th>
                 <th class="text-center"><h4>课表时间</h4></th>
-                <!--<th class="text-center"><h4>操作</h4></th>-->
-                <!--<th class="text-center"><h4>操作</h4></th>-->
+                <th class="text-center"><h4>操作</h4></th>
+                <th class="text-center"><h4>操作</h4></th>
             </tr>
 
             <tr ng-repeat="schedule in schedules">
                 <td><h4>{{schedule.course.name}}</h4></td>
                 <td><h4>{{schedule.employee.name}}</h4></td>
                 <td><h4>{{schedule.time}}</h4></td>
-                <!--<td>-->
-                <!--<button type="button" class="btn btn-danger " ng-click="deleteCourse(course.id)">删除</button>-->
-                <!--</td>-->
-                <!--<td>-->
-                <!--<button type="button" class="btn btn-primary " ng-click="getModifyCourse(course.id)">修改</button>-->
-                <!--</td>-->
+                <td>
+                    <button type="button" class="btn btn-danger " ng-click="deleteSchedule(schedule.id)">删除</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary " ng-click="getModifySchedule(schedule.id)">修改</button>
+                </td>
             </tr>
         </table>
     </div>
