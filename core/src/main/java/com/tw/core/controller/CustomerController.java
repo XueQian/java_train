@@ -20,15 +20,21 @@ public class CustomerController {
     CustomerService customerService;
 
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
-    public ModelAndView getCustomers() {
+    public List<Customer> getCustomers() {
 
-        List<Customer> customerList = customerService.getCustomers();
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("customers");
-        modelAndView.addObject("customers", customerList);
-        return modelAndView;
+        return customerService.getCustomers();
     }
+
+//    @RequestMapping(value = "/customers", method = RequestMethod.GET)
+//    public ModelAndView getCustomers() {
+//
+//        List<Customer> customerList = customerService.getCustomers();
+//
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("customers");
+//        modelAndView.addObject("customers", customerList);
+//        return modelAndView;
+//    }
 
     @RequestMapping(value = "/customers/creation", method = RequestMethod.POST)
     public String addUser(@RequestParam String name, @RequestParam String sex, @RequestParam String email, @RequestParam String telephone) {
