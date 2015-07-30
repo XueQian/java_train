@@ -17,6 +17,8 @@ angular.module('gymSystem').controller('scheduleController', function($scope, Sc
 
     $scope.addSchedule = function(employeeId, courseId, time) {
 
+        console.log(time.toLocaleString());
+
         ScheduleService.addSchedule(employeeId, courseId, time, function() {
 
             getSchedules();
@@ -56,10 +58,25 @@ angular.module('gymSystem').controller('scheduleController', function($scope, Sc
         })
     };
 
+    $scope.getModifySchedule = function(id) {
+
+        $scope.modifyFlag = false;
+        $scope.scheduleToBeModified = getSchedule(id);
+    };
+
+    $scope.modifySchedule = function(schedule){
+
+        ScheduleService.modifySchedule(schedule,function(){
+
+            getSchedules();
+        })
+    };
+
     function getSchedules() {
 
         $scope.addFlag = true;
         $scope.addPrivateFlag = true;
+        $scope.modifyFlag = true;
 
         ScheduleService.getSchedules(function(data) {
 
@@ -83,5 +100,12 @@ angular.module('gymSystem').controller('scheduleController', function($scope, Sc
 
             $scope.customers = data;
         })
+    }
+
+    function getSchedule(id) {
+
+        return _.find($scope.schedules, function(schedule) {
+            return schedule.id === id;
+        });
     }
 });
