@@ -61,6 +61,25 @@ angular.module('gymSystem').service('ScheduleService', function($http) {
             callback();
         });
     };
+
+    this.modifySchedule = function(scheduleToBeModified, callback) {
+
+        console.log(scheduleToBeModified.id+scheduleToBeModified.employee.name+scheduleToBeModified.course.name+scheduleToBeModified.time);
+
+        $http.put('api/schedules/'+scheduleToBeModified.id, {
+
+            id: scheduleToBeModified.id,
+            employee: {name: scheduleToBeModified.employee.name},
+            course: {name: scheduleToBeModified.course.name},
+            time: scheduleToBeModified.time.toISOString().substring(0, 10)
+        }).success(function() {
+
+            callback();
+        }).error(function() {
+
+            alert("该教练时间冲突，请重新操作！");
+        });
+    };
 });
 
 
