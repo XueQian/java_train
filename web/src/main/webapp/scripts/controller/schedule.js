@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gymSystem').controller('scheduleController', function($scope, ScheduleService, CourseService, EmployeeService, CustomerService) {
+angular.module('gymSystem').controller('scheduleController', function($scope, ScheduleService, CourseService, EmployeeService, CustomerService, $filter) {
 
     getSchedules();
 
@@ -16,8 +16,6 @@ angular.module('gymSystem').controller('scheduleController', function($scope, Sc
     };
 
     $scope.addSchedule = function(employeeId, courseId, time) {
-
-        console.log(time.toLocaleString());
 
         ScheduleService.addSchedule(employeeId, courseId, time, function() {
 
@@ -61,12 +59,19 @@ angular.module('gymSystem').controller('scheduleController', function($scope, Sc
     $scope.getModifySchedule = function(id) {
 
         $scope.modifyFlag = false;
+
         $scope.scheduleToBeModified = getSchedule(id);
+        $scope.scheduleToBeModified = {
+            id: getSchedule(id).id,
+            course: {name: getSchedule(id).course.name},
+            employee: {name: getSchedule(id).employee.name},
+            time: new Date($filter('date')(getSchedule(id).time, 'MM/dd/yyyy'))
+        };
     };
 
-    $scope.modifySchedule = function(schedule){
+    $scope.modifySchedule = function(schedule) {
 
-        ScheduleService.modifySchedule(schedule,function(){
+        ScheduleService.modifySchedule(schedule, function() {
 
             getSchedules();
         })

@@ -105,7 +105,6 @@
                         <option value="">找个教练~\(≧▽≦)/~啦啦啦</option>
                     </select>
                 </div>
-                =
 
                 <div class="col-md-11 col-md-offset-1 text-center">
                     时间
@@ -150,8 +149,11 @@
 
                 <div class="col-md-11 col-md-offset-1 text-center">
                     时间
-                    <input type="date" class="form-control"
-                           aria-describedby="basic-addon1" name="time" ng-model="scheduleToBeModified.time">
+                    <!--<input type="date" class="form-control"-->
+                           <!--aria-describedby="basic-addon1"  ng-model="scheduleToBeModified.time" required="required" min={{$scope.date}}>-->
+
+                    <input type="date"  ng-model="scheduleToBeModified.time" aria-describedby="basic-addon1"
+                           required />
                 </div>
 
                 <div class="col-md-11 col-md-offset-1 text-center">

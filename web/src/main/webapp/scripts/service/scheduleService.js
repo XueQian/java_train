@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gymSystem').service('ScheduleService', function($http) {
+angular.module('gymSystem').service('ScheduleService', function($http, $filter) {
 
     this.getSchedules = function(callback) {
 
@@ -13,13 +13,20 @@ angular.module('gymSystem').service('ScheduleService', function($http) {
 
     this.addSchedule = function(employeeId, courseId, time, callback) {
 
+        $scope.date = Date.now();
+
+        console.log(time);
+
+        //function pad(n) {return n < 10 ? "0"+n : n;}
+        //var result = time.getFullYear()+'-'+pad(time.getMonth()+1)+"-"+pad(time.getDate());
+
         $http({
             method: 'POST',
             url: 'api/schedules',
             data: {
                 employee: {id: employeeId},
                 course: {id: courseId},
-                time: time.toISOString().substring(0, 10)
+                time: $filter('date')(time, 'yyyy-MM-dd')
             }
         }).success(function() {
 
@@ -38,7 +45,7 @@ angular.module('gymSystem').service('ScheduleService', function($http) {
             params: {
                 customerId: customerId,
                 employeeId: employeeId,
-                time: time.toISOString().substring(0, 10)
+                time: $filter('date')(time, 'yyyy-MM-dd')
             }
         }).success(function() {
 
@@ -64,14 +71,12 @@ angular.module('gymSystem').service('ScheduleService', function($http) {
 
     this.modifySchedule = function(scheduleToBeModified, callback) {
 
-        console.log(scheduleToBeModified.id+scheduleToBeModified.employee.name+scheduleToBeModified.course.name+scheduleToBeModified.time);
-
-        $http.put('api/schedules/'+scheduleToBeModified.id, {
+        $http.put('api/schedules/' + scheduleToBeModified.id, {
 
             id: scheduleToBeModified.id,
             employee: {name: scheduleToBeModified.employee.name},
             course: {name: scheduleToBeModified.course.name},
-            time: scheduleToBeModified.time.toISOString().substring(0, 10)
+            time: $filter('date')(scheduleToBeModified.time, 'yyyy-MM-dd')
         }).success(function() {
 
             callback();
