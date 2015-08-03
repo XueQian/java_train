@@ -3,6 +3,7 @@ package com.tw.core.dao;
 import com.tw.core.entity.Customer;
 import com.tw.core.entity.Employee;
 import com.tw.core.util.HibernateUtil;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -26,9 +27,10 @@ public class CustomerDao {
 
         for (Customer customer : customerList) {
 
-            if (customer.getEmployee() != null) {
-                customer.getEmployee().getEmail();
-            }
+//            if (customer.getEmployee() != null) {
+//                customer.getEmployee().getEmail();
+//            }
+            Hibernate.initialize(customer.getEmployee());
         }
 
         return customerList;

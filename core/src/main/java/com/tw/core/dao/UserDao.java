@@ -2,6 +2,7 @@ package com.tw.core.dao;
 
 import com.tw.core.entity.User;
 import com.tw.core.util.HibernateUtil;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -21,10 +22,11 @@ public class UserDao {
         session.getTransaction().commit();
 
         for (User user : userList) {
-
-            if (user.getEmployee() != null) {
-                user.getEmployee().getEmail();
-            }
+//
+//            if (user.getEmployee() != null) {
+//                user.getEmployee().getEmail();
+//            }
+            Hibernate.initialize(user.getEmployee());
         }
 
         return userList;

@@ -2,6 +2,7 @@ package com.tw.core.dao;
 
 import com.tw.core.entity.Schedule;
 import com.tw.core.util.HibernateUtil;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -24,13 +25,15 @@ public class ScheduleDao {
 
         for (Schedule schedule : scheduleList) {
 
-            if(schedule.getCourse() != null){
-                schedule.getCourse().getDescription();
-            }
-
-            if(schedule.getEmployee() != null) {
-                schedule.getEmployee().getSchedules();
-            }
+//            if(schedule.getCourse() != null){
+//                schedule.getCourse().getDescription();
+//            }
+//
+//            if(schedule.getEmployee() != null) {
+//                schedule.getEmployee().getSchedules();
+//            }
+            Hibernate.initialize(schedule.getCourse());
+            Hibernate.initialize(schedule.getEmployee());
         }
 
         return scheduleList;
