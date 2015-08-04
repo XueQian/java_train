@@ -1,15 +1,9 @@
 package com.tw.core.controller;
 
 import com.tw.core.entity.Course;
-import com.tw.core.entity.Customer;
-import com.tw.core.entity.Employee;
-import com.tw.core.model.ScheduleModel;
 import com.tw.core.service.CourseService;
-import com.tw.core.service.CustomerService;
-import com.tw.core.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 
