@@ -5,29 +5,33 @@ import com.tw.core.util.HibernateUtil;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
+@Transactional
 public class UserDao {
 
+    @Autowired
+    private SessionFactory sessionFactory;
+
     public List<User> getUsers() {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
         List<User> userList;
 
-        session.beginTransaction();
-        userList = session.createQuery("from User").list();
-        session.getTransaction().commit();
-
-        for (User user : userList) {
+        userList = sessionFactory.getCurrentSession().createQuery("from User").list();
 //
-//            if (user.getEmployee() != null) {
-//                user.getEmployee().getEmail();
-//            }
-            Hibernate.initialize(user.getEmployee());
-        }
+//        for (User user : userList) {
+////
+////            if (user.getEmployee() != null) {
+////                user.getEmployee().getEmail();
+////            }
+//            Hibernate.initialize(user.getEmployee());
+//        }
 
         return userList;
     }

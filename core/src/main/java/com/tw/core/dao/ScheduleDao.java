@@ -5,25 +5,33 @@ import com.tw.core.util.HibernateUtil;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by qxue on 7/22/15.
  */
 @Repository
+@Transactional
 public class ScheduleDao {
 
+    @Autowired
+    private SessionFactory sessionFactory;
+
     public List<Schedule> getSchedules() {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         List<Schedule> scheduleList;
 
-        session.beginTransaction();
-        scheduleList = session.createQuery("from Schedule").list();
+//        session.beginTransaction();
 
-        System.out.printf("11111"+String.valueOf(session.createQuery("from Schedule")));
-        session.getTransaction().commit();
+        scheduleList = sessionFactory.getCurrentSession().createQuery("from Schedule").list();
+
+//        System.out.printf("11111" + String.valueOf(session.createQuery("from Schedule")));
+//        session.getTransaction().commit();
 
 //        for (Schedule schedule : scheduleList) {
 //

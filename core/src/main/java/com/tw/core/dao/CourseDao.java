@@ -5,22 +5,22 @@ import com.tw.core.entity.Employee;
 import com.tw.core.util.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
+@Transactional
 public class CourseDao {
 
+    @Autowired
+    private SessionFactory sessionFactory;
+
     public List<Course> getCourses() {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        List<Course> courseList;
-
-        session.beginTransaction();
-        courseList = session.createQuery("from Course").list();
-        session.getTransaction().commit();
-
-        return courseList;
+        return sessionFactory.getCurrentSession().createQuery("from Course").list();
     }
 
     public void addCourse(Course course) {
@@ -62,17 +62,12 @@ public class CourseDao {
     }
 
     public Course getCourseById(int id) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Course course;
 
-        try {
-            session.beginTransaction();
-            course = (Course) session.get(Course.class, id);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
+        course = (Course) sessionFactory.getCurrentSession().get(Course.class, id);
+//            session.getTransaction().commit();
+
         return course;
     }
 }

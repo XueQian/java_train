@@ -5,26 +5,27 @@ import com.tw.core.entity.Employee;
 import com.tw.core.util.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.transform.RootEntityResultTransformer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by qxue on 7/16/15.
  */
 @Repository
+@Transactional
 public class EmployeeDao {
 
+    @Autowired
+    private SessionFactory sessionFactory;
+
     public List<Employee> getEmployees() {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        return sessionFactory.getCurrentSession().createQuery("from Employee").list();
 
-        List<Employee> employeeList;
-        session.beginTransaction();
-        employeeList = session.createQuery("from Employee").list();
-        session.getTransaction().commit();
-
-        return employeeList;
     }
 
     public void addEmployee(Employee employee) {
@@ -58,17 +59,9 @@ public class EmployeeDao {
     }
 
     public Employee getEmployeeById(int id) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Employee employee;
 
-        try {
-            session.beginTransaction();
-            employee = (Employee) session.get(Employee.class, id);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
+        employee = (Employee) sessionFactory.getCurrentSession().get(Employee.class, id);
 
         return employee;
     }
