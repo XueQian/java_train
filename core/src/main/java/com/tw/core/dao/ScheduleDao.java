@@ -21,20 +21,22 @@ public class ScheduleDao {
 
         session.beginTransaction();
         scheduleList = session.createQuery("from Schedule").list();
+
+        System.out.printf("11111"+String.valueOf(session.createQuery("from Schedule")));
         session.getTransaction().commit();
 
-        for (Schedule schedule : scheduleList) {
-
-//            if(schedule.getCourse() != null){
-//                schedule.getCourse().getDescription();
-//            }
+//        for (Schedule schedule : scheduleList) {
 //
-//            if(schedule.getEmployee() != null) {
-//                schedule.getEmployee().getSchedules();
-//            }
-            Hibernate.initialize(schedule.getCourse());
-            Hibernate.initialize(schedule.getEmployee());
-        }
+////            if(schedule.getCourse() != null){
+////                schedule.getCourse().getDescription();
+////            }
+////
+////            if(schedule.getEmployee() != null) {
+////                schedule.getEmployee().getSchedules();
+////            }
+//            Hibernate.initialize(schedule.getCourse());
+//            Hibernate.initialize(schedule.getEmployee());
+//        }
 
         return scheduleList;
     }

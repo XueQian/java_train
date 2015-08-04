@@ -52,7 +52,7 @@ public class Schedule {
         this.time = time;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
     public Employee getEmployee() {
         return employee;
@@ -62,7 +62,7 @@ public class Schedule {
         this.employee = employee;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id")
     public Course getCourse() {
         return course;
