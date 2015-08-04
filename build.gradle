@@ -17,6 +17,10 @@ subprojects {
         compile group: 'org.flywaydb', name: 'flyway-core', version: '3.2.1'
         compile 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:2.6.0'
         compile 'org.slf4j:slf4j-log4j12:1.7.12'
+        compile 'org.springframework:spring-jdbc:4.2.0.RELEASE'
+        compile 'org.springframework:spring-orm:4.2.0.RELEASE'
+        compile 'org.springframework:spring-webmvc:4.1.7.RELEASE'
+        compile 'org.springframework:spring-context:4.2.0.RELEASE'
     }
 }
 
