@@ -8,21 +8,6 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     </servlet>
 
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>default</servlet-name>-->
-        <!--<url-pattern>*.html</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>default</servlet-name>-->
-        <!--<url-pattern>*.css</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>default</servlet-name>-->
-        <!--<url-pattern>*.js</url-pattern>-->
-    <!--</servlet-mapping>-->
-
     <servlet-mapping>
         <servlet-name>HelloServlet</servlet-name>
         <url-pattern>/api/*</url-pattern>
@@ -38,5 +23,10 @@
             org.springframework.web.context.ContextLoaderListener
         </listener-class>
     </listener>
+
+    <context-param>
+        <param-name>spring.profiles.active</param-name>
+        <param-value>dev</param-value>
+    </context-param>
 </web-app>
 

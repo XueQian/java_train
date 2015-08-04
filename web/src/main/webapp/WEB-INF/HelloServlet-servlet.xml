@@ -10,7 +10,6 @@
 
     <context:component-scan base-package="com.tw"/>
     <context:property-placeholder location="classpath:/jdbc_${spring.profiles.active}.properties"/>
-    <!--<context:property-placeholder location="classpath:/jdbc_dev.properties"/>-->
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -26,8 +25,8 @@
             <props>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
-                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
                 <prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+                <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
             </props>
         </property>
 
@@ -40,8 +39,6 @@
                 <value>com.tw.core.entity.Employee</value>
                 <value>com.tw.core.entity.Schedule</value>
             </list>
-
-
 
         </property>
     </bean>
@@ -60,10 +57,6 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!--<mvc:resources mapping="/lib/**" location="/lib/"/>-->
-    <!--<mvc:resources mapping="/js/**" location="/js/"/>-->
-    <!--<mvc:resources mapping="/css/**" location="/css/"/>-->
-    <!--<mvc:resources mapping="/views/**" location="/views/"/>-->
     <mvc:resources mapping="/**" location="/"/>
 
     <mvc:annotation-driven>
