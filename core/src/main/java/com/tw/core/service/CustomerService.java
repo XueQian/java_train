@@ -1,6 +1,6 @@
 package com.tw.core.service;
 
-import com.tw.core.dao.CustomerDao;
+import com.tw.core.dao.impl.CustomerDaoImpl;
 import com.tw.core.entity.Customer;
 import com.tw.core.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.List;
 public class CustomerService {
 
     @Autowired
-    CustomerDao customerDao;
+    CustomerDaoImpl customerDao;
 
     public void addCustomer(Customer customer){
         customerDao.addCustomer(customer);

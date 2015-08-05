@@ -1,7 +1,7 @@
 package com.tw.core.service;
 
 import com.tw.core.dao.EmployeeDao;
-import com.tw.core.entity.Course;
+import com.tw.core.dao.impl.EmployeeDaoImpl;
 import com.tw.core.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

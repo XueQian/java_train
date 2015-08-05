@@ -1,6 +1,6 @@
 package com.tw.core.service;
 
-import com.tw.core.dao.UserDao;
+import com.tw.core.dao.impl.UserDaoImpl;
 import com.tw.core.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    UserDao userDao;
+    UserDaoImpl userDao;
 
     public void addUser(User user) {
         userDao.addUser(user);
