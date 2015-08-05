@@ -36,8 +36,17 @@ public class EmployeeDaoTest {
         List<Employee> employees = employeeDao.getEmployees();
 
         Assert.assertEquals(employees.size(), 1);
-
         Assert.assertEquals(employees.get(0).getName(),"测试");
+    }
 
+    @Test
+    public void testAddEmployee(){
+
+        Employee employee = new Employee("coach","testAdd","add@qq.com");
+        employeeDao.addEmployee(employee);
+        List<Employee> employeeList = employeeDao.getEmployees();
+
+        Assert.assertEquals(employeeList.size(),2);
+        Assert.assertEquals(employeeList.get(1).getName(),"testAdd");
     }
 }
