@@ -21,6 +21,7 @@ subprojects {
         compile 'org.springframework:spring-orm:4.2.0.RELEASE'
         compile 'org.springframework:spring-webmvc:4.1.7.RELEASE'
         compile 'org.springframework:spring-context:4.2.0.RELEASE'
+        compile 'org.springframework:spring-tx:4.2.0.RELEASE'
     }
 }
 
