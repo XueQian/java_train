@@ -58,4 +58,26 @@ public class EmployeeDaoTest {
         Assert.assertNotEquals(employee,null);
         Assert.assertEquals(employee.getId(),1);
     }
+
+    @Test
+    public void testGetEmployeeById(){
+
+        Employee employee = employeeDao.getEmployeeById(1);
+
+        Assert.assertNotEquals(employee,null);
+        Assert.assertEquals(employee.getName(),"测试");
+    }
+
+    @Test
+    public void testUpdateEmployee(){
+
+        Employee employee = new Employee(1,"教练","更新","update@qq.com");
+        employeeDao.updateEmployee(employee);
+
+        Employee updateEmployee = employeeDao.getEmployeeById(1);
+
+        Assert.assertEquals(updateEmployee.getName(),"更新");
+        Assert.assertEquals(updateEmployee.getRole(),"教练");
+        Assert.assertEquals(updateEmployee.getEmail(), "update@qq.com");
+    }
 }
