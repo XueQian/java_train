@@ -49,4 +49,13 @@ public class EmployeeDaoTest {
         Assert.assertEquals(employeeList.size(),2);
         Assert.assertEquals(employeeList.get(1).getName(),"testAdd");
     }
+
+    @Test
+    public void testGetEmployeeByName(){
+
+        Employee employee = employeeDao.getEmployeeByName("测试");
+
+        Assert.assertNotEquals(employee,null);
+        Assert.assertEquals(employee.getId(),1);
+    }
 }
