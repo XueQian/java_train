@@ -1,128 +1,111 @@
-package com.tw.core.dao;
+package com.tw.core.dao.impl;
 
-import com.tw.core.entity.Customer;
-import com.tw.core.entity.Employee;
+import com.tw.core.entity.User;
 import com.tw.core.util.HibernateUtil;
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
-/**
- * Created by qxue on 7/19/15.
- */
 @Repository
 @Transactional
-public class CustomerDao {
-
+public class UserDaoImpl {
 
     @Autowired
     private SessionFactory sessionFactory;
 
-    public List<Customer> getCustomers() {
+    public List<User> getUsers() {
 
-        List<Customer> customerList;
+        List<User> userList;
 
-        customerList = sessionFactory.getCurrentSession() .createQuery("from Customer").list();
-
-//        for (Customer customer : customerList) {
+        userList = sessionFactory.getCurrentSession().createQuery("from User").list();
 //
-////            if (customer.getEmployee() != null) {
-////                customer.getEmployee().getEmail();
+//        for (User user : userList) {
+////
+////            if (user.getEmployee() != null) {
+////                user.getEmployee().getEmail();
 ////            }
-//            Hibernate.initialize(customer.getEmployee());
+//            Hibernate.initialize(user.getEmployee());
 //        }
 
-        return customerList;
+        return userList;
     }
 
-    public void addCustomer(Customer customer) {
+    public void addUser(User user) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-
-        session.beginTransaction();
-        session.save(customer);
-        session.getTransaction().commit();
-    }
-
-    public Customer getCustomerByName(String name) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Customer customer;
 
         try {
             session.beginTransaction();
-            Query query = session.createQuery("from Customer where name=:name");
+            session.save(user);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+
+    public void deleteUser(int id) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            User user = (User) session.load(User.class, id);
+            session.delete(user);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+
+    public User getUserById(int id) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        User user;
+
+        try {
+            session.beginTransaction();
+            user = (User) session.get(User.class, id);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+
+        return user;
+    }
+
+    public void updateUser(User user) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        try {
+            session.beginTransaction();
+            session.update(user);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
+    }
+
+    public User getUserByName(String name) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        User user;
+
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from User where name=:name");
             query.setString("name", name);
-            customer = (Customer) query.uniqueResult();
+            user = (User) query.uniqueResult();
             session.getTransaction().commit();
         } catch (RuntimeException e) {
             session.getTransaction().rollback();
             throw e;
         }
-        return customer;
-    }
-
-    public Customer getCustomerById(int id) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Customer customer;
-
-        try {
-            session.beginTransaction();
-            customer = (Customer) session.get(Customer.class, id);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-
-        return customer;
-    }
-
-    public void updateCustomer(Customer customer) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-
-        try {
-            session.beginTransaction();
-            session.update(customer);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-    }
-
-    public void deleteCustomer(int id) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-
-        try {
-            session.beginTransaction();
-            Customer customer = (Customer) session.load(Customer.class, id);
-            session.delete(customer);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-    }
-
-    public Customer getCustomerByEmployee(Employee employee) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Customer customer;
-
-        try {
-            session.beginTransaction();
-            Query query = session.createQuery("from Customer where employee=:employee");
-            query.setEntity("employee", employee);
-            customer = (Customer) query.uniqueResult();
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-        return customer;
+        return user;
     }
 }
+
