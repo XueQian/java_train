@@ -80,4 +80,13 @@ public class EmployeeDaoTest {
         Assert.assertEquals(updateEmployee.getRole(),"教练");
         Assert.assertEquals(updateEmployee.getEmail(), "update@qq.com");
     }
+
+    @Test
+    public void testDeleteEmployee(){
+
+        employeeDao.deleteEmployee(1);
+        List<Employee> employeeList = employeeDao.getEmployees();
+
+        Assert.assertEquals(employeeList.size(),0);
+    }
 }
