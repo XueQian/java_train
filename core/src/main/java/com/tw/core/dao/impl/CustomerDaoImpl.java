@@ -27,7 +27,7 @@ public class CustomerDaoImpl {
 
         List<Customer> customerList;
 
-        customerList = sessionFactory.getCurrentSession() .createQuery("from Customer").list();
+        customerList = sessionFactory.getCurrentSession().createQuery("from Customer").list();
 
 //        for (Customer customer : customerList) {
 //
@@ -41,87 +41,37 @@ public class CustomerDaoImpl {
     }
 
     public void addCustomer(Customer customer) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        session.beginTransaction();
-        session.save(customer);
-        session.getTransaction().commit();
+        sessionFactory.getCurrentSession().save(customer);
     }
 
     public Customer getCustomerByName(String name) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Customer customer;
 
-        try {
-            session.beginTransaction();
-            Query query = session.createQuery("from Customer where name=:name");
-            query.setString("name", name);
-            customer = (Customer) query.uniqueResult();
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-        return customer;
+        Query query = sessionFactory.getCurrentSession().createQuery("from Customer where name=:name");
+        query.setString("name", name);
+        return (Customer) query.uniqueResult();
     }
 
     public Customer getCustomerById(int id) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Customer customer;
 
-        try {
-            session.beginTransaction();
-            customer = (Customer) session.get(Customer.class, id);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-
-        return customer;
+        return (Customer) sessionFactory.getCurrentSession().get(Customer.class, id);
     }
 
     public void updateCustomer(Customer customer) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        try {
-            session.beginTransaction();
-            session.update(customer);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
+        sessionFactory.getCurrentSession().update(customer);
     }
 
     public void deleteCustomer(int id) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        try {
-            session.beginTransaction();
-            Customer customer = (Customer) session.load(Customer.class, id);
-            session.delete(customer);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
+        Customer customer = (Customer) sessionFactory.getCurrentSession().load(Customer.class, id);
+        sessionFactory.getCurrentSession().delete(customer);
     }
 
     public Customer getCustomerByEmployee(Employee employee) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Customer customer;
 
-        try {
-            session.beginTransaction();
-            Query query = session.createQuery("from Customer where employee=:employee");
-            query.setEntity("employee", employee);
-            customer = (Customer) query.uniqueResult();
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-        return customer;
+        Query query = sessionFactory.getCurrentSession().createQuery("from Customer where employee=:employee");
+        query.setEntity("employee", employee);
+        return (Customer) query.uniqueResult();
     }
 }

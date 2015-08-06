@@ -48,64 +48,33 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
     @Override
     public void addSchedule(Schedule schedule) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        session.beginTransaction();
-        session.save(schedule);
-        session.getTransaction().commit();
+        sessionFactory.getCurrentSession().save(schedule);
     }
 
     @Override
     public void deleteSchedule(int id) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        session.beginTransaction();
-        Schedule schedule = (Schedule) session.load(Schedule.class, id);
-        session.delete(schedule);
-        session.getTransaction().commit();
+        Schedule schedule = (Schedule) sessionFactory.getCurrentSession().load(Schedule.class, id);
+        sessionFactory.getCurrentSession().delete(schedule);
     }
 
     @Override
     public void updateSchedule(Schedule schedule) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        session.beginTransaction();
-        session.update(schedule);
-        session.getTransaction().commit();
+        sessionFactory.getCurrentSession().update(schedule);
     }
 
     @Override
     public List<Schedule> getScheduleByTime(String time) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        List scheduleList;
 
-        try {
-            session.beginTransaction();
-            Query query = session.createQuery("from Schedule where time=:time");
-            scheduleList = query.setString("time", time).list();
-            session.getTransaction().commit();
-
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-
-        return scheduleList;
+        Query query = sessionFactory.getCurrentSession().createQuery("from Schedule where time=:time");
+        return query.setString("time", time).list();
     }
 
     @Override
     public Schedule getScheduleById(int id) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Schedule schedule;
 
-        try {
-            session.beginTransaction();
-            schedule = (Schedule) session.get(Schedule.class, id);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-        return schedule;
+        return  (Schedule) sessionFactory.getCurrentSession().get(Schedule.class, id);
     }
 }

@@ -13,10 +13,6 @@ angular.module('gymSystem').service('ScheduleService', function($http, $filter) 
 
     this.addSchedule = function(employeeId, courseId, time, callback) {
 
-        $scope.date = Date.now();
-
-        console.log(time);
-
         //function pad(n) {return n < 10 ? "0"+n : n;}
         //var result = time.getFullYear()+'-'+pad(time.getMonth()+1)+"-"+pad(time.getDate());
 

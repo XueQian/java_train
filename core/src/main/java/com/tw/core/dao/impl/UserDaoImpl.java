@@ -36,76 +36,31 @@ public class UserDaoImpl {
     }
 
     public void addUser(User user) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        try {
-            session.beginTransaction();
-            session.save(user);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
+        sessionFactory.getCurrentSession().save(user);
     }
 
     public void deleteUser(int id) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        try {
-            session.beginTransaction();
-            User user = (User) session.load(User.class, id);
-            session.delete(user);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
+        User user = (User) sessionFactory.getCurrentSession().load(User.class, id);
+        sessionFactory.getCurrentSession().delete(user);
     }
 
     public User getUserById(int id) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        User user;
 
-        try {
-            session.beginTransaction();
-            user = (User) session.get(User.class, id);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-
-        return user;
+        return (User) sessionFactory.getCurrentSession().get(User.class, id);
     }
 
     public void updateUser(User user) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        try {
-            session.beginTransaction();
-            session.update(user);
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
+        sessionFactory.getCurrentSession().update(user);
     }
 
     public User getUserByName(String name) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        User user;
 
-        try {
-            session.beginTransaction();
-            Query query = session.createQuery("from User where name=:name");
-            query.setString("name", name);
-            user = (User) query.uniqueResult();
-            session.getTransaction().commit();
-        } catch (RuntimeException e) {
-            session.getTransaction().rollback();
-            throw e;
-        }
-        return user;
+        Query query = sessionFactory.getCurrentSession().createQuery("from User where name=:name");
+        query.setString("name", name);
+        return (User) query.uniqueResult();
     }
 }
 

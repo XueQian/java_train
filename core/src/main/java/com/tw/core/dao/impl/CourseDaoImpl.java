@@ -24,50 +24,30 @@ public class CourseDaoImpl {
     }
 
     public void addCourse(Course course) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        session.beginTransaction();
-        session.save(course);
-        session.getTransaction().commit();
+        sessionFactory.getCurrentSession().save(course);
     }
 
     public void deleteCourse(int id) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        session.beginTransaction();
-        Course course = (Course) session.load(Course.class, id);
-        session.delete(course);
-        session.getTransaction().commit();
+        Course course = (Course) sessionFactory.getCurrentSession().load(Course.class, id);
+        sessionFactory.getCurrentSession().delete(course);
     }
 
     public Course getCourseByName(String name) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Course course;
 
-        session.beginTransaction();
-        Query query = session.createQuery("from Course where name=:name");
+        Query query = sessionFactory.getCurrentSession().createQuery("from Course where name=:name");
         query.setString("name", name);
-        course = (Course) query.uniqueResult();
-        session.getTransaction().commit();
-
-        return course;
+        return (Course) query.uniqueResult();
     }
 
     public void updateCourse(Course course) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        session.beginTransaction();
-        session.update(course);
-        session.getTransaction().commit();
+        sessionFactory.getCurrentSession().update(course);
     }
 
     public Course getCourseById(int id) {
-//        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Course course;
 
-        course = (Course) sessionFactory.getCurrentSession().get(Course.class, id);
-//            session.getTransaction().commit();
-
-        return course;
+        return (Course) sessionFactory.getCurrentSession().get(Course.class, id);
     }
 }
