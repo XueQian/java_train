@@ -24,7 +24,6 @@
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
 
-
     <listener>
         <listener-class>
             org.springframework.web.context.ContextLoaderListener

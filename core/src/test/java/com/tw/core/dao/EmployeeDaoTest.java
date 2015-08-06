@@ -19,11 +19,11 @@ import java.util.List;
 @Transactional
 @WebAppConfiguration
 @ContextConfiguration(locations = {"classpath*:/applicationContext.xml"})
-@Rollback(true)
 public class EmployeeDaoTest {
 
     @BeforeClass
     public static void setSystemProperty() {
+
         System.setProperty("spring.profiles.active", "test");
     }
 
@@ -56,7 +56,7 @@ public class EmployeeDaoTest {
         Employee employee = employeeDao.getEmployeeByName("测试");
 
         Assert.assertNotEquals(employee,null);
-        Assert.assertEquals(employee.getId(),1);
+        Assert.assertEquals(employee.getId(),2);
     }
 
     @Test
