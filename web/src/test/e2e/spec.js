@@ -34,18 +34,42 @@ var delayFn = function() {
 };
 
 describe('test schedules', function() {
+
     beforeEach(function() {
+
         logger.trace('redirect to:', '#/schedules');
         browser.get('#/schedules');
     });
 
     it('check url.', function() {
+
         browser.getLocationAbsUrl()
             .then(function(url) {
+
                 logger.info('assertion:', '/schedules');
                 expect(url).toBe('/schedules');
             })
             .then(delayFn);
     });
+
+    it('check schedules count',function(){
+
+        logger.info('assertion:','/schedules count');
+        expect(element.all(by.repeater('schedule in schedules')).count()).toEqual(4);
+    });
+
+    it('check schedule value',function(){
+
+        element.all(by.repeater('schedule in schedules')).then(function(schedules) {
+
+            logger.info('assertion:','/schedule1 courseName is correct');
+
+            var courseName = schedules[0].element(by.className('courseName'));
+            expect(courseName.getText()).toEqual('瑜伽');
+        });
+    });
+
+
+
 
 });
