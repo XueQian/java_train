@@ -1,0 +1,21 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "gym",
+  "main": "index.js",
+  "dependencies": {
+    "karma": "^0.13.7"
+  },
+  "devDependencies": {
+    "karma": "^0.13.8"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "qiana",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "XueQian"
+  }
+}
