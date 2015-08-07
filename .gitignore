@@ -9,3 +9,4 @@ out/
 *.ipr
 *.iws
 *.log
+node_modules
